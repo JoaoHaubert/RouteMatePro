@@ -6,3 +6,4 @@
 - Material ui (MUI)
 - Redux
 - Node.js
+- TypeScript
