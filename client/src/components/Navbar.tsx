@@ -1,9 +1,10 @@
+//@ts-nocheck
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 //MUI IMPORTS
 import { Menu as MenuIcon, Search } from "@mui/icons-material";
 import { Icon, InputBase, useTheme } from "@mui/material";
-import { AppBar, IconButton, Toolbar } from "@mui/material";
+import { AppBar, IconButton, Toolbar, Divider } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 //COMPONENTS IMPORTS
@@ -11,11 +12,15 @@ import FlexBetween from "./FlexBetween";
 //SVG IMPORTS
 import profileImage from "@/assets/react.svg";
 
-type Props = {};
 
-export default function Navbar({}: Props) {
-  const { palette } = useTheme();
+const Navbar = ({isSidebarOpen, setIsSidebarOpen}) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isOpen = Boolean(anchorEl);
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
 
   return (
     <AppBar
@@ -28,15 +33,15 @@ export default function Navbar({}: Props) {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/*>>>LEFT SIDE<<<*/}
         <FlexBetween>
-          <IconButton onClick={() => console.log("sidebar open")}>
+          <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
           <FlexBetween
-            bgcolor={palette.background.default}
+            bgcolor="white"
             borderRadius="9px"
             gap="3rem"
             p="0.1rem 1.5rem"
-          >
+            >
             <InputBase placeholder="Search..." />
             <IconButton>
               <Search />
@@ -56,3 +61,5 @@ export default function Navbar({}: Props) {
     </AppBar>
   );
 }
+
+export default Navbar
