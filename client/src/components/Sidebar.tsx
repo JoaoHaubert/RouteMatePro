@@ -1,9 +1,180 @@
-import React from 'react'
 
-type Props = {}
+import React, { ReactNode, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+//icons
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import NoCrashIcon from "@mui/icons-material/NoCrash";
+import BuildIcon from "@mui/icons-material/Build";
+import PeopleIcon from "@mui/icons-material/People";
+import StoreIcon from "@mui/icons-material/Store";
+import HistoryIcon from "@mui/icons-material/History";
+//MUI
+import {
+  useTheme,
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import { ChevronLeft, ChevronRight, ReplyTwoTone } from "@mui/icons-material";
+//components
+import FlexBetween from "@/components/FlexBetween";
+import profileImage from "@/assets/react.svg";
 
-export default function Sidebar({}: Props) {
+const navItems = [
+  {
+    text: "Dashboard",
+    icon: <DashboardIcon />,
+    route: "dashboard",
+  },
+  {
+    text: "Cadastros",
+    icon: <AppRegistrationIcon />,
+    route: "register",
+  },
+  {
+    text: "Veiculos",
+    icon: <DirectionsCarIcon />,
+    route: "vehicles",
+  },
+  {
+    text: "Veiculos Ativos",
+    icon: <NoCrashIcon />,
+    route: "active-vehicles",
+  },
+  {
+    text: "Manutencoes",
+    icon: <BuildIcon />,
+    route: "maintenance",
+  },
+  {
+    text: "Condutores",
+    icon: <PeopleIcon />,
+    route: "drivers",
+  },
+  {
+    text: "Lojas",
+    icon: <StoreIcon />,
+    route: "shop",
+  },
+  {
+    text: "Historico",
+    icon: <HistoryIcon />,
+    route: "historic",
+  },
+];
+
+const Sidebar = ({
+  user,
+  drawerWidth,
+  isSidebarOpen,
+  setIsSidebarOpen,
+  isNonMobile,
+}: any) => {
+  const { pathname } = useLocation();
+  const [active, setActive] = useState("");
+  const navigate = useNavigate();
+  const theme = useTheme();
+
+  useEffect(() => {
+    setActive(pathname.substring(1));
+  }, [pathname]);
+
   return (
-    <div>Sidebar</div>
-  )
-}
+    <Box component="nav">
+      {isSidebarOpen && (
+        <Drawer
+          open={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+          variant="persistent"
+          anchor="left"
+          sx={{
+            width: drawerWidth,
+            "& .MuiDrawer-paper": {
+              color: "white",
+              backgroundColor: theme.palette.primary[600],
+              boxSixing: "border-box",
+              borderWidth: isNonMobile ? 0 : "2px",
+              width: drawerWidth,
+            },
+          }}
+        >
+          <Box width="100%">
+            <Box m="1.5rem 2rem 2rem 2.5rem">
+              <FlexBetween color={theme.palette.secondary.main}>
+                <Box display="flex" alignItems="center" gap="0.5rem">
+                  <Typography variant="h3" fontWeight="bold">
+                    RouteMatePro
+                  </Typography>
+                </Box>
+                {!isNonMobile && (
+                  <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                    <ChevronLeft />
+                  </IconButton>
+                )}
+              </FlexBetween>
+            </Box>
+            <List>
+              {navItems.map(({ text, icon, route }) => {
+                if (!icon) {
+                  return (
+                    <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
+                      {text}
+                    </Typography>
+                  );
+                }
+
+                return (
+                  <ListItem key={text} disablePadding>
+                    <ListItemButton
+                      onClick={() => {
+                        navigate(`/${route}`);
+                        setActive(route);
+                      }}
+                      sx={{
+                        borderRadius: "50px",
+                        backgroundColor:
+                          active === route
+                            ? theme.palette.primary[500]
+                            : "transparent",
+                        color:
+                          active === route
+                            ? theme.palette.secondary[200]
+                            : theme.palette.secondary[100],
+                      }}
+                    >
+                      <ListItemIcon
+                        sx={{
+                          p: "0.4rem",
+                          ml: "1rem",
+                          color:
+                            active === route
+                              ? theme.palette.secondary[200]
+                              : theme.palette.secondary[100],
+                        }}
+                      >
+                        {icon}
+                      </ListItemIcon>
+                      <ListItemText primary={text} />
+              
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Box>
+        </Drawer>
+      )}
+    </Box>
+  );
+};
+
+export default Sidebar;
