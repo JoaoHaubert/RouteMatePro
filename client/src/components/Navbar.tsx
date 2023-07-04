@@ -6,14 +6,14 @@ import { Menu as MenuIcon, Search } from "@mui/icons-material";
 import { Icon, InputBase, useTheme } from "@mui/material";
 import { AppBar, IconButton, Toolbar, Divider } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import NotificationsIcon from "@mui/icons-material/Notifications";
 //COMPONENTS IMPORTS
 import FlexBetween from "./FlexBetween";
 //SVG IMPORTS
 import profileImage from "@/assets/react.svg";
 
-
-const Navbar = ({isSidebarOpen, setIsSidebarOpen}) => {
+const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -33,7 +33,10 @@ const Navbar = ({isSidebarOpen, setIsSidebarOpen}) => {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/*>>>LEFT SIDE<<<*/}
         <FlexBetween>
-          <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          <IconButton
+            sx={{ color: "black" }}
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
             <MenuIcon />
           </IconButton>
           <FlexBetween
@@ -41,25 +44,37 @@ const Navbar = ({isSidebarOpen, setIsSidebarOpen}) => {
             borderRadius="9px"
             gap="3rem"
             p="0.1rem 1.5rem"
-            >
+          >
             <InputBase placeholder="Search..." />
-            <IconButton>
+            <IconButton sx={{ color: "black" }}>
               <Search />
             </IconButton>
           </FlexBetween>
         </FlexBetween>
         {/*>>>RIGHT SIDE<<<*/}
         <FlexBetween gap="1.5rem">
-          <IconButton onClick={() => console.log("add button")}>
+          <IconButton
+            sx={{ color: "black" }}
+            onClick={() => console.log("add button")}
+          >
             <AddIcon sx={{ fontSize: "25px" }} />
           </IconButton>
-          <IconButton onClick={() => console.log("notification button")}>
+          <IconButton
+            sx={{ color: "black" }}
+            onClick={() => console.log("notification button")}
+          >
             <NotificationsIcon sx={{ fontSize: "25px" }} />
+          </IconButton>
+          <IconButton
+            sx={{ color: "black" }}
+            onClick={() => console.log("help button")}
+          >
+            <QuestionMarkIcon sx={{ fontSize: "25px" }} />
           </IconButton>
         </FlexBetween>
       </Toolbar>
     </AppBar>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

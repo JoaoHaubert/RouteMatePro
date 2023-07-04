@@ -109,7 +109,7 @@ const Sidebar = ({
         >
           <Box width="100%">
             <Box m="1.5rem 2rem 2rem 2.5rem">
-              <FlexBetween color={theme.palette.secondary.main}>
+              <FlexBetween color={theme.palette.secondary[100]}>
                 <Box display="flex" alignItems="center" gap="0.5rem">
                   <Typography variant="h3" fontWeight="bold">
                     RouteMatePro
