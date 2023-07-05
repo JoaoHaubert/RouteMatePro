@@ -5,9 +5,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-import clientRoutes from './routes/client'
-import generalRoutes from './routes/general'
-
+import clientRoutes from "./routes/client";
+import generalRoutes from "./routes/general";
 
 //Configs
 dotenv.config();
@@ -21,5 +20,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 //Routes
-app.use("/client", clientRoutes)
-app.use("/general", generalRoutes)
+app.use("/client", clientRoutes);
+app.use("/general", generalRoutes);
+
+//Mongoose
+const PORT: number = parseInt(process.env.PORT || "9000");
+const MONGO_URL: string =
+  process.env.MONGO_URL || "mongodb://localhost2701/database";
+mongoose
+  .connect(MONGO_URL)
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server is into port: ${PORT}`));
+  })
+  .catch((error) => {
+    console.error("Failed to connect mongoDB", error);
+  });
