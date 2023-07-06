@@ -1,4 +1,4 @@
-
+//@ts-nocheck
 import React, { ReactNode, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 //icons

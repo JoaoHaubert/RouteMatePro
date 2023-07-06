@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 //MUI IMPORTS
 import { Menu as MenuIcon, Search } from "@mui/icons-material";
-import { Icon, InputBase, useTheme } from "@mui/material";
-import { AppBar, IconButton, Toolbar, Divider } from "@mui/material";
+import {InputBase, useTheme } from "@mui/material";
+import { AppBar, IconButton, Toolbar,  } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import NotificationsIcon from "@mui/icons-material/Notifications";
