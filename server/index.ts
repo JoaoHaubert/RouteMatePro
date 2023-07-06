@@ -7,6 +7,9 @@ import helmet from "helmet";
 import morgan from "morgan";
 import clientRoutes from "./routes/client";
 import generalRoutes from "./routes/general";
+//data import
+import User from "./models/user";
+import { dataUser } from "./data/index";
 
 //Configs
 dotenv.config();
@@ -31,6 +34,8 @@ mongoose
   .connect(MONGO_URL)
   .then(() => {
     app.listen(PORT, () => console.log(`Server is into port: ${PORT}`));
+    //add the data just once
+    User.insertMany(dataUser);
   })
   .catch((error) => {
     console.error("Failed to connect mongoDB", error);

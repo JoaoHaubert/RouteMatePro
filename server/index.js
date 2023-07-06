@@ -5,12 +5,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
 const client_1 = __importDefault(require("./routes/client"));
 const general_1 = __importDefault(require("./routes/general"));
+//data import
+const user_1 = __importDefault(require("./models/user"));
+const index_1 = require("./data/index");
 //Configs
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -24,3 +28,16 @@ app.use((0, cors_1.default)());
 //Routes
 app.use("/client", client_1.default);
 app.use("/general", general_1.default);
+//Mongoose
+const PORT = parseInt(process.env.PORT || "9000");
+const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost2701/database";
+mongoose_1.default
+    .connect(MONGO_URL)
+    .then(() => {
+    app.listen(PORT, () => console.log(`Server is into port: ${PORT}`));
+    //add the data just once
+    user_1.default.insertMany(index_1.dataUser);
+})
+    .catch((error) => {
+    console.error("Failed to connect mongoDB", error);
+});
