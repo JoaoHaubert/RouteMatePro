@@ -1,6 +1,6 @@
 export const tokens = {
   grey: {
-    100: "#f0f0f3",
+    100: "#f0f0f0",
     200: "#e1e2e7",
     300: "#d1d3da",
     400: "#c2c5ce",
@@ -25,7 +25,7 @@ export const tokens = {
   },
   secondary: {
     // yellow
-    100: "#fcf0dd",
+    100: "#f0f0f0",
     200: "#fae1bb",
     300: "#f7d299",
     400: "#f5c377",
