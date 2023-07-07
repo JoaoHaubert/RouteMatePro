@@ -12,9 +12,6 @@ const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
 const client_1 = __importDefault(require("./routes/client"));
 const general_1 = __importDefault(require("./routes/general"));
-//data import
-const user_1 = __importDefault(require("./models/user"));
-const index_1 = require("./data/index");
 //Configs
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -36,7 +33,7 @@ mongoose_1.default
     .then(() => {
     app.listen(PORT, () => console.log(`Server is into port: ${PORT}`));
     //add the data just once
-    user_1.default.insertMany(index_1.dataUser);
+    //User.insertMany(dataUser);
 })
     .catch((error) => {
     console.error("Failed to connect mongoDB", error);
