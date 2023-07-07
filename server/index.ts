@@ -8,7 +8,7 @@ import morgan from "morgan";
 import clientRoutes from "./routes/client";
 import generalRoutes from "./routes/general";
 //data import
-import User from "./models/user";
+import User from "./models/User";
 import { dataUser } from "./data/index";
 
 //Configs
@@ -35,7 +35,7 @@ mongoose
   .then(() => {
     app.listen(PORT, () => console.log(`Server is into port: ${PORT}`));
     //add the data just once
-    User.insertMany(dataUser);
+    //User.insertMany(dataUser);
   })
   .catch((error) => {
     console.error("Failed to connect mongoDB", error);
