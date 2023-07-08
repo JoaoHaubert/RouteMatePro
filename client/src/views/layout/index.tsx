@@ -17,6 +17,7 @@ export default function Layout() {
   return (
     <Box display={isNonMobile ? "flex" : "block"} width="100%" height="100%">
       <Sidebar
+        user = { data || {} }
         isNonMobile={isNonMobile}
         drawerWidth="230px"
         isSidebarOpen={isSidebarOpen}
@@ -24,6 +25,7 @@ export default function Layout() {
       />
       <Box flexGrow={1}>
         <Navbar
+          user = { data || {} }
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
