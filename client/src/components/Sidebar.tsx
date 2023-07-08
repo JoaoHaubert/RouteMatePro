@@ -171,6 +171,20 @@ const Sidebar = ({
               })}
             </List>
           </Box>
+          <Box position="absolute" bottom="2rem"> 
+              <Divider />
+              <FlexBetween 
+                component="img"
+                alt="profile"
+                src={profileImage}
+                height="40px"
+                width="40px"
+                borderRadius="50%"
+                sx={{ objectFit: "cover" }}
+              >
+
+              </FlexBetween>
+          </Box>
         </Drawer>
       )}
     </Box>
