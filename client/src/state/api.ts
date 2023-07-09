@@ -5,9 +5,9 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
   reducerPath: "adminApi",
   tagTypes: ["User"],
-  endpoints: (build) => ({
+  endpoints: (build: any) => ({
     getUser: build.query({
-      query: (id) => `general/user/${id}`,
+      query: (id: string) => `general/user/${id}`,
       providesTags: ["User"],
     }),
   }),
