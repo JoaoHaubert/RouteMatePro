@@ -8,6 +8,7 @@ export const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
+  
   },
 });
 
