@@ -2,7 +2,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 //MUI IMPORTS
-import { Menu as MenuIcon, Search, ArrowDropDownOutlined } from "@mui/icons-material";
+import {
+  Menu as MenuIcon,
+  Search,
+  ArrowDropDownOutlined,
+} from "@mui/icons-material";
 
 import {
   AppBar,
@@ -15,6 +19,7 @@ import {
   Menu,
   MenuItem,
   useTheme,
+  MenuList,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
@@ -65,11 +70,33 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
         {/*>>>RIGHT SIDE<<<*/}
         <FlexBetween gap="1.5rem">
           <IconButton
-            sx={{ color: "black" }}
-            onClick={() => console.log("add button")}
+            id="demo-positioned-button"
+            aria-controls={isOpen ? "demo-positioned-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={isOpen ? "true" : undefined}
+            onClick={handleClick}
           >
-            <AddIcon sx={{ fontSize: "25px" }} />
+            <AddIcon sx={{ fontSize: "25px",color: "black" }} />
           </IconButton>
+          <Menu
+            id="demo-positioned-menu"
+            aria-labelledby="demo-positioned-button"
+            anchorEl={anchorEl}
+            open={isOpen}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+          >
+            <MenuItem onClick={handleClose}>+ Veiculo</MenuItem>
+            <MenuItem onClick={handleClose}>+ Condutores</MenuItem>
+            <MenuItem onClick={handleClose}>+ Lojas</MenuItem>
+          </Menu>
           <IconButton
             sx={{ color: "black" }}
             onClick={() => console.log("notification button")}
@@ -85,7 +112,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
 
           <FlexBetween>
             <Button
-              onClick={handleClick}
+        
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
@@ -107,29 +134,23 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                 <Typography
                   fontWeight="bold"
                   fontSize="0.85rem"
-                  sx={{ color: theme.palette.secondary[100] }}
+                  sx={{ color: theme.palette.grey[900] }}
                 >
-                  {user.name}
+                  {/*user.name*/}
+                  Joao Haubert
                 </Typography>
                 <Typography
                   fontSize="0.75rem"
-                  sx={{ color: theme.palette.secondary[200] }}
+                  sx={{ color: theme.palette.grey[700] }}
                 >
-                  {user.occupation}
+                  {/*user.occupation*/}
+                  Software Developer
                 </Typography>
               </Box>
               <ArrowDropDownOutlined
                 sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
               />
             </Button>
-            <Menu
-              anchorEl={anchorEl}
-              open={isOpen}
-              onClose={handleClose}
-              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-            >
-              <MenuItem onClick={handleClose}>Log Out</MenuItem>
-            </Menu>
           </FlexBetween>
         </FlexBetween>
       </Toolbar>

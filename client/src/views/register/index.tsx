@@ -1,5 +1,5 @@
 //@ts-nocheck
-//import React from "react";
+import React from "react";
 import FlexBetween from "@/components/FlexBetween";
 import Header from "@/components/Header";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
@@ -13,6 +13,7 @@ import {
   useTheme,
   Stack,
 } from "@mui/material";
+import { Add } from "@mui/icons-material";
 type Props = {};
 
 export default function Register({}: Props) {
@@ -26,40 +27,63 @@ export default function Register({}: Props) {
         />
       </FlexBetween>
       <FlexBetween>
-        <Box>
-          <Stack direction="row" spacing={4}>
+        <Box m="8rem 2rem 2rem 5rem">
+          <Stack direction="row" spacing={20}>
             <IconButton
+              size="large"
               sx={{
                 backgroundColor: theme.palette.secondary[100],
                 color: theme.palette.primary[900],
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
+                padding: "30px 50px",
+                flexDirection: "column",
+                borderRadius: "15px",
+                border: "solid 2px",
+                '&:hover': {
+                  backgroundColor: "#002d5a",
+                  color: "white",
+                  transition: "0.5s" 
+                },
               }}
             >
-              <DirectionsCarFilledOutlinedIcon />
+              <DirectionsCarFilledOutlinedIcon sx={{fontSize: "120px"}} />
+              <Typography variant="h1" fontWeight="bold">Veículos</Typography>
             </IconButton>
             <IconButton
               sx={{
                 backgroundColor: theme.palette.secondary[100],
                 color: theme.palette.primary[900],
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
+                padding: "30px 20px",
+                flexDirection: "column",
+                borderRadius: "15px",
+                border: "solid 2px",
+                '&:hover': {
+                  backgroundColor: "#002d5a",
+                  color: "white",
+                  transition: "0.5s" 
+                },
               }}
             >
-              <GroupAddOutlinedIcon />
+              <GroupAddOutlinedIcon sx={{fontSize: "120px"}} />
+              <Typography variant="h1" fontWeight="bold">Condutores</Typography>
             </IconButton>
             <IconButton
               sx={{
                 backgroundColor: theme.palette.secondary[100],
                 color: theme.palette.primary[900],
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
+                padding: "30px 50px",
+                flexDirection: "column",
+                borderRadius: "15px",
+                border: "solid 2px",
+                '&:hover': {
+                  backgroundColor: "#002d5a",
+                  color: "white",
+                  transition: "0.5s" 
+                },
               }}
             >
-              <StorefrontOutlinedIcon />
+
+              <StorefrontOutlinedIcon sx={{fontSize: "120px"}} />
+              <Typography variant="h1" fontWeight="bold">Lojas</Typography>
             </IconButton>
           </Stack>
         </Box>
