@@ -30,7 +30,7 @@ export default function Register({}: Props) {
         <Box m="8rem 2rem 2rem 5rem">
           <Stack direction="row" spacing={20}>
             <IconButton
-              size="large"
+              onClick={() => {console.log("Veiculos cadastro")}}
               sx={{
                 backgroundColor: theme.palette.secondary[100],
                 color: theme.palette.primary[900],
@@ -49,6 +49,7 @@ export default function Register({}: Props) {
               <Typography variant="h1" fontWeight="bold">Veículos</Typography>
             </IconButton>
             <IconButton
+              onClick={() => {console.log("Condutores cadastro")}}
               sx={{
                 backgroundColor: theme.palette.secondary[100],
                 color: theme.palette.primary[900],
@@ -67,6 +68,7 @@ export default function Register({}: Props) {
               <Typography variant="h1" fontWeight="bold">Condutores</Typography>
             </IconButton>
             <IconButton
+              onClick={() => {console.log("Lojas cadastro")}}
               sx={{
                 backgroundColor: theme.palette.secondary[100],
                 color: theme.palette.primary[900],
