@@ -24,7 +24,12 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { ChevronLeft, ChevronRight, ReplyTwoTone, SettingsOutlined } from "@mui/icons-material";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ReplyTwoTone,
+  SettingsOutlined,
+} from "@mui/icons-material";
 //components
 import FlexBetween from "@/components/FlexBetween";
 import profileImage from "@/assets/react.svg";
@@ -176,35 +181,7 @@ const Sidebar = ({
               textTransform="none"
               gap="1rem"
               m="1.5 rem 2rem 0 3rem"
-            >
-              <Box
-                component="img"
-                alt="profile"
-                src={profileImage}
-                height="40px"
-                width="40px"
-                borderRadius="50%"
-                sx={{ objectFit: "cover" }}
-              />
-              <Box textAlign="left">
-                <Typography
-                  fontWeight="bold"
-                  fontSize="0.9rem"
-                  sx={{ color: theme.palette.primary[100]}}
-                >
-                  {/*user.name*/}
-                  Joao Haubert
-                </Typography>
-                <Typography
-                  fontSize="0.7rem"
-                  sx={{ color: theme.palette.primary[200]}}
-                >
-                  {/*user.occupation*/}
-                  Software Developer
-                </Typography>
-              </Box>
-              <SettingsOutlined/>
-            </FlexBetween>
+            ></FlexBetween>
           </Box>
         </Drawer>
       )}
