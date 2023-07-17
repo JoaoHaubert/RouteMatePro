@@ -20,7 +20,6 @@ import {
   Menu,
   MenuItem,
   useTheme,
-  MenuList,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
@@ -43,8 +42,10 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <AppBar
       sx={{
+        borderRadius: "8px",
+        border: "solid 1px #DDE6ED",
+        backgroundColor:"#ffffff",
         position: "static",
-        background: "none",
         boxShadow: "none",
       }}
     >
@@ -57,9 +58,9 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
           >
             <MenuIcon />
           </IconButton>
-          <FlexBetween
-            bgcolor="white"
-            borderRadius="9px"
+          <FlexBetween          
+            border="solid 1px #f0f0f0"
+            borderRadius="10px"
             gap="3rem"
             p="0.1rem 1.5rem"
           >
