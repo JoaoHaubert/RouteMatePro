@@ -1,5 +1,6 @@
 //@ts-nocheck
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "@/components/FlexBetween";
 import Header from "@/components/Header";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
@@ -14,10 +15,12 @@ import {
   Stack,
 } from "@mui/material";
 import { Add } from "@mui/icons-material";
+import VehicleForm from "../form/VehicleForm";
 type Props = {};
 
 export default function Register({}: Props) {
   const theme = useTheme();
+  const navigate = useNavigate();
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
@@ -30,7 +33,7 @@ export default function Register({}: Props) {
         <Box m="8rem 2rem 2rem 5rem">
           <Stack direction="row" spacing={20}>
             <IconButton
-              onClick={() => {console.log("Veiculos cadastro")}}
+              onClick={() => {navigate('/new-vehicle')}}
               sx={{
                 backgroundColor: theme.palette.secondary[100],
                 color: theme.palette.primary[900],

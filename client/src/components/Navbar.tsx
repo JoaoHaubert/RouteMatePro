@@ -1,6 +1,7 @@
 //@ts-nocheck
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 //MUI IMPORTS
 import {
   Menu as MenuIcon,
@@ -32,6 +33,7 @@ import profileImage from "@/assets/react.svg";
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
@@ -93,7 +95,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               horizontal: "left",
             }}
           >
-            <MenuItem onClick={handleClose}>+ Veiculo</MenuItem>
+            <MenuItem onClick={() => {navigate('/new-vehicle')}}>+ Veiculo</MenuItem>
             <MenuItem onClick={handleClose}>+ Condutores</MenuItem>
             <MenuItem onClick={handleClose}>+ Lojas</MenuItem>
           </Menu>
