@@ -21,14 +21,14 @@ export const tokens = {
     600: "#002d5a",
     700: "#002244",
     800: "#00162d",
-    900: "#000b17",
+    900: "#000000",  //modified black
   },
   secondary: {
     // yellow
     100: "#f0f0f0",
     200: "#fae1bb",
     300: "#f7d299",
-    400: "#f5c377",
+    400: "#ffffff", //modified white
     500: "#f2b455",
     600: "#c29044",
     700: "#916c33",

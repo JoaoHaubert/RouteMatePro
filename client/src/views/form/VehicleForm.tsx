@@ -1,36 +1,59 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
+//@ts-nocheck
+import { useState } from "react";
 import {
   Button,
+  Box,
   Typography,
   Autocomplete,
   TextField,
-  Drawer,
-  IconButton,
-  ButtonGroup,
-  Divider,
   Grid,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  useTheme,
+  StyledBadge
 } from "@mui/material";
 import FlexBetween from "@/components/FlexBetween";
 import { useNavigate } from "react-router-dom";
 //icons
-import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
 
 type Props = {};
 
 export default function VehicleForm({}: Props) {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const [active, setActive] = useState("");
   const vehicleType = [
     { label: "Carro" },
     { label: "Caminhão" },
     { label: "Empilhadeira" },
+    { label: "Moto" },
     { label: "Ônibus" },
     { label: "SUV" },
+  ];
+  const vehicleStatus = [
+    { label: "Ativo"},
+    { label: "Inativo"},
+    { label: "Fora de serviço"},
+    { label: "Vendido"},
+  ]
+  const navItems = [
+    {
+      text: "Identificação",
+      icon: <SummarizeOutlinedIcon />,
+    },
+    {
+      text: "Especificações",
+      icon: <ListAltOutlinedIcon />,
+    },
+    {
+      text: "Lembrarei",
+      icon: <ListAltOutlinedIcon />,
+    },
   ];
   return (
     <Box>
@@ -58,9 +81,56 @@ export default function VehicleForm({}: Props) {
       </Box>
       <Grid container spacing={5}>
         <Grid item xs={3}>
-          <ListItem>
-            
-          </ListItem>
+          <Box
+            borderRadius={4}
+            sx={{
+              width: "85%",
+              minWidth: 200,
+              bgcolor: "#ffffff",
+              marginTop: "2rem",
+              border: "solid 1px #DDE6ED",
+            }}
+          >
+            <List>
+              {navItems.map(({ text, icon }) => {
+                if (!icon) {
+                  return (
+                    <Typography key={text} sx={{ m: "2.25rem " }}>
+                      {text}
+                    </Typography>
+                  );
+                }
+
+                return (
+                  <ListItem key={text} disablePadding>
+                    <ListItemButton
+                      onClick={() => {
+                        setActive(text);
+                      }}
+                      sx={{
+                        color:
+                          active === text
+                            ? theme.palette.primary[900]
+                            : theme.palette.grey[600],
+                      }}
+                    >
+                      <ListItemIcon
+                        sx={{
+                          color:
+                          active === text
+                            ? theme.palette.primary[900]
+                            : theme.palette.grey[600],
+                        }}
+                      >
+                        {icon}
+                      </ListItemIcon>
+                      <ListItemText primary={text} />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Box>
         </Grid>
         <Grid item>
           <Box
@@ -70,7 +140,7 @@ export default function VehicleForm({}: Props) {
             m="2rem 2.5rem"
             component="form"
             sx={{
-              "& .MuiTextField-root": { m: 2, width: "50ch" },
+              "& .MuiTextField-root": { m: 2, width: "90ch" },
             }}
             noValidate
             autoComplete="off"
@@ -80,6 +150,7 @@ export default function VehicleForm({}: Props) {
                 required
                 id="outlined-required"
                 label="Nome do Veiculo"
+                helperText="Dê um nome, código ou apelido para o veículo."
               />
               <Autocomplete
                 disablePortal
@@ -89,11 +160,13 @@ export default function VehicleForm({}: Props) {
                   <TextField {...params} label="Tipo do Veiculo" />
                 )}
               />
-              <TextField
-                id="outlined-password-input"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
+             <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={vehicleStatus}
+                renderInput={(params) => (
+                  <TextField {...params} label="Status do Veiculo" />
+                )}
               />
               <TextField
                 id="outlined-read-only-input"
@@ -126,7 +199,6 @@ export default function VehicleForm({}: Props) {
           </Box>
         </Grid>
       </Grid>
-      
     </Box>
   );
 }
