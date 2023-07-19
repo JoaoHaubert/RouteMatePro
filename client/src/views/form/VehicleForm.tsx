@@ -13,7 +13,7 @@ import {
   ListItemIcon,
   ListItemText,
   useTheme,
-  StyledBadge
+  Badge
 } from "@mui/material";
 import FlexBetween from "@/components/FlexBetween";
 import { useNavigate } from "react-router-dom";
@@ -40,6 +40,12 @@ export default function VehicleForm({}: Props) {
     { label: "Inativo"},
     { label: "Fora de serviço"},
     { label: "Vendido"},
+  ]
+  const vehicleOwnership = [
+    { label: "Próprio" },
+    { label: "Alugado" },
+    { label: "Cliente" },
+    { label: "Arrendado" },
   ]
   const navItems = [
     {
@@ -168,13 +174,13 @@ export default function VehicleForm({}: Props) {
                   <TextField {...params} label="Status do Veiculo" />
                 )}
               />
-              <TextField
-                id="outlined-read-only-input"
-                label="Read Only"
-                defaultValue="Hello World"
-                InputProps={{
-                  readOnly: true,
-                }}
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={vehicleOwnership}
+                renderInput={(params) => (
+                  <TextField {...params} label="Propriedade" />
+                )}
               />
               <TextField
                 id="outlined-number"
