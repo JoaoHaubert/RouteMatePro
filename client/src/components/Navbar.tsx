@@ -62,7 +62,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             border="solid 1px #f0f0f0"
             borderRadius="10px"
             gap="3rem"
-            p="0.1rem 1.5rem"
+            p="0.1rem 1rem"
           >
             <InputBase placeholder="Search..." />
             <IconButton sx={{ color: "black" }}>
