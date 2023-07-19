@@ -13,7 +13,7 @@ import {
   ListItemIcon,
   ListItemText,
   useTheme,
-  Badge
+  Badge,
 } from "@mui/material";
 import FlexBetween from "@/components/FlexBetween";
 import { useNavigate } from "react-router-dom";
