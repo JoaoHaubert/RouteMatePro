@@ -14,12 +14,15 @@ import {
   ListItemText,
   useTheme,
   Badge,
+  ButtonGroup,
+  Stack,
 } from "@mui/material";
 import FlexBetween from "@/components/FlexBetween";
 import { useNavigate } from "react-router-dom";
 //icons
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
+import SaveButton from "@/components/SaveButton";
 
 type Props = {};
 
@@ -31,22 +34,23 @@ export default function VehicleForm({}: Props) {
     { label: "Carro" },
     { label: "Caminhão" },
     { label: "Empilhadeira" },
+    { label: "Furgão" },
     { label: "Moto" },
     { label: "Ônibus" },
     { label: "SUV" },
   ];
   const vehicleStatus = [
-    { label: "Ativo"},
-    { label: "Inativo"},
-    { label: "Fora de serviço"},
-    { label: "Vendido"},
-  ]
+    { label: "Ativo" },
+    { label: "Inativo" },
+    { label: "Fora de serviço" },
+    { label: "Vendido" },
+  ];
   const vehicleOwnership = [
     { label: "Próprio" },
     { label: "Alugado" },
     { label: "Cliente" },
     { label: "Arrendado" },
-  ]
+  ];
   const navItems = [
     {
       text: "Identificação",
@@ -123,9 +127,9 @@ export default function VehicleForm({}: Props) {
                       <ListItemIcon
                         sx={{
                           color:
-                          active === text
-                            ? theme.palette.primary[900]
-                            : theme.palette.grey[600],
+                            active === text
+                              ? theme.palette.primary[900]
+                              : theme.palette.grey[600],
                         }}
                       >
                         {icon}
@@ -166,7 +170,7 @@ export default function VehicleForm({}: Props) {
                   <TextField {...params} label="Tipo do Veiculo" />
                 )}
               />
-             <Autocomplete
+              <Autocomplete
                 disablePortal
                 id="combo-box-demo"
                 options={vehicleStatus}
@@ -183,26 +187,12 @@ export default function VehicleForm({}: Props) {
                 )}
               />
               <TextField
-                id="outlined-number"
-                label="Number"
-                type="number"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-              <TextField
-                id="outlined-search"
-                label="Search field"
-                type="search"
-              />
-              <TextField
-                id="outlined-helperText"
-                label="Helper text"
-                defaultValue="Default Value"
-                helperText="Some important text"
+                label="Grupo do Veículo"
+                helperText="Defina o grupo do veículo. Ex: Jardinagem, Laticínios, etc."
               />
             </FlexBetween>
           </Box>
+        <SaveButton/>       
         </Grid>
       </Grid>
     </Box>
