@@ -12,7 +12,7 @@ import {
 import Dashboard from "./views/dashboard";
 import Layout from "./views/layout";
 import Register from "./views/register";
-import VehicleForm from "./views/form/VehicleForm";
+import VehicleForm from "./views/form/vehicles/VehicleForm";
 //import Navbar from '@/components/Navbar'
 //import Sidebar from '@/components/Sidebar'
 function App() {

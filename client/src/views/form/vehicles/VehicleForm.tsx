@@ -4,8 +4,6 @@ import {
   Button,
   Box,
   Typography,
-  Autocomplete,
-  TextField,
   Grid,
   List,
   ListItem,
@@ -13,56 +11,49 @@ import {
   ListItemIcon,
   ListItemText,
   useTheme,
-  Badge,
-  ButtonGroup,
-  Stack,
 } from "@mui/material";
-import FlexBetween from "@/components/FlexBetween";
+
 import { useNavigate } from "react-router-dom";
 //icons
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
-import SaveButton from "@/components/SaveButton";
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+//forms
+import Identification from "./Identification";
+import Specs from "./Specs";
+import Settings from "./Settings";
 
 type Props = {};
 
 export default function VehicleForm({}: Props) {
+  const [activeSection, setActiveSection] = useState<
+    "identification" | "specs" | "settings"
+  >("identification");
+
+  const handleNavigation = (
+    sectionId: "identification" | "specs" | "settings"
+  ) => {
+    setActiveSection(sectionId);
+  };
   const navigate = useNavigate();
   const theme = useTheme();
   const [active, setActive] = useState("");
-  const vehicleType = [
-    { label: "Carro" },
-    { label: "Caminhão" },
-    { label: "Empilhadeira" },
-    { label: "Furgão" },
-    { label: "Moto" },
-    { label: "Ônibus" },
-    { label: "SUV" },
-  ];
-  const vehicleStatus = [
-    { label: "Ativo" },
-    { label: "Inativo" },
-    { label: "Fora de serviço" },
-    { label: "Vendido" },
-  ];
-  const vehicleOwnership = [
-    { label: "Próprio" },
-    { label: "Alugado" },
-    { label: "Cliente" },
-    { label: "Arrendado" },
-  ];
+
   const navItems = [
     {
       text: "Identificação",
       icon: <SummarizeOutlinedIcon />,
+      route: "identification"
     },
     {
       text: "Especificações",
       icon: <ListAltOutlinedIcon />,
+      route: "specs"
     },
     {
-      text: "Lembrarei",
-      icon: <ListAltOutlinedIcon />,
+      text: "Configurações",
+      icon: <SettingsOutlinedIcon/>,
+      route: "settings"
     },
   ];
   return (
@@ -102,7 +93,7 @@ export default function VehicleForm({}: Props) {
             }}
           >
             <List>
-              {navItems.map(({ text, icon }) => {
+              {navItems.map(({ text, icon, route }) => {
                 if (!icon) {
                   return (
                     <Typography key={text} sx={{ m: "2.25rem " }}>
@@ -115,11 +106,12 @@ export default function VehicleForm({}: Props) {
                   <ListItem key={text} disablePadding>
                     <ListItemButton
                       onClick={() => {
-                        setActive(text);
+                        handleNavigation(route)
+                        setActive(route);
                       }}
                       sx={{
                         color:
-                          active === text
+                          active === route
                             ? theme.palette.primary[900]
                             : theme.palette.grey[600],
                       }}
@@ -127,7 +119,7 @@ export default function VehicleForm({}: Props) {
                       <ListItemIcon
                         sx={{
                           color:
-                            active === text
+                            active === route
                               ? theme.palette.primary[900]
                               : theme.palette.grey[600],
                         }}
@@ -142,58 +134,9 @@ export default function VehicleForm({}: Props) {
             </List>
           </Box>
         </Grid>
-        <Grid item>
-          <Box
-            bgcolor="#fff"
-            border="solid 1px #DDE6ED"
-            borderRadius={4}
-            m="2rem 2.5rem"
-            component="form"
-            sx={{
-              "& .MuiTextField-root": { m: 2, width: "90ch" },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <FlexBetween p="15px" flexDirection="column">
-              <TextField
-                required
-                id="outlined-required"
-                label="Nome do Veiculo"
-                helperText="Dê um nome, código ou apelido para o veículo."
-              />
-              <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={vehicleType}
-                renderInput={(params) => (
-                  <TextField {...params} label="Tipo do Veiculo" />
-                )}
-              />
-              <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={vehicleStatus}
-                renderInput={(params) => (
-                  <TextField {...params} label="Status do Veiculo" />
-                )}
-              />
-              <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={vehicleOwnership}
-                renderInput={(params) => (
-                  <TextField {...params} label="Propriedade" />
-                )}
-              />
-              <TextField
-                label="Grupo do Veículo"
-                helperText="Defina o grupo do veículo. Ex: Jardinagem, Laticínios, etc."
-              />
-            </FlexBetween>
-          </Box>
-        <SaveButton/>       
-        </Grid>
+        {activeSection === "identification" && <Identification/>}
+        {activeSection === "specs" && <Specs/>}
+        {activeSection === "settings" && <Settings/>}
       </Grid>
     </Box>
   );
