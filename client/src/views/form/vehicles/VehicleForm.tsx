@@ -18,9 +18,11 @@ import { useNavigate } from "react-router-dom";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
 //forms
 import Identification from "./Identification";
 import Specs from "./Specs";
+import Performance from "./Performance";
 import Settings from "./Settings";
 
 type Props = {};
@@ -49,6 +51,11 @@ export default function VehicleForm({}: Props) {
       text: "Especificações",
       icon: <ListAltOutlinedIcon />,
       route: "specs"
+    },
+    {
+      text: "Performance",
+      icon: <SpeedOutlinedIcon />,
+      route: "performance"
     },
     {
       text: "Configurações",
@@ -136,6 +143,7 @@ export default function VehicleForm({}: Props) {
         </Grid>
         {activeSection === "identification" && <Identification/>}
         {activeSection === "specs" && <Specs/>}
+        {activeSection === "performance" && <Performance/>}
         {activeSection === "settings" && <Settings/>}
       </Grid>
     </Box>

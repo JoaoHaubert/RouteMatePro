@@ -49,6 +49,7 @@ export default function Identification({}: Props) {
             label="Nome do Veiculo"
             helperText="Dê um nome, código ou apelido para o veículo."
           />
+          <TextField label="Placa do Veículo" />
           <Autocomplete
             disablePortal
             id="combo-box-demo"

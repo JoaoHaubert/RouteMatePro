@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, TextField, Grid } from "@mui/material";
+import { Box, TextField, Grid, InputAdornment } from "@mui/material";
 //components
 import FlexBetween from "@/components/FlexBetween";
 import SaveButton from "@/components/SaveButton";
@@ -23,11 +23,70 @@ export default function Specs({}: Props) {
       >
         <FlexBetween p="15px" flexDirection="column">
           <TextField
-            required
-            id="outlined-required"
-            label="Example1"
-            helperText="Example1"
-          />
+            id="outlined-number"
+            type="number"
+            label="Largura"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">m</InputAdornment>,
+            }}
+          />   
+          <TextField
+            id="outlined-number"
+            type="number"
+            label="Altura"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">m</InputAdornment>,
+            }}
+          />   
+          <TextField
+            id="outlined-number"
+            type="number"
+            label="Comprimento"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">m</InputAdornment>,
+            }}
+          />   
+          <TextField
+            id="outlined-number"
+            type="number"
+            label="Quantidade de Passageiros"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">un</InputAdornment>,
+            }}
+          />   
+          <TextField
+            id="outlined-number"
+            type="number"
+            label="Volume Carga"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">m3</InputAdornment>,
+            }}
+          />   
+          <TextField
+            id="outlined-number"
+            type="number"
+            label="Volume Interior"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">m3</InputAdornment>,
+            }}
+          />   
+          <TextField
+            id="outlined-number"
+            type="number"
+            label="Peso Total do Veículo"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+            }}
+          />   
+          <TextField
+            id="outlined-number"
+            type="number"
+            label="Peso Total com Carga e Passageiros"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+            }}
+          />   
+        
         </FlexBetween>
       </Box>
       <SaveButton />
