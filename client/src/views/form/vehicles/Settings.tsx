@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, TextField, Grid } from "@mui/material";
+import { Box, TextField, Grid, InputAdornment } from "@mui/material";
 //components
 import FlexBetween from "@/components/FlexBetween";
 import SaveButton from "@/components/SaveButton";
@@ -24,8 +24,12 @@ export default function Settings({}: Props) {
           <TextField
             required
             id="outlined-required"
-            label="Example2"
-            helperText="Example2"
+            type="number"
+            label="Medida odômetro atual"
+            helperText="Quilometragem do veículo"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">km</InputAdornment>
+            }}
           />
         </FlexBetween>
       </Box>

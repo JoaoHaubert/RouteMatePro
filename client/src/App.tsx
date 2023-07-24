@@ -13,6 +13,7 @@ import Dashboard from "./views/dashboard";
 import Layout from "./views/layout";
 import Register from "./views/register";
 import VehicleForm from "./views/form/vehicles/VehicleForm";
+import DriverForm from "./views/form/drivers/DriverForm";
 //import Navbar from '@/components/Navbar'
 //import Sidebar from '@/components/Sidebar'
 function App() {
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/new-vehicle" element={<VehicleForm />} />
+                <Route path="/new-driver" element={<DriverForm />} />
                 <Route path="/vehicles" element={<div>Lista veiculos</div>} />
                 <Route path="/active-vehicles" element={<div>Veiculos Ativos</div>}/>
                 <Route path="/maintenance" element={<div>Manutencoes</div>} />
