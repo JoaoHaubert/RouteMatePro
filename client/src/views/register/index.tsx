@@ -71,7 +71,7 @@ export default function Register({}: Props) {
               <Typography variant="h1" fontWeight="bold">Condutores</Typography>
             </IconButton>
             <IconButton
-              onClick={() => {console.log("Lojas cadastro")}}
+              onClick={() => {navigate('/new-shop')}}
               sx={{
                 backgroundColor: theme.palette.secondary[100],
                 color: theme.palette.primary[900],

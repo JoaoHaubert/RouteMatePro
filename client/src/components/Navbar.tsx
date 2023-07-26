@@ -97,8 +97,8 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             }}
           >
             <MenuItem onClick={() => {navigate('/new-vehicle')}}>+ Veiculo</MenuItem>
-            <MenuItem onClick={handleClose}>+ Condutores</MenuItem>
-            <MenuItem onClick={handleClose}>+ Lojas</MenuItem>
+            <MenuItem onClick={() => {navigate('/new-driver')}}>+ Condutores</MenuItem>
+            <MenuItem onClick={() => {navigate('/new-shop')}}>+ Lojas</MenuItem>
           </Menu>
           <IconButton
             sx={{ color: "black" }}

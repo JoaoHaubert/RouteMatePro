@@ -6,10 +6,10 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import NoCrashIcon from "@mui/icons-material/NoCrash";
-import BuildIcon from "@mui/icons-material/Build";
+///import BuildIcon from "@mui/icons-material/Build";
 import PeopleIcon from "@mui/icons-material/People";
 import StoreIcon from "@mui/icons-material/Store";
-import HistoryIcon from "@mui/icons-material/History";
+//import HistoryIcon from "@mui/icons-material/History";
 //MUI
 import {
   useTheme,
@@ -56,11 +56,6 @@ const navItems = [
     route: "active-vehicles",
   },
   {
-    text: "Manutencoes",
-    icon: <BuildIcon />,
-    route: "maintenance",
-  },
-  {
     text: "Condutores",
     icon: <PeopleIcon />,
     route: "drivers",
@@ -69,11 +64,6 @@ const navItems = [
     text: "Lojas",
     icon: <StoreIcon />,
     route: "shop",
-  },
-  {
-    text: "Historico",
-    icon: <HistoryIcon />,
-    route: "historic",
   },
 ];
 

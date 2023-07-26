@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
 export default function SaveButton({}: Props) {
+  const navigate = useNavigate();
   return (
     <Box
       display="flex"
@@ -13,6 +15,7 @@ export default function SaveButton({}: Props) {
     >
       {/* Left Side */}
       <Button
+        onClick={() => {navigate('/register')}}
         size="small"
         color="error"
         sx={{

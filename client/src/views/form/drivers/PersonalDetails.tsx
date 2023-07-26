@@ -22,6 +22,7 @@ export default function PersonalDetails({}: Props) {
       >
         <FlexBetween p="15px" flexDirection="column">
           <TextField required id="outlined-required" label="CPF" />
+          <TextField required id="outlined-required" label="CEP" />
           <TextField
             required
             id="outlined-required"
@@ -29,7 +30,6 @@ export default function PersonalDetails({}: Props) {
             helperText="Rua e número. Ex: Rua Coronel Bordini, 1151"
           />
           <TextField id="outlined-required" label="Complemento" />
-          <TextField required id="outlined-required" label="CEP" />
           <TextField id="outlined-required" label="Cidade" />
           <TextField id="outlined-required" label="Estado" />
         </FlexBetween>
