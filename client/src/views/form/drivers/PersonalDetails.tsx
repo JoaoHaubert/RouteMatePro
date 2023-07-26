@@ -1,25 +1,11 @@
 import React, { useState } from "react";
 import { Box, TextField, Grid, Autocomplete } from "@mui/material";
-import { MuiTelInput } from "mui-tel-input";
 //components
 import FlexBetween from "@/components/FlexBetween";
 import SaveButton from "@/components/SaveButton";
 type Props = {};
 
 export default function PersonalDetails({}: Props) {
-  const [value, setValue] = React.useState("");
-  const handleChange = (newValue: any) => {
-    setValue(newValue);
-  };
-  const licenseTypes = [
-    { label: "A" },
-    { label: "B" },
-    { label: "AB" },
-    { label: "C" },
-    { label: "D" },
-    { label: "E" },
-  ]
-
   return (
     <Grid item>
       <Box
@@ -35,27 +21,17 @@ export default function PersonalDetails({}: Props) {
         autoComplete="off"
       >
         <FlexBetween p="15px" flexDirection="column">
+          <TextField required id="outlined-required" label="CPF" />
           <TextField
             required
             id="outlined-required"
-            label="Nome completo"
-            helperText="Quilometragem do veículo"
+            label="Endereço"
+            helperText="Rua e número. Ex: Rua Coronel Bordini, 1151"
           />
-          <MuiTelInput
-            defaultCountry="BR"
-            label="Celular"
-            value={value}
-            onChange={handleChange}
-          />
-          <TextField id="outlined-required" label="Email" />
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={licenseTypes}
-            renderInput={(params) => (
-              <TextField {...params} label="Tipo de habilitação" />
-            )}
-          />
+          <TextField id="outlined-required" label="Complemento" />
+          <TextField required id="outlined-required" label="CEP" />
+          <TextField id="outlined-required" label="Cidade" />
+          <TextField id="outlined-required" label="Estado" />
         </FlexBetween>
       </Box>
       <SaveButton />

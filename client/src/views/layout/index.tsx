@@ -19,7 +19,7 @@ export default function Layout() {
       <Sidebar
         user = { data || {} }
         isNonMobile={isNonMobile}
-        drawerWidth="230px"
+        drawerWidth="210px"
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
       />

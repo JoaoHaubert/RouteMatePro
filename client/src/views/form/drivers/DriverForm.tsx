@@ -15,17 +15,19 @@ import {
 import { useNavigate } from "react-router-dom";
 //icons
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 //forms
 import PersonalDetails from "./PersonalDetails";
+import BasicDetails from "./BasicDetails";
 type Props = {}
 
 export default function DriverForm({}: Props) {
   const [activeSection, setActiveSection] = useState<
-  "personal" | "specs" | "settings"
->("personal");
+  "basic" | "personal"
+>("basic");
 
 const handleNavigation = (
-  sectionId: "personal" | "specs" | "settings"
+  sectionId: "basic" | "personal"
 ) => {
   setActiveSection(sectionId);
 };
@@ -35,24 +37,14 @@ const [active, setActive] = useState("");
 
 const navItems = [
   {
+    text: "Dados Básicos",
+    icon: <EmojiEmotionsOutlinedIcon/>,
+    route: "basic"
+  },
+  {
     text: "Dados Pessoais",
-    icon: <EmojiEmotionsOutlinedIcon/>,
+    icon: <DescriptionOutlinedIcon/>,
     route: "personal"
-  },
-  {
-    text: "Especificações",
-    icon: <EmojiEmotionsOutlinedIcon/>,
-    route: "specs"
-  },
-  {
-    text: "Performance",
-    icon: "a",
-    route: "performance"
-  },
-  {
-    text: "Configurações",
-    icon: "b",
-    route: "settings"
   },
 ];
 return (
@@ -133,6 +125,7 @@ return (
           </List>
         </Box>
       </Grid>
+      {activeSection === "basic" && <BasicDetails/>}
       {activeSection === "personal" && <PersonalDetails/>}
       
     </Grid>
