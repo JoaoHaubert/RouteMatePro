@@ -1,11 +1,11 @@
-import React from "react";
-import { Box, TextField, Grid, InputAdornment } from "@mui/material";
+import React, { useState } from "react";
+import { Box, TextField, Grid, Autocomplete } from "@mui/material";
 //components
 import FlexBetween from "@/components/FlexBetween";
 import SaveButton from "@/components/SaveButton";
 type Props = {};
 
-export default function Settings({}: Props) {
+export default function PersonalDetails({}: Props) {
   return (
     <Grid item>
       <Box
@@ -21,16 +21,17 @@ export default function Settings({}: Props) {
         autoComplete="off"
       >
         <FlexBetween p="15px" flexDirection="column">
+          <TextField required id="outlined-required" label="CPF" />
           <TextField
             required
             id="outlined-required"
-            type="number"
-            label="Medida odômetro atual"
-            helperText="Quilometragem do veículo"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">km</InputAdornment>
-            }}
+            label="Endereço"
+            helperText="Rua e número. Ex: Rua Coronel Bordini, 1151"
           />
+          <TextField id="outlined-required" label="Complemento" />
+          <TextField required id="outlined-required" label="CEP" />
+          <TextField id="outlined-required" label="Cidade" />
+          <TextField id="outlined-required" label="Estado" />
         </FlexBetween>
       </Box>
       <SaveButton />
