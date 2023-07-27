@@ -22,6 +22,7 @@ export default function PersonalDetails({}: Props) {
       >
         <FlexBetween p="15px" flexDirection="column">
           <TextField required id="outlined-required" label="CPF" />
+          <TextField required id="outlined-start-adorment" label="Data de nascimento"  type="date" />
           <TextField required id="outlined-required" label="CEP" />
           <TextField
             required

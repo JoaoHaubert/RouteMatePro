@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Box, TextField, Grid, Autocomplete } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
+import { useForm } from "react-hook-form";
 //components
 import FlexBetween from "@/components/FlexBetween";
 import SaveButton from "@/components/SaveButton";
 type Props = {};
 
 export default function BasicDetails({}: Props) {
+  const { register } = useForm();
   const [value, setValue] = React.useState("");
   const handleChange = (newValue: any) => {
     setValue(newValue);
@@ -42,7 +44,7 @@ export default function BasicDetails({}: Props) {
             value={value}
             onChange={handleChange}
           />
-          <TextField id="outlined-required" label="Email" />
+          <TextField id="outlined-required" label="Email" type="email" {...register("email")}/>
           <Autocomplete
             disablePortal
             id="combo-box-demo"
