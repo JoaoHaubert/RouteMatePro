@@ -36,6 +36,7 @@ export default function SaveButton({}: Props) {
           Salvar e adicionar outro
         </Button>
         <Button
+        type="submit"
           size="small"
           variant="contained"
           color="primary"
