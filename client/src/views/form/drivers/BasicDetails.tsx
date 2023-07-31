@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import { Box, TextField, Grid, Autocomplete } from "@mui/material";
+import { Box, TextField, Grid, Autocomplete, Button } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 //components
 import FlexBetween from "@/components/FlexBetween";
 import SaveButton from "@/components/SaveButton";
 type Props = {};
 
 export default function BasicDetails({}: Props) {
-  const { register } = useForm();
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
+  function createDriver(data: any) {
+    console.log(data)
+  }
   const [value, setValue] = React.useState("");
   const handleChange = (newValue: any) => {
     setValue(newValue);
@@ -25,6 +30,7 @@ export default function BasicDetails({}: Props) {
   return (
     <Grid item>
       <Box
+        onSubmit={handleSubmit(createDriver)}
         bgcolor="#fff"
         border="solid 1px #DDE6ED"
         borderRadius={4}
@@ -55,7 +61,46 @@ export default function BasicDetails({}: Props) {
           />
         </FlexBetween>
       </Box>
-      <SaveButton />
+      <Box
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      padding={1}
+    >
+      {/* Left Side */}
+      <Button
+        onClick={() => {navigate('/register')}}
+        size="small"
+        color="error"
+        sx={{
+          marginLeft: "3rem",
+        }}
+      >
+        Cancelar
+      </Button>
+
+      {/* Right Side Container */}
+      <Box>
+        <Button
+          size="small"
+          variant="outlined"
+          color="info"
+          sx={{ marginRight: "1rem" }}
+        >
+          Salvar e adicionar outro
+        </Button>
+        <Button
+        onSubmit={handleSubmit(createDriver)}
+          type="submit"
+          size="small"
+          variant="contained"
+          color="primary"
+          sx={{ marginRight: "3rem" }}
+        >
+          Salvar
+        </Button>
+      </Box>
+    </Box>
     </Grid>
   );
 }
