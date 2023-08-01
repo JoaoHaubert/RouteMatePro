@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useState } from "react";
 import { Box, TextField, Grid, Autocomplete, Button } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
@@ -29,21 +30,22 @@ export default function BasicDetails({}: Props) {
 
   return (
     <Grid item>
+    <Box 
+    component="form"
+    onSubmit={handleSubmit(createDriver)}>
       <Box
-        onSubmit={handleSubmit(createDriver)}
+        
         bgcolor="#fff"
         border="solid 1px #DDE6ED"
         borderRadius={4}
         m="2rem 2.5rem"
-        component="form"
         sx={{
           "& .MuiTextField-root": { m: 2, width: "90ch" },
         }}
-        noValidate
         autoComplete="off"
       >
         <FlexBetween p="15px" flexDirection="column">
-          <TextField required id="outlined-required" label="Nome completo" />
+          <TextField required id="outlined-required" label="Nome completo" {...register("N")} />
           <MuiTelInput
             defaultCountry="BR"
             label="Celular"
@@ -90,7 +92,6 @@ export default function BasicDetails({}: Props) {
           Salvar e adicionar outro
         </Button>
         <Button
-        onSubmit={handleSubmit(createDriver)}
           type="submit"
           size="small"
           variant="contained"
@@ -100,6 +101,7 @@ export default function BasicDetails({}: Props) {
           Salvar
         </Button>
       </Box>
+    </Box>
     </Box>
     </Grid>
   );
