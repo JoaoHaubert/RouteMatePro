@@ -10,10 +10,15 @@ import SaveButton from "@/components/SaveButton";
 type Props = {};
 
 export default function BasicDetails({}: Props) {
-  const navigate = useNavigate();
+  const handleInputChange = (event) => {
+    // Remove any digits from the input value
+    const newValue = event.target.value.replace(/\d/g, '');
+    // Update the value in the TextField
+    event.target.value = newValue;
+  };
   const { register, handleSubmit } = useForm();
   function createDriver(data: any) {
-    console.log(data)
+    console.log(data);
   }
   const [value, setValue] = React.useState("");
   const handleChange = (newValue: any) => {
@@ -30,79 +35,55 @@ export default function BasicDetails({}: Props) {
 
   return (
     <Grid item>
-    <Box 
-    component="form"
-    onSubmit={handleSubmit(createDriver)}>
-      <Box
-        
-        bgcolor="#fff"
-        border="solid 1px #DDE6ED"
-        borderRadius={4}
-        m="2rem 2.5rem"
-        sx={{
-          "& .MuiTextField-root": { m: 2, width: "90ch" },
-        }}
-        autoComplete="off"
-      >
-        <FlexBetween p="15px" flexDirection="column">
-          <TextField required id="outlined-required" label="Nome completo" {...register("N")} />
-          <MuiTelInput
-            defaultCountry="BR"
-            label="Celular"
-            value={value}
-            onChange={handleChange}
-          />
-          <TextField id="outlined-required" label="Email" type="email" {...register("email")}/>
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={licenseTypes}
-            renderInput={(params) => (
-              <TextField {...params} label="Tipo de habilitação" />
-            )}
-          />
-        </FlexBetween>
-      </Box>
-      <Box
-      display="flex"
-      justifyContent="space-between"
-      alignItems="center"
-      padding={1}
-    >
-      {/* Left Side */}
-      <Button
-        onClick={() => {navigate('/register')}}
-        size="small"
-        color="error"
-        sx={{
-          marginLeft: "3rem",
-        }}
-      >
-        Cancelar
-      </Button>
-
-      {/* Right Side Container */}
-      <Box>
-        <Button
-          size="small"
-          variant="outlined"
-          color="info"
-          sx={{ marginRight: "1rem" }}
+      <Box component="form" onSubmit={handleSubmit(createDriver)}>
+        <Box
+          bgcolor="#fff"
+          border="solid 1px #DDE6ED"
+          borderRadius={4}
+          m="2rem 2.5rem"
+          sx={{
+            "& .MuiTextField-root": { m: 2, width: "90ch" },
+          }}
+          autoComplete="off"
         >
-          Salvar e adicionar outro
-        </Button>
-        <Button
-          type="submit"
-          size="small"
-          variant="contained"
-          color="primary"
-          sx={{ marginRight: "3rem" }}
-        >
-          Salvar
-        </Button>
+          <FlexBetween p="15px" flexDirection="column">
+            <TextField
+              required
+              type="text"
+              id="outlined-required"
+              label="Nome completo"
+              {...register("name")}
+              onChange={handleInputChange}
+            />
+            <MuiTelInput
+              {...register("phone")}
+              defaultCountry="BR"
+              label="Contato"
+              value={value}
+              onChange={handleChange}
+            />
+            <TextField
+              id="outlined-required"
+              label="Email"
+              type="email"
+              {...register("email")}
+            />
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={licenseTypes}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Tipo de habilitação"
+                  {...register("license")}
+                />
+              )}
+            />
+          </FlexBetween>
+        </Box>
+        <SaveButton />
       </Box>
-    </Box>
-    </Box>
     </Grid>
   );
 }
