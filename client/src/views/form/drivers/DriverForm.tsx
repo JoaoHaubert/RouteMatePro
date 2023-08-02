@@ -19,6 +19,7 @@ import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 //forms
 import PersonalDetails from "./PersonalDetails";
 import BasicDetails from "./BasicDetails";
+import SaveButton from "@/components/SaveButton";
 type Props = {}
 
 export default function DriverForm({}: Props) {
@@ -127,7 +128,6 @@ return (
       </Grid>
       {activeSection === "basic" && <BasicDetails/>}
       {activeSection === "personal" && <PersonalDetails/>}
-      
     </Grid>
   </Box>
 )
