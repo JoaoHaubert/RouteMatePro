@@ -1,11 +1,28 @@
-import React from "react";
-import { Box, Autocomplete, TextField, Grid } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Autocomplete, TextField, Grid, Typography } from "@mui/material";
 import FlexBetween from "@/components/FlexBetween";
 import SaveButton from "@/components/SaveButton";
 
 type Props = {};
 
 export default function Identification({}: Props) {
+   // Initialize state for input values
+   const [formValues, setFormValues] = useState({
+    nomeVeiculo: "",
+    placaVeiculo: "",
+    tipoVeiculo: null,
+    statusVeiculo: null,
+    propriedadeVeiculo: null,
+    grupoVeiculo: "",
+  });
+
+  // Helper function to handle changes in the input fields
+  const handleChange = (name: string, value: any) => {
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      [name]: value,
+    }));
+  };
   const vehicleType = [
     { label: "Carro" },
     { label: "Caminhão" },
@@ -14,6 +31,7 @@ export default function Identification({}: Props) {
     { label: "Moto" },
     { label: "Ônibus" },
     { label: "SUV" },
+    { label: "Van" },
   ];
   const vehicleStatus = [
     { label: "Ativo" },
@@ -48,6 +66,8 @@ export default function Identification({}: Props) {
             id="outlined-required"
             label="Nome do Veiculo"
             helperText="Dê um nome, código ou apelido para o veículo."
+            value={formValues.nomeVeiculo}
+            onChange={(e) => handleChange("nomeVeiculo", e.target.value)}
           />
           <TextField label="Placa do Veículo" />
           <Autocomplete
