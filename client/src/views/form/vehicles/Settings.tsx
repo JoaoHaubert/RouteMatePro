@@ -1,5 +1,11 @@
 import React from "react";
-import { Box, TextField, Grid, InputAdornment } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Grid,
+  InputAdornment,
+  Typography,
+} from "@mui/material";
 //components
 import FlexBetween from "@/components/FlexBetween";
 import SaveButton from "@/components/SaveButton";
@@ -28,7 +34,7 @@ export default function Settings({}: Props) {
             label="Odômetro atual"
             helperText="Quilometragem do veículo"
             InputProps={{
-              endAdornment: <InputAdornment position="end">km</InputAdornment>
+              endAdornment: <InputAdornment position="end">km</InputAdornment>,
             }}
           />
         </FlexBetween>

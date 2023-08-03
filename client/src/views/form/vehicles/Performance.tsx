@@ -22,24 +22,15 @@ export default function Performance({}: Props) {
         autoComplete="off"
       >
         <FlexBetween p="15px" flexDirection="column">
-          <TextField id="outlined-number" type="number" label="Km/l Estimado para Cidade" />
           <TextField
             id="outlined-number"
             type="number"
-            label="Km/l Estimado para Rodovias"
+            label="Km/l Estimado do veículo"
           />
           <TextField
             id="outlined-number"
             type="number"
-            label="Carga Máxima"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">kg</InputAdornment>,
-            }}
-          />
-          <TextField
-            id="outlined-number"
-            type="number"
-            label="Capacidade de Reboque"
+            label="Peso carga líquida"
             InputProps={{
               endAdornment: <InputAdornment position="end">kg</InputAdornment>,
             }}

@@ -15,42 +15,44 @@ import {
 
 import { useNavigate } from "react-router-dom";
 //icons
-import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+//import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
 //forms
 import Identification from "./Identification";
-import Specs from "./Specs";
+//import Specs from "./Specs";
 import Performance from "./Performance";
 import Settings from "./Settings";
 
 type Props = {};
 
+enum FormWindows {
+  identification,
+  performance,
+  settings,
+}
 export default function VehicleForm({}: Props) {
-  const [activeSection, setActiveSection] = useState<
-    "identification" | "specs" | "settings"
-  >("identification");
+  // const [activeSection, setActiveSection] = useState<
+  //   "identification" | "performance" | "settings"
+  // >("identification");
 
-  const handleNavigation = (
-    sectionId: "identification" | "specs" | "settings"
-  ) => {
-    setActiveSection(sectionId);
-  };
-  const navigate = useNavigate();
-  const theme = useTheme();
-  const [active, setActive] = useState("");
+  // const handleNavigation = (
+  //   sectionId: "identification" | "performance" | "settings"
+  // ) => {
+  //   setActiveSection(sectionId);
+  // };
+  // const navigate = useNavigate();
+  // const theme = useTheme();
+  // const [active, setActive] = useState("");
+  const [currentForm, setCurrentForm] = useState(FormWindows.identification)
+
 
   const navItems = [
     {
       text: "Identificação",
       icon: <SummarizeOutlinedIcon />,
       route: "identification"
-    },
-    {
-      text: "Especificações",
-      icon: <ListAltOutlinedIcon />,
-      route: "specs"
     },
     {
       text: "Performance",
@@ -142,7 +144,6 @@ export default function VehicleForm({}: Props) {
           </Box>
         </Grid>
         {activeSection === "identification" && <Identification/>}
-        {activeSection === "specs" && <Specs/>}
         {activeSection === "performance" && <Performance/>}
         {activeSection === "settings" && <Settings/>}
       </Grid>
