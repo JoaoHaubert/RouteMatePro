@@ -14,9 +14,7 @@ import {
   TextField,
   Autocomplete
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 //components
-import FlexBetween from "@/components/FlexBetween";
 import SaveButton from "@/components/SaveButton";
 //icons
 //import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
@@ -28,7 +26,7 @@ import Identification from "./Identification";
 //import Specs from "./Specs";
 import Performance from "./Performance";
 import Settings from "./Settings";
-import { FormatShapes } from "@mui/icons-material";
+
 
 type Props = {};
 
@@ -38,16 +36,6 @@ enum FormWindows {
   settings,
 }
 export default function VehicleForm({}: Props) {
-  // const [activeSection, setActiveSection] = useState<
-  //   "identification" | "performance" | "settings"
-  // >("identification");
-
-  // const handleNavigation = (
-  //   sectionId: "identification" | "performance" | "settings"
-  // ) => {
-  //   setActiveSection(sectionId);
-  // };
-  // const navigate = useNavigate();
   const theme = useTheme();
   const [active, setActive] = useState("");
   const [currentForm, setCurrentForm] = useState(FormWindows.identification)
@@ -60,7 +48,7 @@ export default function VehicleForm({}: Props) {
     vehicleTag: "",
     vehicleType: null,
     vehicleStatus: null,
-    vehicleProperties: null,
+    vehicleOwnership: null,
     vehicleGroup: "",
   });
 
@@ -72,7 +60,7 @@ export default function VehicleForm({}: Props) {
     }));
   };
   const vehicleType = [
-    { label: "Carro" },
+    { value: "car", label: "Carro" },
     { label: "Caminhão" },
     { label: "Empilhadeira" },
     { label: "Furgão" },
@@ -82,13 +70,13 @@ export default function VehicleForm({}: Props) {
     { label: "Van" },
   ];
   const vehicleStatus = [
-    { label: "Ativo" },
+    { value: "active", label: "Ativo" },
     { label: "Inativo" },
     { label: "Fora de serviço" },
     { label: "Vendido" },
   ];
   const vehicleOwnership = [
-    { label: "Próprio" },
+    { value: "owner", label: "Próprio" },
     { label: "Alugado" },
     { label: "Cliente" },
     { label: "Arrendado" },
@@ -216,7 +204,7 @@ export default function VehicleForm({}: Props) {
         {currentForm === FormWindows.performance && <Performance/>}
         {currentForm === FormWindows.settings && <Settings/>}
       </Grid>
-      <SaveButton />
+        <SaveButton />
     </Box>
   );
 }

@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React, { useState } from "react";
-import { Box, Autocomplete, TextField, Grid, Typography } from "@mui/material";
+import { Box, Autocomplete, TextField, Grid, Typography, MenuItem } from "@mui/material";
 import FlexBetween from "@/components/FlexBetween";
 import SaveButton from "@/components/SaveButton";
 
@@ -8,12 +8,20 @@ type Props = {
   formValues: {
     vehicleName: string;
     vehicleTag: string;
-    vehicleType: any;
-    vehicleStatus: any;
-    vehicleProperties: any;
+    vehicleType: string;
+    vehicleStatus: string;
+    vehicleOwnership: string;
     vehicleGroup: string;
   };
+
+  handleChange: (name: string, value: any) => void;
+  vehicleType: { label: string }[];
+  vehicleStatus: { label: string }[];
+  vehicleOwnership: { label: string }[];
 };
+
+
+
 
 const Identification: React.FC<Props> = ({
   formValues,
@@ -37,31 +45,53 @@ const Identification: React.FC<Props> = ({
         value={formValues.vehicleTag}
         onChange={(e) => handleChange("vehicleTag", e.target.value)}
       />
-      <Autocomplete
+      <TextField
         disablePortal
-        id="combo-box-demo"
-        options={vehicleType}
-        renderInput={(params) => (
-          <TextField {...params} label="Tipo do Veiculo" />
-        )}
-      />
-      <Autocomplete
+        select
+        label="Tipo do Veículo"
+        id="outlined-select-car-type"
+        onChange={(e) => handleChange("vehicleType", e.target.value)}
+        value={formValues.vehicleType}
+      >
+        {vehicleType.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
+      <TextField
         disablePortal
-        id="combo-box-demo"
-        options={vehicleStatus}
-        renderInput={(params) => (
-          <TextField {...params} label="Status do Veiculo" />
-        )}
-      />
-      <Autocomplete
+        select
+        label="Status do Veículo"
+        id="outlined-select-car-type"
+        onChange={(e) => handleChange("vehicleStatus", e.target.value)}
+        value={formValues.vehicleStatus}
+      >
+        {vehicleStatus.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
+      <TextField
         disablePortal
-        id="combo-box-demo"
-        options={vehicleOwnership}
-        renderInput={(params) => <TextField {...params} label="Propriedade" />}
-      />
+        select
+        label="Propriedade"
+        id="outlined-select-car-type"
+        onChange={(e) => handleChange("vehicleOwnership", e.target.value)}
+        value={formValues.vehicleOwnership}
+      >
+        {vehicleOwnership.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
       <TextField
         label="Grupo do Veículo"
         helperText="Defina o grupo do veículo. Ex: Jardinagem, Laticínios, etc."
+        value={formValues.vehicleGroup}
+        onChange={(e) => handleChange("vehicleGroup", e.target.value)}
       />
     </FlexBetween>
   );
