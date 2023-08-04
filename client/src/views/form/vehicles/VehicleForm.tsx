@@ -11,9 +11,13 @@ import {
   ListItemIcon,
   ListItemText,
   useTheme,
+  TextField,
+  Autocomplete
 } from "@mui/material";
-
 import { useNavigate } from "react-router-dom";
+//components
+import FlexBetween from "@/components/FlexBetween";
+import SaveButton from "@/components/SaveButton";
 //icons
 //import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
@@ -24,6 +28,7 @@ import Identification from "./Identification";
 //import Specs from "./Specs";
 import Performance from "./Performance";
 import Settings from "./Settings";
+import { FormatShapes } from "@mui/icons-material";
 
 type Props = {};
 
@@ -43,26 +48,67 @@ export default function VehicleForm({}: Props) {
   //   setActiveSection(sectionId);
   // };
   // const navigate = useNavigate();
-  // const theme = useTheme();
-  // const [active, setActive] = useState("");
+  const theme = useTheme();
+  const [active, setActive] = useState("");
   const [currentForm, setCurrentForm] = useState(FormWindows.identification)
+  const handleSidebarItemClick = (form: FormWindows) => {
+    setCurrentForm(form);
+  };
+   // Initialize state for input values
+   const [formValues, setFormValues] = useState({
+    vehicleName: "",
+    vehicleTag: "",
+    vehicleType: null,
+    vehicleStatus: null,
+    vehicleProperties: null,
+    vehicleGroup: "",
+  });
 
+  // Helper function to handle changes in the input fields
+  const handleChange = (name: string, value: any) => {
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      [name]: value,
+    }));
+  };
+  const vehicleType = [
+    { label: "Carro" },
+    { label: "Caminhão" },
+    { label: "Empilhadeira" },
+    { label: "Furgão" },
+    { label: "Moto" },
+    { label: "Ônibus" },
+    { label: "SUV" },
+    { label: "Van" },
+  ];
+  const vehicleStatus = [
+    { label: "Ativo" },
+    { label: "Inativo" },
+    { label: "Fora de serviço" },
+    { label: "Vendido" },
+  ];
+  const vehicleOwnership = [
+    { label: "Próprio" },
+    { label: "Alugado" },
+    { label: "Cliente" },
+    { label: "Arrendado" },
+  ];
 
   const navItems = [
     {
       text: "Identificação",
       icon: <SummarizeOutlinedIcon />,
-      route: "identification"
+      route: FormWindows.identification
     },
     {
       text: "Performance",
       icon: <SpeedOutlinedIcon />,
-      route: "performance"
+      route: FormWindows.performance
     },
     {
       text: "Configurações",
       icon: <SettingsOutlinedIcon/>,
-      route: "settings"
+      route: FormWindows.settings
     },
   ];
   return (
@@ -115,7 +161,7 @@ export default function VehicleForm({}: Props) {
                   <ListItem key={text} disablePadding>
                     <ListItemButton
                       onClick={() => {
-                        handleNavigation(route)
+                        handleSidebarItemClick(route)
                         setActive(route);
                       }}
                       sx={{
@@ -143,10 +189,34 @@ export default function VehicleForm({}: Props) {
             </List>
           </Box>
         </Grid>
-        {activeSection === "identification" && <Identification/>}
-        {activeSection === "performance" && <Performance/>}
-        {activeSection === "settings" && <Settings/>}
+        {currentForm === FormWindows.identification && (
+          <Grid item>
+          <Box
+            bgcolor="#fff"
+            border="solid 1px #DDE6ED"
+            borderRadius={4}
+            m="2rem 2.5rem"
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 2, width: "90ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <Identification
+              formValues={formValues}
+              handleChange={handleChange}
+              vehicleType={vehicleType}
+              vehicleStatus={vehicleStatus}
+              vehicleOwnership={vehicleOwnership}
+            />
+          </Box>
+        </Grid>
+        )}
+        {currentForm === FormWindows.performance && <Performance/>}
+        {currentForm === FormWindows.settings && <Settings/>}
       </Grid>
+      <SaveButton />
     </Box>
   );
 }
