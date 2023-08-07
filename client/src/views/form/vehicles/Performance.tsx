@@ -37,7 +37,6 @@ export default function Performance({}: Props) {
           />
         </FlexBetween>
       </Box>
-      <SaveButton />
     </Grid>
   );
 }
