@@ -23,7 +23,7 @@ export default function BasicDetails({}: Props) {
   const [value, setValue] = React.useState("");
   const handleChange = (newValue: any) => {
     setValue(newValue);
-  };
+  }; 
   const licenseTypes = [
     { label: "A" },
     { label: "B" },

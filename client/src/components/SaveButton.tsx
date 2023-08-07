@@ -19,7 +19,7 @@ export default function SaveButton({}: Props) {
       size="small"
       color="error"
       sx={{
-        marginLeft: "3rem",
+        marginLeft: "23rem",
       }}
     >
       Cancelar
