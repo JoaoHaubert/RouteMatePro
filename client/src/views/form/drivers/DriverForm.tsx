@@ -129,6 +129,7 @@ return (
       {activeSection === "basic" && <BasicDetails/>}
       {activeSection === "personal" && <PersonalDetails/>}
     </Grid>
+    <SaveButton/>
   </Box>
 )
 }
