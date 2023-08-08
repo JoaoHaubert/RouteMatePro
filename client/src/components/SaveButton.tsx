@@ -1,11 +1,13 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useFormContext } from "@/views/form/vehicles/FormContext";
 
 type Props = {};
 
 export default function SaveButton({}: Props) {
   const navigate = useNavigate();
+  const { submitForms } = useFormContext();
   return (
     <Box
     display="flex"
@@ -36,6 +38,7 @@ export default function SaveButton({}: Props) {
         Salvar e adicionar outro
       </Button>
       <Button
+      onClick={submitForms}
         type="submit"
         size="small"
         variant="contained"

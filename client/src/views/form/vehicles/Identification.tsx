@@ -1,39 +1,18 @@
 //@ts-nocheck
-import React, { useState } from "react";
-import {
-  Box,
-  Autocomplete,
-  TextField,
-  Grid,
-  Typography,
-  MenuItem,
-} from "@mui/material";
-import FlexBetween from "@/components/FlexBetween";
-import SaveButton from "@/components/SaveButton";
-import { useForm } from "react-hook-form";
-type Props = {
-  formValues: {
-    vehicleName: string;
-    vehicleTag: string;
-    vehicleType: string;
-    vehicleStatus: string;
-    vehicleOwnership: string;
-    vehicleGroup: string;
+import React from 'react';
+import { useFormContext } from './FormContext';
+import { FormControl, TextField, MenuItem } from '@mui/material';
+//components
+import FlexBetween from '@/components/FlexBetween';
+
+const FormOne: React.FC = () => {
+  const { formData, setFormData } = useFormContext();
+
+  const handleChange = (field: keyof FormData) => (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
   };
-
-  handleChange: (name: string, value: any) => void;
-  vehicleType: { label: string }[];
-  vehicleStatus: { label: string }[];
-  vehicleOwnership: { label: string }[];
-};
-
-const Identification: React.FC<Props> = ({
-  formValues,
-  handleChange,
-  vehicleType,
-  vehicleStatus,
-  vehicleOwnership,
-}) => {
 
 
   return (
@@ -43,20 +22,20 @@ const Identification: React.FC<Props> = ({
           id="outlined-required"
           label="Nome do Veiculo"
           helperText="Dê um nome, código ou apelido para o veículo."
-          value={formValues.vehicleName}
-          onChange={(e) => handleChange("vehicleName", e.target.value)}
+          value={formData.vehicleName}
+          onChange={handleChange("vehicleName")}
         />
         <TextField
           label="Placa do Veículo"
-          value={formValues.vehicleTag}
-          onChange={(e) => handleChange("vehicleTag", e.target.value)}
+          value={formData.vehicleTag}
+          onChange={handleChange("vehicleTag")}
         />
         <TextField
           select
           label="Tipo do Veículo"
           id="outlined-select-car-type"
-          onChange={(e) => handleChange("vehicleType", e.target.value)}
-          value={formValues.vehicleType}
+          onChange={handleChange("vehicleType")}
+          value={formData.vehicleType}
         >
           {vehicleType.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -68,8 +47,8 @@ const Identification: React.FC<Props> = ({
           select
           label="Status do Veículo"
           id="outlined-select-car-type"
-          onChange={(e) => handleChange("vehicleStatus", e.target.value)}
-          value={formValues.vehicleStatus}
+          onChange={handleChange("vehicleStatus")}
+          value={formData.vehicleStatus}
         >
           {vehicleStatus.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -81,8 +60,8 @@ const Identification: React.FC<Props> = ({
           select
           label="Propriedade"
           id="outlined-select-car-type"
-          onChange={(e) => handleChange("vehicleOwnership", e.target.value)}
-          value={formValues.vehicleOwnership}
+          onChange={handleChange("vehicleOwnership")}
+          value={formData.vehicleOwnership}
         >
           {vehicleOwnership.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -93,8 +72,8 @@ const Identification: React.FC<Props> = ({
         <TextField
           label="Grupo do Veículo"
           helperText="Defina o grupo do veículo. Ex: Jardinagem, Laticínios, etc."
-          value={formValues.vehicleGroup}
-          onChange={(e) => handleChange("vehicleGroup", e.target.value)}
+          value={formData.vehicleGroup}
+          onChange={handleChange("vehicleGroup")}
         />
       </FlexBetween>
   );
