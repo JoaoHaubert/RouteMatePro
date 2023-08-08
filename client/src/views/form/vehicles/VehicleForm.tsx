@@ -12,7 +12,7 @@ import {
   ListItemText,
   useTheme,
 } from "@mui/material";
-import { useForm } from 'react-hook-form'
+import { useForm } from "react-hook-form";
 //components
 import SaveButton from "@/components/SaveButton";
 //icons
@@ -180,21 +180,20 @@ export default function VehicleForm({}: Props) {
             </List>
           </Box>
         </Grid>
-        {currentForm === FormWindows.identification && (
-          <Grid item>
-            <Box
-              component="form"
-              onSubmit={handleSubmit(createVehicle)}
-              bgcolor="#fff"
-              border="solid 1px #DDE6ED"
-              borderRadius={4}
-              m="2rem 2.5rem"
-              sx={{
-                "& .MuiTextField-root": { m: 2, width: "90ch" },
-              }}
-              noValidate
-              autoComplete="off"
-            >
+        <Grid item>
+          <Box
+            component="form"
+            bgcolor="#fff"
+            border="solid 1px #DDE6ED"
+            borderRadius={4}
+            m="2rem 2.5rem"
+            sx={{
+              "& .MuiTextField-root": { m: 2, width: "90ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            {currentForm === FormWindows.identification && (
               <Identification
                 formValues={formValues}
                 handleChange={handleChange}
@@ -202,13 +201,12 @@ export default function VehicleForm({}: Props) {
                 vehicleStatus={vehicleStatus}
                 vehicleOwnership={vehicleOwnership}
               />
-            </Box>
-          </Grid>
-        )}
-        {currentForm === FormWindows.performance && <Performance />}
-        {currentForm === FormWindows.settings && <Settings />}
+            )}
+            {currentForm === FormWindows.performance && <Performance />}
+            {currentForm === FormWindows.settings && <Settings />}
+          </Box>
+        </Grid>
       </Grid>
-      <SaveButton />
     </Box>
   );
 }
