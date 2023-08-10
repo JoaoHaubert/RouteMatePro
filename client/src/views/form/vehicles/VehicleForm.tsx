@@ -26,6 +26,7 @@ import Identification from "./Identification";
 //import Specs from "./Specs";
 import Performance from "./Performance";
 import Settings from "./Settings";
+import { FormProvider } from "./FormContext";
 
 type Props = {};
 
@@ -35,10 +36,6 @@ enum FormWindows {
   settings,
 }
 export default function VehicleForm({}: Props) {
-  const { register, handleSubmit } = useForm();
-  function createVehicle(data: any) {
-    console.log(data);
-  }
   const theme = useTheme();
   const [active, setActive] = useState("");
   const [currentForm, setCurrentForm] = useState(FormWindows.identification);
@@ -46,44 +43,44 @@ export default function VehicleForm({}: Props) {
     setCurrentForm(form);
   };
   // Initialize state for input values
-  const [formValues, setFormValues] = useState({
-    vehicleName: "",
-    vehicleTag: "",
-    vehicleType: "",
-    vehicleStatus: "",
-    vehicleOwnership: "",
-    vehicleGroup: "",
-  });
+  // const [formValues, setFormValues] = useState({
+  //   vehicleName: "",
+  //   vehicleTag: "",
+  //   vehicleType: "",
+  //   vehicleStatus: "",
+  //   vehicleOwnership: "",
+  //   vehicleGroup: "",
+  // });
 
-  // Helper function to handle changes in the input fields
-  const handleChange = (name: string, value: any) => {
-    setFormValues((prevFormValues) => ({
-      ...prevFormValues,
-      [name]: value,
-    }));
-  };
-  const vehicleType = [
-    { value: "car", label: "Carro" },
-    { label: "Caminhão" },
-    { label: "Empilhadeira" },
-    { label: "Furgão" },
-    { label: "Moto" },
-    { label: "Ônibus" },
-    { label: "SUV" },
-    { label: "Van" },
-  ];
-  const vehicleStatus = [
-    { value: "active", label: "Ativo" },
-    { label: "Inativo" },
-    { label: "Fora de serviço" },
-    { label: "Vendido" },
-  ];
-  const vehicleOwnership = [
-    { value: "owner", label: "Próprio" },
-    { label: "Alugado" },
-    { label: "Cliente" },
-    { label: "Arrendado" },
-  ];
+  // // Helper function to handle changes in the input fields
+  // const handleChange = (name: string, value: any) => {
+  //   setFormValues((prevFormValues) => ({
+  //     ...prevFormValues,
+  //     [name]: value,
+  //   }));
+  // };
+  // const vehicleType = [
+  //   { value: "car", label: "Carro" },
+  //   { label: "Caminhão" },
+  //   { label: "Empilhadeira" },
+  //   { label: "Furgão" },
+  //   { label: "Moto" },
+  //   { label: "Ônibus" },
+  //   { label: "SUV" },
+  //   { label: "Van" },
+  // ];
+  // const vehicleStatus = [
+  //   { value: "active", label: "Ativo" },
+  //   { label: "Inativo" },
+  //   { label: "Fora de serviço" },
+  //   { label: "Vendido" },
+  // ];
+  // const vehicleOwnership = [
+  //   { value: "owner", label: "Próprio" },
+  //   { label: "Alugado" },
+  //   { label: "Cliente" },
+  //   { label: "Arrendado" },
+  // ];
 
   const navItems = [
     {
@@ -181,6 +178,7 @@ export default function VehicleForm({}: Props) {
           </Box>
         </Grid>
         <Grid item>
+          <FormProvider>
           <Box
             component="form"
             bgcolor="#fff"
@@ -193,18 +191,12 @@ export default function VehicleForm({}: Props) {
             noValidate
             autoComplete="off"
           >
-            {currentForm === FormWindows.identification && (
-              <Identification
-                formValues={formValues}
-                handleChange={handleChange}
-                vehicleType={vehicleType}
-                vehicleStatus={vehicleStatus}
-                vehicleOwnership={vehicleOwnership}
-              />
-            )}
+            {currentForm === FormWindows.identification && <Identification />}
             {currentForm === FormWindows.performance && <Performance />}
             {currentForm === FormWindows.settings && <Settings />}
           </Box>
+          <SaveButton/>
+          </FormProvider>
         </Grid>
       </Grid>
     </Box>

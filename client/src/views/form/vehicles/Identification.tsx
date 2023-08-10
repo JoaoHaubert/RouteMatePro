@@ -1,11 +1,11 @@
-//@ts-nocheck
+
 import React from 'react';
 import { useFormContext } from './FormContext';
-import { FormControl, TextField, MenuItem } from '@mui/material';
+import { TextField, MenuItem } from '@mui/material';
 //components
 import FlexBetween from '@/components/FlexBetween';
 
-const FormOne: React.FC = () => {
+const Identification: React.FC = () => {
   const { formData, setFormData } = useFormContext();
 
   const handleChange = (field: keyof FormData) => (
@@ -13,7 +13,28 @@ const FormOne: React.FC = () => {
   ) => {
     setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
   };
-
+ const vehicleType = [
+    { value: "car", label: "Carro" },
+    { label: "Caminhão" },
+    { label: "Empilhadeira" },
+    { label: "Furgão" },
+    { label: "Moto" },
+    { label: "Ônibus" },
+    { label: "SUV" },
+    { label: "Van" },
+  ];
+  const vehicleStatus = [
+    { value: "active", label: "Ativo" },
+    { label: "Inativo" },
+    { label: "Fora de serviço" },
+    { label: "Vendido" },
+  ];
+  const vehicleOwnership = [
+    { value: "owner", label: "Próprio" },
+    { label: "Alugado" },
+    { label: "Cliente" },
+    { label: "Arrendado" },
+  ];
 
   return (
       <FlexBetween p="15px" flexDirection="column">
@@ -43,6 +64,12 @@ const FormOne: React.FC = () => {
             </MenuItem>
           ))}
         </TextField>
+        <TextField
+          label="Fabricante do Veículo"
+          value={formData.vehicleBrand}
+          onChange={handleChange("vehicleBrand")}
+          helperText="Exemplo: Ford ou Volkswagen."
+        />
         <TextField
           select
           label="Status do Veículo"

@@ -9,6 +9,9 @@ const formSchema: ZodType<FormData> = z.object({
   vehicleStatus: z.string(),
   vehicleGroup: z.string(),
   vehicleOwnership: z.string(),
+  vehicleBrand: z.string(),
+  vehicleConsume: z.number().nonnegative(),
+  vehicleLoadCap: z.number().nonnegative(),
 });
 
 interface FormContextValue {
@@ -35,6 +38,9 @@ export const FormProvider: React.FC = ({ children }: any) => {
     vehicleStatus: "",
     vehicleOwnership: "",
     vehicleGroup: "",
+    vehicleBrand: "",
+    vehicleConsume: 0,
+    vehicleLoadCap: 0,
   });
 
   const submitForms = () => {

@@ -3,9 +3,9 @@ import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useFormContext } from "@/views/form/vehicles/FormContext";
 
-type Props = {};
 
-export default function SaveButton({}: Props) {
+
+const SaveButton: React.FC = () => {
   const navigate = useNavigate();
   const { submitForms } = useFormContext();
   return (
@@ -21,7 +21,7 @@ export default function SaveButton({}: Props) {
       size="small"
       color="error"
       sx={{
-        marginLeft: "23rem",
+        marginLeft: "2rem",
       }}
     >
       Cancelar
@@ -50,4 +50,6 @@ export default function SaveButton({}: Props) {
     </Box>
   </Box>
   );
-}
+};
+
+export default SaveButton
