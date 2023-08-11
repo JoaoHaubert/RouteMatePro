@@ -6,6 +6,7 @@ export interface FormData {
     vehicleOwnership: string;
     vehicleGroup: string;
     vehicleBrand: string;
-    vehicleConsume: number;
-    vehicleLoadCap: number;
+    vehicleConsume: string;
+    vehicleLoadCap: string;
+    vehicleOdometer: string; 
 }
