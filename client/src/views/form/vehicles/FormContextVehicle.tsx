@@ -1,8 +1,9 @@
+
 import React, { createContext, useState, useContext } from "react";
 import { z, ZodType } from "zod";
-import { FormData } from "@/types";
+import { FormDataVehicle } from "@/types";
 
-const formSchema: ZodType<FormData> = z.object({
+const formSchema: ZodType<FormDataVehicle> = z.object({
   vehicleName: z.string().nonempty("Campo necessário para o cadastro"),
   vehicleType: z.string().nonempty("Campo necessário para o cadastro"),
   vehicleTag: z.string(),
@@ -16,8 +17,8 @@ const formSchema: ZodType<FormData> = z.object({
 });
 
 interface FormContextValue {
-  formData: FormData;
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  formData: FormDataVehicle;
+  setFormData: React.Dispatch<React.SetStateAction<FormDataVehicle>>;
   submitForms: () => void;
 }
 
@@ -32,7 +33,7 @@ export const useFormContext = () => {
   };
 
 export const FormProvider: React.FC = ({ children }: any) => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<FormDataVehicle>({
     vehicleName: "",
     vehicleTag: "",
     vehicleType: "",

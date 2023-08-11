@@ -1,4 +1,4 @@
-export interface FormData {
+export interface FormDataVehicle {
     vehicleName: string;
     vehicleTag: string;
     vehicleType: string;
@@ -8,5 +8,12 @@ export interface FormData {
     vehicleBrand: string;
     vehicleConsume: string;
     vehicleLoadCap: string;
-    vehicleOdometer: string; 
+    vehicleOdometer: string;
+};
+
+export interface FormDataDriver {
+    fullName: string;
+    phone: string;
+    email: string;
+    license: string;
 }

@@ -55,21 +55,6 @@ export default function PersonalDetails({}: Props) {
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
   }
 
-  return (
-    <Grid item>
-      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-        <Box
-          bgcolor="#fff"
-          border="solid 1px #DDE6ED"
-          borderRadius={4}
-          m="2rem 2.5rem"
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 2, width: "90ch" },
-          }}
-          noValidate
-          autoComplete="off"
-        >
           <FlexBetween p="15px" flexDirection="column">
             <TextField
               required
@@ -138,9 +123,6 @@ export default function PersonalDetails({}: Props) {
               label="Complemento"
             />
           </FlexBetween>
-        </Box>
-        <SaveButton />
-      </Box>
-    </Grid>
+
   );
 }

@@ -12,21 +12,18 @@ import {
   ListItemText,
   useTheme,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
 //components
 import SaveButton from "@/components/SaveButton";
+import { FormProvider } from "./FormContextVehicle";
 //icons
-//import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import SpeedOutlinedIcon from "@mui/icons-material/SpeedOutlined";
 //forms
-
 import Identification from "./Identification";
-//import Specs from "./Specs";
 import Performance from "./Performance";
 import Settings from "./Settings";
-import { FormProvider } from "./FormContext";
+
 
 type Props = {};
 
@@ -42,45 +39,6 @@ export default function VehicleForm({}: Props) {
   const handleSidebarItemClick = (form: FormWindows) => {
     setCurrentForm(form);
   };
-  // Initialize state for input values
-  // const [formValues, setFormValues] = useState({
-  //   vehicleName: "",
-  //   vehicleTag: "",
-  //   vehicleType: "",
-  //   vehicleStatus: "",
-  //   vehicleOwnership: "",
-  //   vehicleGroup: "",
-  // });
-
-  // // Helper function to handle changes in the input fields
-  // const handleChange = (name: string, value: any) => {
-  //   setFormValues((prevFormValues) => ({
-  //     ...prevFormValues,
-  //     [name]: value,
-  //   }));
-  // };
-  // const vehicleType = [
-  //   { value: "car", label: "Carro" },
-  //   { label: "Caminhão" },
-  //   { label: "Empilhadeira" },
-  //   { label: "Furgão" },
-  //   { label: "Moto" },
-  //   { label: "Ônibus" },
-  //   { label: "SUV" },
-  //   { label: "Van" },
-  // ];
-  // const vehicleStatus = [
-  //   { value: "active", label: "Ativo" },
-  //   { label: "Inativo" },
-  //   { label: "Fora de serviço" },
-  //   { label: "Vendido" },
-  // ];
-  // const vehicleOwnership = [
-  //   { value: "owner", label: "Próprio" },
-  //   { label: "Alugado" },
-  //   { label: "Cliente" },
-  //   { label: "Arrendado" },
-  // ];
 
   const navItems = [
     {
