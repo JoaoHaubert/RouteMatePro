@@ -4,14 +4,14 @@ import { TextField } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 //components
 import FlexBetween from "@/components/FlexBetween";
-import { useFormContext } from "./FormContextDrivers";
-import { FormDataDriver } from "@/types";
+import { useFormContext } from "./../../../components/FormContext"
+import { FormData } from "@/types";
 
 const BasicDetails: React.FC = () => {
   const { formData, setFormData } = useFormContext();
 
   const handleChange =
-    (field: keyof FormDataDriver) =>
+    (field: keyof FormData) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
     };

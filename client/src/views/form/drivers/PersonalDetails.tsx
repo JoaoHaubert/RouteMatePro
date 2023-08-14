@@ -54,7 +54,8 @@ export default function PersonalDetails({}: Props) {
     if (!cpf) return "";
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
   }
-
+ 
+  return (
           <FlexBetween p="15px" flexDirection="column">
             <TextField
               required
@@ -125,4 +126,4 @@ export default function PersonalDetails({}: Props) {
           </FlexBetween>
 
   );
-}
+};

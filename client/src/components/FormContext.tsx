@@ -1,9 +1,9 @@
-
 import React, { createContext, useState, useContext } from "react";
 import { z, ZodType } from "zod";
-import { FormDataVehicle } from "@/types";
+import { FormData } from "@/types";
 
-const formSchema: ZodType<FormDataVehicle> = z.object({
+const formSchema: ZodType<FormData> = z.object({
+  //Vehicles
   vehicleName: z.string().nonempty("Campo necessário para o cadastro"),
   vehicleType: z.string().nonempty("Campo necessário para o cadastro"),
   vehicleTag: z.string(),
@@ -13,27 +13,33 @@ const formSchema: ZodType<FormDataVehicle> = z.object({
   vehicleBrand: z.string(),
   vehicleConsume: z.string(),
   vehicleLoadCap: z.string(),
-  vehicleOdometer: z.string(), 
+  vehicleOdometer: z.string(),
+  //Drivers
+  fullName: z.string().nonempty("Campo necessário para o cadastro"),
+  phone: z.string().nonempty("Campo necessário para o cadastro"),
+  license: z.string().nonempty("Campo necessário para o cadastro"),
+  email: z.string(),
 });
 
 interface FormContextValue {
-  formData: FormDataVehicle;
-  setFormData: React.Dispatch<React.SetStateAction<FormDataVehicle>>;
+  formData: FormData;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   submitForms: () => void;
 }
 
 const FormContext = createContext<FormContextValue | undefined>(undefined);
 
 export const useFormContext = () => {
-    const context = useContext(FormContext);
-    if (!context) {
-      throw new Error('useFormContext must be used within a FormProvider');
-    }
-    return context;
-  };
+  const context = useContext(FormContext);
+  if (!context) {
+    throw new Error("useFormContext must be used within a FormProvider");
+  }
+  return context;
+};
 
 export const FormProvider: React.FC = ({ children }: any) => {
-  const [formData, setFormData] = useState<FormDataVehicle>({
+  const [formData, setFormData] = useState<FormData>({
+    //Vehicles
     vehicleName: "",
     vehicleTag: "",
     vehicleType: "",
@@ -44,6 +50,11 @@ export const FormProvider: React.FC = ({ children }: any) => {
     vehicleConsume: "",
     vehicleLoadCap: "",
     vehicleOdometer: "",
+    //Drivers
+    fullName: "",
+    phone: "",
+    license: "",
+    email: "",
   });
 
   const submitForms = () => {
@@ -58,7 +69,7 @@ export const FormProvider: React.FC = ({ children }: any) => {
   };
 
   return (
-    <FormContext.Provider value={{formData ,setFormData, submitForms}}>
+    <FormContext.Provider value={{ formData, setFormData, submitForms }}>
       {children}
     </FormContext.Provider>
   );
