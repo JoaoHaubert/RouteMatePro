@@ -12,7 +12,6 @@ import {
   ListItemText,
   useTheme,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 //icons
 import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
@@ -20,31 +19,33 @@ import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import PersonalDetails from "./PersonalDetails";
 import BasicDetails from "./BasicDetails";
 import SaveButton from "@/components/SaveButton";
-import { FormProvider } from "./FormContextDrivers";
+import { FormProvider } from "../../../components/FormContext";
 type Props = {};
 
-export default function DriverForm({}: Props) {
-  const [activeSection, setActiveSection] = useState<"basic" | "personal">(
-    "basic"
-  );
 
-  const handleNavigation = (sectionId: "basic" | "personal") => {
-    setActiveSection(sectionId);
-  };
-  const navigate = useNavigate();
+enum FormWindows {
+  basic,
+  personal,
+}
+export default function DriverForm({}: Props) {
   const theme = useTheme();
   const [active, setActive] = useState("");
+  const [currentForm, setCurrentForm] = useState(FormWindows.basic);
+  const handleSidebarItemClick = (form: FormWindows) => {
+    setCurrentForm(form);
+  };
+
 
   const navItems = [
     {
       text: "Dados Básicos",
       icon: <EmojiEmotionsOutlinedIcon />,
-      route: "basic",
+      route: FormWindows.basic,
     },
     {
       text: "Dados Pessoais",
       icon: <DescriptionOutlinedIcon />,
-      route: "personal",
+      route: FormWindows.personal,
     },
   ];
   return (
@@ -97,7 +98,7 @@ export default function DriverForm({}: Props) {
                   <ListItem key={text} disablePadding>
                     <ListItemButton
                       onClick={() => {
-                        handleNavigation(route);
+                        handleSidebarItemClick(route);
                         setActive(route);
                       }}
                       sx={{
@@ -139,13 +140,13 @@ export default function DriverForm({}: Props) {
               noValidate
               autoComplete="off"
             >
-              {activeSection === "basic" && <BasicDetails />}
-              {activeSection === "personal" && <PersonalDetails />}
+              {currentForm === FormWindows.basic && <BasicDetails />}
+              {currentForm === FormWindows.personal && <PersonalDetails />}
             </Box>
+            <SaveButton />
           </FormProvider>
         </Grid>
       </Grid>
-      <SaveButton />
     </Box>
   );
 }
