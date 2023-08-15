@@ -1,59 +1,45 @@
 import React, { useState } from "react";
-import { Box, TextField, Grid, Autocomplete } from "@mui/material";
-import { MuiTelInput } from "mui-tel-input";
+import { InputAdornment, TextField, MenuItem } from "@mui/material";
 //components
 import FlexBetween from "@/components/FlexBetween";
-import SaveButton from "@/components/SaveButton";
-type Props = {};
+import { useFormShopContext } from "@/components/FormContextShops";
 
-export default function BasicDetails({}: Props) {
-  const [value, setValue] = React.useState("");
-  const handleChange = (newValue: any) => {
-    setValue(newValue);
-  };
+const BasicDetails: React.FC = () => {
+  const { formData, setFormData } = useFormShopContext();
+
+  const handleChange =
+    (field: keyof FormData) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
+    };
   const shopTypes = [
-    { label: "Autopeças" },
-    { label: "Compra e venda veículos" },
-    { label: "Mecânica e manutenção" },
-    { label: "Pneus e borracharia" },
-    { label: "Ferramentas" },
-    { label: "Outros" },
+    { value: "parts", label: "Autopeças" },
+    { value: "sellBuy", label: "Compra e venda veículos" },
+    { value: "maintenance", label: "Mecânica e manutenção" },
+    { value: "tires", label: "Pneus e borracharia" },
+    { value: "tools", label: "Ferramentas" },
+    { value: "others", label: "Outros" },
   ];
 
   return (
-    <Grid item>
-      <Box
-        bgcolor="#fff"
-        border="solid 1px #DDE6ED"
-        borderRadius={4}
-        m="2rem 2.5rem"
-        component="form"
-        sx={{
-          "& .MuiTextField-root": { m: 2, width: "90ch" },
+    <FlexBetween p="15px" flexDirection="column">
+      <TextField required id="outlined-required" label="Nome da loja" />
+      <TextField
+        type="number"
+        label="Telefone"
+        InputProps={{
+          startAdornment: <InputAdornment position="start">+55</InputAdornment>,
         }}
-        noValidate
-        autoComplete="off"
-      >
-        <FlexBetween p="15px" flexDirection="column">
-          <TextField required id="outlined-required" label="Nome da loja" />
-          <MuiTelInput
-            defaultCountry="BR"
-            label="Contato"
-            value={value}
-            onChange={handleChange}
-          />
-          <TextField id="outlined-required" label="Email" />
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={shopTypes}
-            renderInput={(params) => (
-              <TextField {...params} label="Tipo da loja" />
-            )}
-          />
-        </FlexBetween>
-      </Box>
-      <SaveButton />
-    </Grid>
+      />
+      <TextField id="outlined-required" label="Email" />
+      <TextField select label="Status do Veículo" id="outlined-select-car-type">
+        {shopTypes.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
+    </FlexBetween>
   );
-}
+};
+
+export default BasicDetails;

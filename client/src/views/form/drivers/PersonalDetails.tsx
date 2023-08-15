@@ -1,55 +1,46 @@
 //@ts-nocheck
 import React, { useState } from "react";
-import { Box, TextField, Grid } from "@mui/material";
+import { TextField } from "@mui/material";
 import axios from "axios";
 //components
 import FlexBetween from "@/components/FlexBetween";
-import SaveButton from "@/components/SaveButton";
 //forms
-import { useForm } from "react-hook-form";
-type Props = {};
+import { useFormDriverContext } from "@/components/FormContextDriver"
+import { FormDataDriver } from "@/types";
 
-export default function PersonalDetails({}: Props) {
-  const [cep, setCep] = useState("");
-  const [logradouro, setLogradouro] = useState("");
-  const [cidade, setCidade] = useState("");
-  const [estado, setEstado] = useState("");
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCep(event.target.value);
-  };
 
-  const consultCep = async () => {
-    try {
-      const response = await axios.get(`http://viacep.com.br/ws/${cep}/json`);
+const PersonalDetails: React.FC = () => {
+  const { formData, setFormData } = useFormDriverContext();
 
-      if (response.status === 200) {
-        const data = response.data;
-        setLogradouro(data.logradouro);
-        setCidade(data.localidade);
-        setEstado(data.uf);
-      } else {
-        console.log("Não foi possível consultar CEP");
-      }
-    } catch (error) {
-      console.error("Erro na consulta do CEP", error.message);
-    }
-  };
-
-  const { register, handleSubmit } = useForm();
-
-  async function onSubmit(data: any) {
-    await consultCep();
-
-    const formData = {
-      ...data,
-      address: logradouro,
-      city: cidade,
-      state: estado,
+  const handleChange =
+    (field: keyof FormDataDriver) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
     };
-    console.log(formData)
-    
-  }
+
+    const consultCep = async () => {
+      const cep = formData.postCode; // Assuming postCode is the CEP field
+      try {
+        const response = await axios.get(`http://viacep.com.br/ws/${cep}/json`);
+  
+        if (response.status === 200) {
+          const data = response.data;
+          setFormData((prevData) => ({
+            ...prevData,
+            address: data.logradouro,
+            city: data.localidade,
+            state: data.uf,
+          }));
+        } else {
+          console.log("Não foi possível consultar CEP");
+        }
+      } catch (error) {
+        console.error("Erro na consulta do CEP", error.message);
+      }
+    };
+
+
   function formatCPF(cpf: any) {
     if (!cpf) return "";
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
@@ -61,12 +52,13 @@ export default function PersonalDetails({}: Props) {
               required
               id="outlined-required"
               label="CPF"
-              {...register("cpf")}
+              value={formData.id}
               onChange={(event) => {
                 const inputCPF = event.target.value
                   .replace(/\D/g, "")
                   .slice(0, 11);
                 event.target.value = formatCPF(inputCPF);
+                handleChange("id")(event);
               }}
               inputProps={{
                 maxLength: 14,
@@ -77,18 +69,15 @@ export default function PersonalDetails({}: Props) {
               id="outlined-start-adorment"
               helperText="Data de nascimento"
               type="date"
-              {...register("date")}
+              value={formData.birthDate}
+              onChange={handleChange("birthDate")}
             />
             <TextField
               required
-              {...register("postcode")}
               id="outlined-required"
               label="CEP"
-              value={cep}
-              onChange={(event) => {
-                handleInputChange(event); // Call handleInputChange to update the cep state
-                consultCep(); // Call consultCep to fetch and update address, city, and state
-              }}
+              value={formData.postCode}
+              onChange={handleChange("postCode")}
               onBlurCapture={consultCep}
               inputProps={{
                 maxLength: 8,
@@ -97,33 +86,37 @@ export default function PersonalDetails({}: Props) {
             <TextField
               id="outlined"
               label="Endereço"
-              value={logradouro}
-              {...register("address")}
+              value={formData.address}
+              onChange={handleChange("address")}
             />
             <TextField
               type="number"
               id="outlined-required"
               label="Número"
-              {...register("number")}
+              value={formData.number}
+              onChange={handleChange("number")}
             />
             <TextField
               id="outlined"
               label="Cidade"
-              value={cidade}
-              {...register("city")}
+              value={formData.city}
+              onChange={handleChange("city")}
             />
             <TextField
               id="outlined"
               label="Estado"
-              value={estado}
-              {...register("state")}
+              value={formData.state}
+              onChange={handleChange("state")}
             />
             <TextField
-              {...register("complement")}
               id="outlined-required"
               label="Complemento"
+              value={formData.complement}
+              onChange={handleChange("complement")}
             />
           </FlexBetween>
 
   );
 };
+
+export default PersonalDetails;

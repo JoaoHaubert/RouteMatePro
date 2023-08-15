@@ -18,8 +18,8 @@ import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 //forms
 import PersonalDetails from "./PersonalDetails";
 import BasicDetails from "./BasicDetails";
-import SaveButton from "@/components/SaveButton";
-import { FormProvider } from "../../../components/FormContext";
+import SaveButtonDriver from "@/components/SaveButtonDriver";
+import { FormDriverProvider } from "@/components/FormContextDriver";
 type Props = {};
 
 
@@ -127,7 +127,7 @@ export default function DriverForm({}: Props) {
           </Box>
         </Grid>
         <Grid item>
-          <FormProvider>
+          <FormDriverProvider>
             <Box
               component="form"
               bgcolor="#fff"
@@ -143,8 +143,8 @@ export default function DriverForm({}: Props) {
               {currentForm === FormWindows.basic && <BasicDetails />}
               {currentForm === FormWindows.personal && <PersonalDetails />}
             </Box>
-            <SaveButton />
-          </FormProvider>
+            <SaveButtonDriver />
+          </FormDriverProvider>
         </Grid>
       </Grid>
     </Box>
