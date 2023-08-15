@@ -1,17 +1,15 @@
-//@ts-nocheck
 import React from "react";
-import { TextField } from "@mui/material";
-import { MuiTelInput } from "mui-tel-input";
+import { TextField, InputAdornment } from "@mui/material";
 //components
 import FlexBetween from "@/components/FlexBetween";
-import { useFormContext } from "./../../../components/FormContext"
-import { FormData } from "@/types";
+import { useFormDriverContext } from "./../../../components/FormContextDriver"
+import { FormDataDriver } from "@/types";
 
 const BasicDetails: React.FC = () => {
-  const { formData, setFormData } = useFormContext();
+  const { formData, setFormData } = useFormDriverContext();
 
   const handleChange =
-    (field: keyof FormData) =>
+    (field: keyof FormDataDriver) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
     };
@@ -26,11 +24,14 @@ const BasicDetails: React.FC = () => {
         value={formData.fullName}
         onChange={handleChange("fullName")}
       />
-      <MuiTelInput
-        defaultCountry="BR"
-        label="Contato"
+      <TextField
+        type="number"
+        label="Telefone"
         value={formData.phone}
         onChange={handleChange("phone")}
+        InputProps={{
+          startAdornment: <InputAdornment position="start">+55</InputAdornment>,
+        }}
       />
       <TextField
         id="outlined-required"

@@ -1,42 +1,29 @@
 import React, { useState } from "react";
-import { Box, TextField, Grid, Autocomplete } from "@mui/material";
+import { TextField } from "@mui/material";
 //components
 import FlexBetween from "@/components/FlexBetween";
-import SaveButton from "@/components/SaveButton";
-type Props = {};
+import { useFormShopContext } from "@/components/FormContextShops";
 
-export default function AddressDetails({}: Props) {
-  const [value, setValue] = React.useState("");
-  const handleChange = (newValue: any) => {
-    setValue(newValue);
-  };
+const AddressDetail: React.FC = () => {
+  const { formData, setFormData } = useFormShopContext();
+
+  const handleChange =
+    (field: keyof FormData) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
+    };
 
   return (
-    <Grid item>
-      <Box
-        bgcolor="#fff"
-        border="solid 1px #DDE6ED"
-        borderRadius={4}
-        m="2rem 2.5rem"
-        component="form"
-        sx={{
-          "& .MuiTextField-root": { m: 2, width: "90ch" },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <FlexBetween p="15px" flexDirection="column">
-          <TextField id="outlined-required" label="CEP" />
-          <TextField
-            id="outlined-required"
-            label="Endereço"
-            helperText="Rua e número. Ex: Rua Coronel Bordini, 1151"
-          />
-          <TextField id="outlined-required" label="Cidade" />
-          <TextField id="outlined-required" label="Estado" />
-        </FlexBetween>
-      </Box>
-      <SaveButton />
-    </Grid>
+    <FlexBetween p="15px" flexDirection="column">
+      <TextField id="outlined-required" label="CEP" />
+      <TextField
+        id="outlined-required"
+        label="Endereço"
+        helperText="Rua e número. Ex: Rua Coronel Bordini, 1151"
+      />
+      <TextField id="outlined-required" label="Cidade" />
+      <TextField id="outlined-required" label="Estado" />
+    </FlexBetween>
   );
-}
+};
+
+export default AddressDetail;

@@ -3,7 +3,6 @@ import { z, ZodType } from "zod";
 import { FormData } from "@/types";
 
 const formSchema: ZodType<FormData> = z.object({
-  //Vehicles
   vehicleName: z.string().nonempty("Campo necessário para o cadastro"),
   vehicleType: z.string().nonempty("Campo necessário para o cadastro"),
   vehicleTag: z.string(),
@@ -14,11 +13,6 @@ const formSchema: ZodType<FormData> = z.object({
   vehicleConsume: z.string(),
   vehicleLoadCap: z.string(),
   vehicleOdometer: z.string(),
-  //Drivers
-  fullName: z.string().nonempty("Campo necessário para o cadastro"),
-  phone: z.string().nonempty("Campo necessário para o cadastro"),
-  license: z.string().nonempty("Campo necessário para o cadastro"),
-  email: z.string(),
 });
 
 interface FormContextValue {
@@ -39,7 +33,6 @@ export const useFormContext = () => {
 
 export const FormProvider: React.FC = ({ children }: any) => {
   const [formData, setFormData] = useState<FormData>({
-    //Vehicles
     vehicleName: "",
     vehicleTag: "",
     vehicleType: "",
@@ -50,11 +43,6 @@ export const FormProvider: React.FC = ({ children }: any) => {
     vehicleConsume: "",
     vehicleLoadCap: "",
     vehicleOdometer: "",
-    //Drivers
-    fullName: "",
-    phone: "",
-    license: "",
-    email: "",
   });
 
   const submitForms = () => {
