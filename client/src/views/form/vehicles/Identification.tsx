@@ -1,9 +1,10 @@
-//@ts-nocheck
+
 import React from "react";
 import { useFormContext } from "@/components/FormContext";
 import { TextField, MenuItem } from "@mui/material";
 //components
 import FlexBetween from "@/components/FlexBetween";
+import { FormData } from "@/types";
 
 const Identification: React.FC = () => {
   const { formData, setFormData } = useFormContext();

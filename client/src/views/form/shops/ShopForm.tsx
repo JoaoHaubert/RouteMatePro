@@ -21,6 +21,11 @@ import BasicDetails from "./BasicDetails";
 import AddressDetails from "./AddressDetails";
 type Props = {};
 
+enum FormWindows {
+  basic,
+  address,
+}
+
 export default function ShopForm({}: Props) {
   const [activeSection, setActiveSection] = useState<"basic" | "address">(
     "basic"
