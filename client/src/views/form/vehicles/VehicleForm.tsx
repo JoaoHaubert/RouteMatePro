@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 //components
 import SaveButton from "@/components/SaveButton";
-import { FormProvider } from "../../../components/FormContext";
+import { FormProvider } from "@/components/FormContext";
 //icons
 import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
@@ -159,4 +159,4 @@ export default function VehicleForm({}: Props) {
       </Grid>
     </Box>
   );
-}
+};

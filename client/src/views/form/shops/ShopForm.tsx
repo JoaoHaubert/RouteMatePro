@@ -12,13 +12,16 @@ import {
   ListItemText,
   useTheme,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+//components
+import SaveButtonShop from "@/components/SaveButtonShop";
+import { FormShopProvider } from "@/components/FormContextShops";
 //icons
-import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
+import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 //forms
 import BasicDetails from "./BasicDetails";
 import AddressDetails from "./AddressDetails";
+import { current } from "@reduxjs/toolkit";
 type Props = {};
 
 enum FormWindows {
@@ -27,27 +30,23 @@ enum FormWindows {
 }
 
 export default function ShopForm({}: Props) {
-  const [activeSection, setActiveSection] = useState<"basic" | "address">(
-    "basic"
-  );
-
-  const handleNavigation = (sectionId: "basic" | "address") => {
-    setActiveSection(sectionId);
-  };
-  const navigate = useNavigate();
   const theme = useTheme();
   const [active, setActive] = useState("");
+  const [currentForm, setCurrentForm] = useState(FormWindows.basic);
+  const handleSidebarItemClick = (form: FormWindows) => {
+    setCurrentForm(form);
+  };
 
   const navItems = [
     {
       text: "Dados Básicos",
       icon: <StorefrontOutlinedIcon />,
-      route: "basic",
+      route: FormWindows.basic,
     },
     {
       text: "Endereço",
       icon: <DescriptionOutlinedIcon />,
-      route: "address",
+      route: FormWindows.address,
     },
   ];
   return (
@@ -100,7 +99,7 @@ export default function ShopForm({}: Props) {
                   <ListItem key={text} disablePadding>
                     <ListItemButton
                       onClick={() => {
-                        handleNavigation(route);
+                        handleSidebarItemClick(route);
                         setActive(route);
                       }}
                       sx={{
@@ -128,9 +127,27 @@ export default function ShopForm({}: Props) {
             </List>
           </Box>
         </Grid>
-        {activeSection === "basic" && <BasicDetails />}
-        {activeSection === "address" && <AddressDetails />}
+        <Grid item>
+          <FormShopProvider>
+            <Box
+              component="form"
+              bgcolor="#fff"
+              border="solid 1px #DDE6ED"
+              borderRadius={4}
+              m="2rem 2.5rem"
+              sx={{
+                "& .MuiTextField-root": { m: 2, width: "90ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              {currentForm === FormWindows.basic && <BasicDetails />}
+              {currentForm === FormWindows.address && <AddressDetails />}
+            </Box>
+            <SaveButtonShop />
+          </FormShopProvider>
+        </Grid>
       </Grid>
     </Box>
   );
-}
+};

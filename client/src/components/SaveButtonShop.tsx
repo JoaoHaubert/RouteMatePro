@@ -5,7 +5,7 @@ import { useFormShopContext } from "@/components/FormContextShops";
 
 
 
-const SaveButtonDriver: React.FC = () => {
+const SaveButtonShop: React.FC = () => {
   const navigate = useNavigate();
   const { submitForms } = useFormShopContext();
   return (
@@ -52,4 +52,4 @@ const SaveButtonDriver: React.FC = () => {
   );
 };
 
-export default SaveButtonDriver
+export default SaveButtonShop
