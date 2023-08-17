@@ -12,6 +12,7 @@ import {
   ListItemText,
   useTheme,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 //icons
 import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
@@ -28,6 +29,7 @@ enum FormWindows {
   personal,
 }
 export default function DriverForm({}: Props) {
+  const navigate = useNavigate();
   const theme = useTheme();
   const [active, setActive] = useState("");
   const [currentForm, setCurrentForm] = useState(FormWindows.basic);
