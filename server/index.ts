@@ -26,6 +26,36 @@ app.use(cors());
 app.use("/client", clientRoutes);
 app.use("/general", generalRoutes);
 
+//Schema
+const VehicleSchema = new mongoose.Schema({
+  vehicleName: String,
+  vehicleTag: String,
+  vehicleType: String,
+  vehicleStatus: String,
+  vehicleOwnership: String,
+  vehicleGroup: String,
+  vehicleBrand: String,
+  vehicleConsume: String,
+  vehicleLoadCap: String,
+  vehicleOdometer: String,
+});
+
+const Vehicle = mongoose.model("Vehicle", VehicleSchema);
+
+app.use(express.json());
+
+//API endpoint to handle forms sub.
+app.post("/vehicles", async (req, res) => {
+  try {
+    const newVehicle = new Vehicle(req.body);
+    await newVehicle.save();
+
+    res.status(201).json({message: "Vehicle added sucessful"})
+  } catch (error) {
+    res.status(500).json({message: "Vehicle went wrong"})
+  }
+})
+
 //Mongoose
 const PORT: number = parseInt(process.env.PORT || "9000");
 const MONGO_URL: string =

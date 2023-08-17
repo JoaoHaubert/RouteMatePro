@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUser = void 0;
-const User_js_1 = __importDefault(require("../models/User.js"));
+const User_1 = __importDefault(require("../models/User"));
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const user = yield User_js_1.default.findById(id);
+        const user = yield User_1.default.findById(id);
         res.status(200).json(user);
     }
     catch (error) {

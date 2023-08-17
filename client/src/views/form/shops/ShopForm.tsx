@@ -12,6 +12,7 @@ import {
   ListItemText,
   useTheme,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 //components
 import SaveButtonShop from "@/components/SaveButtonShop";
 import { FormShopProvider } from "@/components/FormContextShops";
@@ -21,7 +22,6 @@ import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 //forms
 import BasicDetails from "./BasicDetails";
 import AddressDetails from "./AddressDetails";
-import { current } from "@reduxjs/toolkit";
 type Props = {};
 
 enum FormWindows {
@@ -30,6 +30,7 @@ enum FormWindows {
 }
 
 export default function ShopForm({}: Props) {
+  const navigate = useNavigate();
   const theme = useTheme();
   const [active, setActive] = useState("");
   const [currentForm, setCurrentForm] = useState(FormWindows.basic);

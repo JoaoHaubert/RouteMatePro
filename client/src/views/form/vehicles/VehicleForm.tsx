@@ -12,6 +12,7 @@ import {
   ListItemText,
   useTheme,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 //components
 import SaveButton from "@/components/SaveButton";
 import { FormProvider } from "@/components/FormContext";
@@ -33,6 +34,7 @@ enum FormWindows {
   settings,
 }
 export default function VehicleForm({}: Props) {
+  const navigate = useNavigate();
   const theme = useTheme();
   const [active, setActive] = useState("");
   const [currentForm, setCurrentForm] = useState(FormWindows.identification);
