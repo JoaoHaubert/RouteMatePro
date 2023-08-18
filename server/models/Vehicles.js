@@ -1,16 +1,37 @@
 import mongoose from "mongoose";
 
 const VehicleSchema = new mongoose.Schema ({
-    vehicleName: String,
-    vehicleTag: String,
-    vehicleType: String,
-    vehicleStatus: String,
-    vehicleOwnership: String,
-    vehicleGroup: String,
-    vehicleBrand: String,
-    vehicleConsume: String,
-    vehicleLoadCap: String,
-    vehicleOdometer: String,
+    vehicleName: {
+        type: String,
+        required: true,
+    },
+    vehicleTag: {
+        type: String,
+    },
+    vehicleType: {
+        type: String,
+    },
+    vehicleStatus: {
+        type: String,
+    },
+    vehicleOwnership: {
+        type: String,
+    },
+    vehicleGroup: {
+        type: String,
+    },
+    vehicleBrand: {
+        type: String,
+    },
+    vehicleConsume: {
+        type: String,
+    },
+    vehicleLoadCap: {
+        type: String,
+    },
+    vehicleOdometer: {
+        type: String,
+    },
 });
 
 const Vehicle = mongoose.model("Vehicle", VehicleSchema)
