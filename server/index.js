@@ -50,11 +50,11 @@ const VehicleSchema = new mongoose_1.default.Schema({
 const Vehicle = mongoose_1.default.model("Vehicle", VehicleSchema);
 app.use(express_1.default.json());
 //API endpoint to handle forms sub.
-app.post("/vehicles", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post("http://localhost:5173/vehicles", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const newVehicle = new Vehicle(req.body);
         yield newVehicle.save();
-        res.status(201).json({ message: "Vehicle added sucessful" });
+        res.status(201).json({ message: "Vehicle added sucessfully" });
     }
     catch (error) {
         res.status(500).json({ message: "Vehicle went wrong" });
@@ -62,7 +62,7 @@ app.post("/vehicles", (req, res) => __awaiter(void 0, void 0, void 0, function* 
 }));
 //Mongoose
 const PORT = parseInt(process.env.PORT || "9000");
-const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost2701/database";
+const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost2701/database/vehicles";
 mongoose_1.default
     .connect(MONGO_URL)
     .then(() => {

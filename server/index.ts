@@ -45,12 +45,12 @@ const Vehicle = mongoose.model("Vehicle", VehicleSchema);
 app.use(express.json());
 
 //API endpoint to handle forms sub.
-app.post("/vehicles", async (req, res) => {
+app.post("http://localhost:5173/vehicles", async (req, res) => {
   try {
     const newVehicle = new Vehicle(req.body);
     await newVehicle.save();
 
-    res.status(201).json({message: "Vehicle added sucessful"})
+    res.status(201).json({message: "Vehicle added sucessfully"})
   } catch (error) {
     res.status(500).json({message: "Vehicle went wrong"})
   }
@@ -58,8 +58,7 @@ app.post("/vehicles", async (req, res) => {
 
 //Mongoose
 const PORT: number = parseInt(process.env.PORT || "9000");
-const MONGO_URL: string =
-  process.env.MONGO_URL || "mongodb://localhost2701/database";
+const MONGO_URL: string = process.env.MONGO_URL || "mongodb://localhost2701/database/vehicles";
 mongoose
   .connect(MONGO_URL)
   .then(() => {
