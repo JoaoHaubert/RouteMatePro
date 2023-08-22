@@ -1,30 +1,42 @@
 const express = require("express");
 const router = express.Router();
-const Vehicle = require("../models/Vehicles")
+const Vehicle = require("../models/vehicles");
 
-router.router("/create-vehicle").post((req: any, res: any) => {
-    const vehicleName = req.body.vehicleName
-    const vehicleTag = req.body.vehicleTag
-    const vehicleType = req.body.vehicleType
-    const vehicleStatus = req.body.vehicleStatus
-    const vehicleOwnership = req.body.vehicleOwnership
-    const vehicleGroup = req.body.vehicleGroup
-    const vehicleBrand = req.body.vehicleBrand
-    const vehicleConsume = req.body.vehicleConsume
-    const vehicleLoadCap = req.body.vehicleLoadCap
-    const vehicleOdometer = req.body.vehicleOdometer
-    const newVehicle = new Vehicle ({
-        vehicleName,
-        vehicleTag,
-        vehicleType,
-        vehicleStatus,
-        vehicleOwnership,
-        vehicleGroup,
-        vehicleBrand,
-        vehicleConsume,
-        vehicleLoadCap,
-        vehicleOdometer,
+router.route("http://localhost:5173/new-vehicle/create-vehicle").post(async (req: any, res: any) => {
+  try {
+    const {
+      vehicleName,
+      vehicleTag,
+      vehicleType,
+      vehicleStatus,
+      vehicleOwnership,
+      vehicleGroup,
+      vehicleBrand,
+      vehicleConsume,
+      vehicleLoadCap,
+      vehicleOdometer,
+    } = req.body;
+
+    const newVehicle = new Vehicle({
+      vehicleName,
+      vehicleTag,
+      vehicleType,
+      vehicleStatus,
+      vehicleOwnership,
+      vehicleGroup,
+      vehicleBrand,
+      vehicleConsume,
+      vehicleLoadCap,
+      vehicleOdometer,
     });
 
-    newVehicle.save();
-})
+    await newVehicle.save();
+
+    res.status(201).json({ message: "Vehicle added successfully" });
+  } catch (error) {
+    console.error("Error saving vehicle:", error);
+    res.status(500).json({ message: "An error occurred while saving the vehicle" });
+  }
+});
+
+module.exports = router;

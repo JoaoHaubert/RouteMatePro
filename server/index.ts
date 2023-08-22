@@ -5,11 +5,12 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-import clientRoutes from "./routes/client";
-import generalRoutes from "./routes/general";
+// import clientRoutes from "./routes/client";
+// import generalRoutes from "./routes/general";
+
 //data import
-import User from "./models/User";
-import { dataUser } from "./data/index";
+//import Vehicle from "./models/vehicles";
+
 
 //Configs
 dotenv.config();
@@ -23,49 +24,31 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 //Routes
-app.use("/client", clientRoutes);
-app.use("/general", generalRoutes);
+// app.use("/client", clientRoutes);
+// app.use("/general", generalRoutes);
+app.use("/", require("./routes/vehicles"));
 
-//Schema
-const VehicleSchema = new mongoose.Schema({
-  vehicleName: String,
-  vehicleTag: String,
-  vehicleType: String,
-  vehicleStatus: String,
-  vehicleOwnership: String,
-  vehicleGroup: String,
-  vehicleBrand: String,
-  vehicleConsume: String,
-  vehicleLoadCap: String,
-  vehicleOdometer: String,
-});
+//API endpoint to handle forms submission.
+// app.post("/create-vehicle", async (req, res) => {
+//   try {
+//     const newVehicle = new Vehicle(req.body);
+//     await newVehicle.save();
 
-const Vehicle = mongoose.model("Vehicle", VehicleSchema);
-
-app.use(express.json());
-
-//API endpoint to handle forms sub.
-app.post("http://localhost:5173/vehicles", async (req, res) => {
-  try {
-    const newVehicle = new Vehicle(req.body);
-    await newVehicle.save();
-
-    res.status(201).json({message: "Vehicle added sucessfully"})
-  } catch (error) {
-    res.status(500).json({message: "Vehicle went wrong"})
-  }
-})
+//     res.status(201).json({ message: "Vehicle added successfully" });
+//   } catch (error) {
+//     res.status(500).json({ message: "Vehicle went wrong" });
+//   }
+// });
 
 //Mongoose
 const PORT: number = parseInt(process.env.PORT || "9000");
-const MONGO_URL: string = process.env.MONGO_URL || "mongodb://localhost2701/database/vehicles";
+const MONGO_URL: string =
+  process.env.MONGO_URL || "mongodb://localhost:27017/database"; 
 mongoose
   .connect(MONGO_URL)
   .then(() => {
-    app.listen(PORT, () => console.log(`Server is into port: ${PORT}`));
-    //add the data just once
-    //User.insertMany(dataUser);
+    app.listen(PORT, () => console.log(`Server is on port: ${PORT}`));
   })
   .catch((error) => {
-    console.error("Failed to connect mongoDB", error);
+    console.error("Failed to connect to MongoDB", error);
   });
