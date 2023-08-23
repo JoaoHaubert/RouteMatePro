@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const Vehicle = require("../models/vehicles");
+import Vehicle from "../models/vehicles";
 
-router.route("http://localhost:5173/new-vehicle/create-vehicle").post(async (req: any, res: any) => {
+router.route("/create-vehicle").post(async (req: any, res: any) => {
   try {
     const {
       vehicleName,

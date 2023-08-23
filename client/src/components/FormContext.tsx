@@ -53,7 +53,7 @@ export const FormProvider: React.FC = ({ children }: any) => {
   
       if (validationResult.success) {
         // Form data is valid, proceed to save
-        const response = await axios.post("http://localhost:5173/new-vehicle/create-vehicle", formData);
+        const response = await axios.post("http://localhost:5001/create-vehicle", formData);
         console.log("Form data saved:", response.data.message);
       } else {
         // Form data is invalid, log errors
