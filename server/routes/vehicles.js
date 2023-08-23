@@ -8,13 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const router = express.Router();
-const Vehicle = require("../models/vehicles");
-router.route("/new-vehicle/create-vehicle").post((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const vehicles_1 = __importDefault(require("../models/vehicles"));
+router.route("/create-vehicle").post((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { vehicleName, vehicleTag, vehicleType, vehicleStatus, vehicleOwnership, vehicleGroup, vehicleBrand, vehicleConsume, vehicleLoadCap, vehicleOdometer, } = req.body;
-        const newVehicle = new Vehicle({
+        const newVehicle = new vehicles_1.default({
             vehicleName,
             vehicleTag,
             vehicleType,
