@@ -12,6 +12,9 @@ const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
 // import clientRoutes from "./routes/client";
 // import generalRoutes from "./routes/general";
+const vehicles_1 = __importDefault(require("./routes/vehicles"));
+// import driverRoutes from "./routes/drivers"
+// import shopRoutes from "./routes/shops"
 //data import
 //import Vehicle from "./models/vehicles";
 //Configs
@@ -27,7 +30,7 @@ app.use((0, cors_1.default)());
 //Routes
 // app.use("/client", clientRoutes);
 // app.use("/general", generalRoutes);
-app.use("/", require("./routes/vehicles"));
+app.use("/", vehicles_1.default);
 //API endpoint to handle forms submission.
 // app.post("/create-vehicle", async (req, res) => {
 //   try {

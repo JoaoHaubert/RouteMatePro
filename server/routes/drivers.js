@@ -13,29 +13,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const vehicles_1 = __importDefault(require("../models/vehicles"));
 const router = express_1.default.Router();
-router.route("/create-vehicle").post((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const drivers_1 = __importDefault(require("../models/drivers"));
+router.route("/create-driver").post((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { vehicleName, vehicleTag, vehicleType, vehicleStatus, vehicleOwnership, vehicleGroup, vehicleBrand, vehicleConsume, vehicleLoadCap, vehicleOdometer, } = req.body;
-        const newVehicle = new vehicles_1.default({
-            vehicleName,
-            vehicleTag,
-            vehicleType,
-            vehicleStatus,
-            vehicleOwnership,
-            vehicleGroup,
-            vehicleBrand,
-            vehicleConsume,
-            vehicleLoadCap,
-            vehicleOdometer,
+        const { fullName, phone, license, email, address, city, postCode, state, birthDate, id, number, complement, } = req.body;
+        const newDriver = new drivers_1.default({
+            fullName,
+            phone,
+            license,
+            email,
+            address,
+            city,
+            postCode,
+            state,
+            birthDate,
+            id,
+            number,
+            complement,
         });
-        yield newVehicle.save();
-        res.status(201).json({ message: "Vehicle added successfully" });
+        yield newDriver.save();
+        res.status(201).json({ message: "Driver added sucessfully" });
     }
     catch (error) {
-        console.error("Error saving vehicle:", error);
-        res.status(500).json({ message: "An error occurred while saving the vehicle" });
+        console.error("Error saving driver:", error);
+        res.status(500).json({ message: "An error occurred while saving" });
     }
 }));
-exports.default = router;
+module.exports = router;

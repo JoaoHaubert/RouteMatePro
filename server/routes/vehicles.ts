@@ -1,6 +1,6 @@
-const express = require("express");
-const router = express.Router();
+import express from "express"
 import Vehicle from "../models/vehicles";
+const router = express.Router();
 
 router.route("/create-vehicle").post(async (req: any, res: any) => {
   try {
@@ -39,4 +39,4 @@ router.route("/create-vehicle").post(async (req: any, res: any) => {
   }
 });
 
-module.exports = router;
+export default router;

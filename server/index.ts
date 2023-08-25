@@ -5,11 +5,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-// import clientRoutes from "./routes/client";
-// import generalRoutes from "./routes/general";
-
-//data import
-//import Vehicle from "./models/vehicles";
+import vehicleRoutes from "./routes/vehicles"
+import driverRoutes from "./routes/drivers"
+import shopRoutes from "./routes/shops"
 
 
 //Configs
@@ -24,21 +22,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 //Routes
-// app.use("/client", clientRoutes);
-// app.use("/general", generalRoutes);
-app.use("/", require("./routes/vehicles"));
-
-//API endpoint to handle forms submission.
-// app.post("/create-vehicle", async (req, res) => {
-//   try {
-//     const newVehicle = new Vehicle(req.body);
-//     await newVehicle.save();
-
-//     res.status(201).json({ message: "Vehicle added successfully" });
-//   } catch (error) {
-//     res.status(500).json({ message: "Vehicle went wrong" });
-//   }
-// });
+app.use("/", vehicleRoutes);
+app.use("/", driverRoutes);
+app.use("/", shopRoutes);
 
 //Mongoose
 const PORT: number = parseInt(process.env.PORT || "9000");
