@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 import { z, ZodType } from "zod";
 import { FormDataDriver } from "@/types";
+import axios from "axios";
 
 const formSchema: ZodType<FormDataDriver> = z.object({
   fullName: z.string().nonempty("Campo necessário para o cadastro"),
@@ -49,14 +50,21 @@ export const FormDriverProvider: React.FC = ({ children }: any) => {
     complement: "",
   });
 
-  const submitForms = () => {
-    //Validation with Zod schema
-    const validationResult = formSchema.safeParse(formData);
-
-    if (validationResult.success) {
-      console.log("Form data:", formData);
-    } else {
-      console.error("Form errors:", validationResult.error.formErrors);
+    const submitForms = async () => {
+    try {
+      // Validate form data using Zod schema
+      const validationResult = formSchema.safeParse(formData);
+  
+      if (validationResult.success) {
+        // Form data is valid, proceed to save
+        const response = await axios.post("http://localhost:5001/create-driver", formData);
+        console.log("Form data saved:", response.data.message);
+      } else {
+        // Form data is invalid, log errors
+        console.error("Form errors:", validationResult.error.formErrors);
+      }
+    } catch (error) {
+      console.error("Error saving form data:", error);
     }
   };
 
