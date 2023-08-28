@@ -1,3 +1,4 @@
+//@ts-nocheck
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -22,9 +23,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 //Routes
-app.use("/", vehicleRoutes);
-app.use("/", driverRoutes);
-app.use("/", shopRoutes);
+app.use(vehicleRoutes);
+app.use(driverRoutes);
+app.use(shopRoutes);
 
 //Mongoose
 const PORT: number = parseInt(process.env.PORT || "9000");

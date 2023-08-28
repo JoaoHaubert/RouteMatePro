@@ -39,6 +39,7 @@ const AddressDetail: React.FC = () => {
   return (
     <FlexBetween p="15px" flexDirection="column">
       <TextField
+      required
         id="outlined-required"
         label="CEP"
         value={formData.storePost}
@@ -51,9 +52,19 @@ const AddressDetail: React.FC = () => {
       <TextField
         id="outlined-required"
         label="Endereço"
-        helperText="Rua e número. Ex: Rua Coronel Bordini, 1151"
         value={formData.storeAddress}
         onChange={handleChange("storeAddress")}
+      />
+       <TextField
+        required
+        id="outlined-required"
+        label="Número"
+        value={formData.storeNumber}
+        onChange={handleChange("storeNumber")}
+        onBlurCapture={consultCep}
+        inputProps={{
+          maxLength: 8,
+        }}
       />
       <TextField
         id="outlined-required"

@@ -1,6 +1,6 @@
 import express from "express";
-const router = express.Router();
 import Driver from "../models/drivers";
+const router = express.Router();
 
 router.route("/create-driver").post(async (req: any, res: any) => {
   try {

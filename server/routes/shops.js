@@ -17,12 +17,13 @@ const shops_1 = __importDefault(require("../models/shops"));
 const router = express_1.default.Router();
 router.route("/create-shop").post((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { storeName, storePhone, storeEmail, storeAddress, storeCity, storePost, storeState, storeType, } = req.body;
+        const { storeName, storePhone, storeEmail, storeAddress, storeNumber, storeCity, storePost, storeState, storeType, } = req.body;
         const newShop = new shops_1.default({
             storeName,
             storePhone,
             storeEmail,
             storeAddress,
+            storeNumber,
             storeCity,
             storePost,
             storeState,
@@ -36,4 +37,4 @@ router.route("/create-shop").post((req, res) => __awaiter(void 0, void 0, void 0
         res.status(500).json({ message: "An error occurred while saving the shop" });
     }
 }));
-module.exports = router;
+exports.default = router;

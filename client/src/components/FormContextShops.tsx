@@ -8,6 +8,7 @@ const formSchema: ZodType<FormDataShop> = z.object({
   storePhone: z.string().nonempty("Campo necessário para o cadastro"),
   storeEmail: z.string(),
   storeAddress: z.string(),
+  storeNumber: z.string().nonempty("Campo necessário para o cadastro"),
   storeCity: z.string(),
   storePost: z.string().nonempty("Campo necessário para o cadastro"),
   storeState: z.string(),
@@ -38,6 +39,7 @@ export const FormShopProvider: React.FC = ({ children }: any) => {
     storeType: "",
     storePost: "",
     storeAddress: "",
+    storeNumber:"",
     storeCity: "",
     storeState: "",
   });
