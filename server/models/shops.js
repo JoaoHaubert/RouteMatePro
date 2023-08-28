@@ -23,6 +23,10 @@ const ShopSchema = new mongoose_1.default.Schema({
         type: String,
         max: 40,
     },
+    storeNumber: {
+        type: String,
+        max: 10,
+    },
     storeCity: {
         type: String,
         max: 40,

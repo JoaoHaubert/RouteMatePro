@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const router = express_1.default.Router();
 const drivers_1 = __importDefault(require("../models/drivers"));
+const router = express_1.default.Router();
 router.route("/create-driver").post((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { fullName, phone, license, email, address, city, postCode, state, birthDate, id, number, complement, } = req.body;
@@ -40,4 +40,4 @@ router.route("/create-driver").post((req, res) => __awaiter(void 0, void 0, void
         res.status(500).json({ message: "An error occurred while saving" });
     }
 }));
-module.exports = router;
+exports.default = router;

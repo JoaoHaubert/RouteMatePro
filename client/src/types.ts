@@ -34,6 +34,7 @@ export interface FormDataShop {
     storeType: string;
     storePost: string;
     storeAddress: string;
+    storeNumber: string;
     storeCity: string;
     storeState: string;
 }
