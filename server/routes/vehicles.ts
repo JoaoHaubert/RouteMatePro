@@ -1,4 +1,4 @@
-import express from "express"
+import express from "express";
 import Vehicle from "../models/vehicles";
 const router = express.Router();
 
@@ -35,7 +35,9 @@ router.route("/create-vehicle").post(async (req: any, res: any) => {
     res.status(201).json({ message: "Vehicle added successfully" });
   } catch (error) {
     console.error("Error saving vehicle:", error);
-    res.status(500).json({ message: "An error occurred while saving the vehicle" });
+    res
+      .status(500)
+      .json({ message: "An error occurred while saving the vehicle" });
   }
 });
 

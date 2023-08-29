@@ -2,6 +2,8 @@ import React, { createContext, useState, useContext } from "react";
 import { z, ZodType } from "zod";
 import { FormDataShop } from "@/types";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const formSchema: ZodType<FormDataShop> = z.object({
   storeName: z.string().nonempty("Campo necessário para o cadastro"),
@@ -39,7 +41,7 @@ export const FormShopProvider: React.FC = ({ children }: any) => {
     storeType: "",
     storePost: "",
     storeAddress: "",
-    storeNumber:"",
+    storeNumber: "",
     storeCity: "",
     storeState: "",
   });
@@ -48,13 +50,36 @@ export const FormShopProvider: React.FC = ({ children }: any) => {
     try {
       // Validate form data using Zod schema
       const validationResult = formSchema.safeParse(formData);
-  
+
       if (validationResult.success) {
         // Form data is valid, proceed to save
-        const response = await axios.post("http://localhost:5001/create-shop", formData);
+        const response = await axios.post(
+          "http://localhost:5001/create-shop",
+          formData
+        );
+        toast.success("Loja adicionada com sucesso!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         console.log("Form data saved:", response.data.message);
       } else {
         // Form data is invalid, log errors
+        toast.error("Falha ao adicionar a loja.", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         console.error("Form errors:", validationResult.error.formErrors);
       }
     } catch (error) {
@@ -65,6 +90,18 @@ export const FormShopProvider: React.FC = ({ children }: any) => {
   return (
     <FormShopContext.Provider value={{ formData, setFormData, submitForms }}>
       {children}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </FormShopContext.Provider>
   );
 };
