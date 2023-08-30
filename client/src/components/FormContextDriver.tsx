@@ -6,17 +6,24 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const formSchema: ZodType<FormDataDriver> = z.object({
-  fullName: z.string().nonempty({ message: "Campo necessário para o cadastro"}),
-  phone: z.string().nonempty({ message: "Campo necessário para o cadastro"}),
-  license: z.string().nonempty({ message: "Campo necessário para o cadastro"}),
-  email: z.string().email("e-mail inválido."),
+  fullName: z
+    .string()
+    .nonempty({ message: "Campo necessário para o cadastro" }),
+  phone: z.string().nonempty({ message: "Campo necessário para o cadastro" }),
+  license: z.string().nonempty({ message: "Campo necessário para o cadastro" }),
+  email: z
+    .string()
+    .email("e-mail inválido.")
+    .nonempty({ message: "Campo necessário para o cadastro" }),
   address: z.string(),
   city: z.string(),
-  postCode: z.string().nonempty({ message: "Campo necessário para o cadastro"}),
+  postCode: z
+    .string()
+    .nonempty({ message: "Campo necessário para o cadastro" }),
   state: z.string(),
   birthDate: z.string(),
-  id: z.string(),
-  number: z.string().nonempty({ message: "Campo necessário para o cadastro"}),
+  id: z.string().nonempty({ message: "Campo necessário para o cadastro"}),
+  number: z.string().nonempty({ message: "Campo necessário para o cadastro" }),
   complement: z.string(),
 });
 
@@ -87,6 +94,16 @@ export const FormDriverProvider: React.FC = ({ children }: any) => {
           draggable: true,
           progress: undefined,
           theme: "light",
+        });
+        toast.warning("Atenção! Campos com * são obrigatórios.", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
         });
         console.error("Form errors:", validationResult.error.formErrors);
       }

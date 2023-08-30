@@ -32,6 +32,7 @@ const BasicDetails: React.FC = () => {
         onChange={handleChange("storeName")}
       />
       <TextField
+        required
         type="number"
         label="Telefone"
         value={formData.storePhone}
@@ -41,12 +42,14 @@ const BasicDetails: React.FC = () => {
         }}
       />
       <TextField
+        required
         id="outlined-required"
         label="Email"
         value={formData.storeEmail}
         onChange={handleChange("storeEmail")}
       />
       <TextField
+        required
         select
         label="Tipo da loja"
         id="outlined-select-store-type"

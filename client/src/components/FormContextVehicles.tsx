@@ -15,12 +15,10 @@ const formSchema: ZodType<FormData> = z.object({
   vehicleConsume: z
     .string()
     .nonempty({ message: "Campo necessário para o cadastro" }),
-  vehicleLoadCap: z
-    .string()
-    .nonempty({ message: "Campo necessário para o cadastro" }),
   vehicleOdometer: z
     .string()
     .nonempty({ message: "Campo necessário para o cadastro" }),
+  vehicleLoadCap: z.string(),
   vehicleTag: z.string(),
   vehicleStatus: z.string(),
   vehicleGroup: z.string(),
@@ -92,6 +90,16 @@ export const FormProvider: React.FC = ({ children }: any) => {
           draggable: true,
           progress: undefined,
           theme: "light",
+        });
+        toast.warning("Atenção! Campos com * são obrigatórios.", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
         });
         console.error("Form errors:", validationResult.error.formErrors);
       }
