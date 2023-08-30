@@ -2,7 +2,7 @@ import React from "react";
 import { TextField, InputAdornment } from "@mui/material";
 //components
 import FlexBetween from "@/components/FlexBetween";
-import { useFormDriverContext } from "./../../../components/FormContextDriver"
+import { useFormDriverContext } from "./../../../components/FormContextDriver";
 import { FormDataDriver } from "@/types";
 
 const BasicDetails: React.FC = () => {
@@ -25,6 +25,7 @@ const BasicDetails: React.FC = () => {
         onChange={handleChange("fullName")}
       />
       <TextField
+        required
         type="number"
         label="Telefone"
         value={formData.phone}
@@ -34,6 +35,7 @@ const BasicDetails: React.FC = () => {
         }}
       />
       <TextField
+        required
         id="outlined-required"
         label="Email"
         type="email"
@@ -41,9 +43,11 @@ const BasicDetails: React.FC = () => {
         onChange={handleChange("email")}
       />
       <TextField
+        required
         id="outlined-required"
         label="Habilitação"
-        type="email"
+        type="text"
+        helperText="Exemplo: AB, B ou ABCDE."
         value={formData.license}
         onChange={handleChange("license")}
       />

@@ -5,21 +5,18 @@ import { TextField, InputAdornment } from "@mui/material";
 import { useFormContext } from "../../../components/FormContextVehicles";
 import FlexBetween from "@/components/FlexBetween";
 
-
-
 const Settings: React.FC = () => {
-
   const { formData, setFormData } = useFormContext();
 
-  const handleChange = (field: keyof FormData) => (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
-  };
+  const handleChange =
+    (field: keyof FormData) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
+    };
 
   return (
     <FlexBetween p="15px" flexDirection="column">
       <TextField
+        required
         id="outlined-required"
         type="number"
         label="Odômetro atual"

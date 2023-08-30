@@ -1,22 +1,21 @@
 //@ts-nocheck
 import React from "react";
-import { TextField,InputAdornment } from "@mui/material";
-import { useFormContext } from '../../../components/FormContextVehicles';
+import { TextField, InputAdornment } from "@mui/material";
+import { useFormContext } from "../../../components/FormContextVehicles";
 //components
 import FlexBetween from "@/components/FlexBetween";
-
 
 const Performance: React.FC = () => {
   const { formData, setFormData } = useFormContext();
 
-  const handleChange = (field: keyof FormData) => (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
-  };
+  const handleChange =
+    (field: keyof FormData) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
+    };
   return (
     <FlexBetween p="15px" flexDirection="column">
       <TextField
+        required
         id="outlined-number"
         type="number"
         label="Km/l Estimado do veículo"

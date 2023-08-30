@@ -1,13 +1,12 @@
 
 import React from "react";
 import { useFormContext } from "@/components/FormContextVehicles";
-import { TextField, MenuItem} from "@mui/material";
+import { TextField, MenuItem } from "@mui/material";
 //components
 import FlexBetween from "@/components/FlexBetween";
 import { FormData } from "@/types";
 
-
-const Identification: React.FC = ({validationResult}: any) => {
+const Identification: React.FC = () => {
   const { formData, setFormData } = useFormContext();
 
   const handleChange =
@@ -55,6 +54,7 @@ const Identification: React.FC = ({validationResult}: any) => {
         onChange={handleChange("vehicleTag")}
       />
       <TextField
+        required
         select
         label="Tipo do Veículo"
         id="outlined-select-car-type"

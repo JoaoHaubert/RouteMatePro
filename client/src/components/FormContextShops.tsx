@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 const formSchema: ZodType<FormDataShop> = z.object({
   storeName: z.string().nonempty("Campo necessário para o cadastro"),
   storePhone: z.string().nonempty("Campo necessário para o cadastro"),
-  storeEmail: z.string(),
+  storeEmail: z.string().email().nonempty("Campo necessário para o cadastro"),
   storeAddress: z.string(),
   storeNumber: z.string().nonempty("Campo necessário para o cadastro"),
   storeCity: z.string(),
@@ -79,6 +79,16 @@ export const FormShopProvider: React.FC = ({ children }: any) => {
           draggable: true,
           progress: undefined,
           theme: "light",
+        });
+        toast.warning("Atenção! Campos com * são obrigatórios.", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
         });
         console.error("Form errors:", validationResult.error.formErrors);
       }

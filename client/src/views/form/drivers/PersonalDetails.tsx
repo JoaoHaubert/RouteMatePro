@@ -84,6 +84,7 @@ const PersonalDetails: React.FC = () => {
         onChange={handleChange("address")}
       />
       <TextField
+        required
         type="number"
         id="outlined-required"
         label="Número"
