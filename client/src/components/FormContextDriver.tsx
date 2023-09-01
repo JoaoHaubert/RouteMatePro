@@ -69,7 +69,7 @@ export const FormDriverProvider: React.FC = ({ children }: any) => {
       if (validationResult.success) {
         // Form data is valid, proceed to save
         const response = await axios.post(
-          "http://localhost:5001/create-driver",
+          "http://localhost:5001/api/driver",
           formData
         );
         toast.success("Condutor(a) adicionado(a) com sucesso!", {

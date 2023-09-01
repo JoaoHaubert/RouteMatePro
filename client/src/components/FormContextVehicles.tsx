@@ -65,7 +65,7 @@ export const FormProvider: React.FC = ({ children }: any) => {
       if (validationResult.success) {
         // Form data is valid, proceed to save
         const response = await axios.post(
-          "http://localhost:5001/create-vehicle",
+          "http://localhost:5001/api/vehicle",
           formData
         );
         toast.success("Veículo adicionado com sucesso!", {
@@ -105,6 +105,16 @@ export const FormProvider: React.FC = ({ children }: any) => {
       }
     } catch (error) {
       console.error("Error saving form data:", error);
+      toast.error("Nome ou placa do veículo já estão cadastrados.", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   return (

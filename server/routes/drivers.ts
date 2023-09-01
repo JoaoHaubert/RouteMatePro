@@ -2,7 +2,7 @@ import express from "express";
 import Driver from "../models/drivers";
 const router = express.Router();
 
-router.route("/create-driver").post(async (req: any, res: any) => {
+router.route("/api/driver").post(async (req: any, res: any) => {
   try {
     const {
       fullName,

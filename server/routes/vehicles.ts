@@ -2,7 +2,7 @@ import express from "express";
 import Vehicle from "../models/vehicles";
 const router = express.Router();
 
-router.route("/create-vehicle").post(async (req: any, res: any) => {
+router.route("/api/vehicle").post(async (req: any, res: any) => {
   try {
     const {
       vehicleName,

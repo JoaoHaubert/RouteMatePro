@@ -10,7 +10,7 @@ const VehicleList: React.FC = () => {
 
   useEffect(() => {
     // Fetch data from your API endpoint
-    axios.get<Vehicle[]>("/api/vehicles").then((response) => {
+    axios.get<Vehicle[]>("/create-vehicle").then((response) => {
       setVehicles(response.data);
     });
   }, []);

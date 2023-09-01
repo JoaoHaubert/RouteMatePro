@@ -15,29 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const vehicles_1 = __importDefault(require("../models/vehicles"));
 const router = express_1.default.Router();
-router.route("/api/vehicle").post((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/create-vehicle", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { vehicleName, vehicleTag, vehicleType, vehicleStatus, vehicleOwnership, vehicleGroup, vehicleBrand, vehicleConsume, vehicleLoadCap, vehicleOdometer, } = req.body;
-        const newVehicle = new vehicles_1.default({
-            vehicleName,
-            vehicleTag,
-            vehicleType,
-            vehicleStatus,
-            vehicleOwnership,
-            vehicleGroup,
-            vehicleBrand,
-            vehicleConsume,
-            vehicleLoadCap,
-            vehicleOdometer,
-        });
-        yield newVehicle.save();
-        res.status(201).json({ message: "Vehicle added successfully" });
+        const vehicles = yield vehicles_1.default.find();
+        res.json(vehicles);
     }
     catch (error) {
-        console.error("Error saving vehicle:", error);
-        res
-            .status(500)
-            .json({ message: "An error occurred while saving the vehicle" });
+        res.status(500).json({ message: "Error fetching data" });
     }
 }));
 exports.default = router;
