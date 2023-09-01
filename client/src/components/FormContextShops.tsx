@@ -54,7 +54,7 @@ export const FormShopProvider: React.FC = ({ children }: any) => {
       if (validationResult.success) {
         // Form data is valid, proceed to save
         const response = await axios.post(
-          "http://localhost:5001/create-shop",
+          "http://localhost:5001/api/shop",
           formData
         );
         toast.success("Loja adicionada com sucesso!", {

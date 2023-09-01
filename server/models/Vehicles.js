@@ -8,9 +8,11 @@ const VehicleSchema = new mongoose_1.default.Schema({
     vehicleName: {
         type: String,
         required: true,
+        unique: true,
     },
     vehicleTag: {
         type: String,
+        unique: true,
     },
     vehicleType: {
         type: String,

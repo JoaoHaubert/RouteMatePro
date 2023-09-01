@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const shops_1 = __importDefault(require("../models/shops"));
 const router = express_1.default.Router();
-router.route("/create-shop").post((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.route("/api/shop").post((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { storeName, storePhone, storeEmail, storeAddress, storeNumber, storeCity, storePost, storeState, storeType, } = req.body;
         const newShop = new shops_1.default({

@@ -15,6 +15,7 @@ import Register from "./views/register";
 import VehicleForm from "./views/form/vehicles/VehicleForm";
 import DriverForm from "./views/form/drivers/DriverForm";
 import ShopForm from "./views/form/shops/ShopForm";
+import VehicleList from "./views/vehicleList";
 //import Navbar from '@/components/Navbar'
 //import Sidebar from '@/components/Sidebar'
 function App() {
@@ -37,7 +38,7 @@ function App() {
                 <Route path="/new-vehicle" element={<VehicleForm />} />
                 <Route path="/new-driver" element={<DriverForm />} />
                 <Route path="/new-shop" element={<ShopForm />} />
-                <Route path="/vehicles" element={<div>Lista veiculos</div>} />
+                <Route path="/vehicles" element={ <VehicleList/> } />
                 <Route path="/active-vehicles" element={<div>Veiculos Ativos</div>}/>
                 <Route path="/maintenance" element={<div>Manutencoes</div>} />
                 <Route path="/drivers" element={<div>Lista Condutores</div>} />

@@ -5,9 +5,11 @@ const VehicleSchema = new mongoose.Schema(
     vehicleName: {
       type: String,
       required: true,
+      unique: true,
     },
     vehicleTag: {
       type: String,
+      unique: true,
     },
     vehicleType: {
       type: String,

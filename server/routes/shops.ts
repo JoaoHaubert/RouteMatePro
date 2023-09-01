@@ -2,7 +2,7 @@ import express from "express";
 import Shop from "../models/shops";
 const router = express.Router();
 
-router.route("/create-shop").post(async (req: any, res: any) => {
+router.route("/api/shop").post(async (req: any, res: any) => {
     try {
         const {
             storeName,
