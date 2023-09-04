@@ -14,6 +14,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const vehicles_1 = __importDefault(require("./routes/vehicles"));
 const drivers_1 = __importDefault(require("./routes/drivers"));
 const shops_1 = __importDefault(require("./routes/shops"));
+const vehicleList_1 = __importDefault(require("./routes/vehicleList"));
 //Configs
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -28,6 +29,7 @@ app.use((0, cors_1.default)());
 app.use(vehicles_1.default);
 app.use(drivers_1.default);
 app.use(shops_1.default);
+app.use(vehicleList_1.default);
 //Mongoose
 const PORT = parseInt(process.env.PORT || "9000");
 const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017/database";
