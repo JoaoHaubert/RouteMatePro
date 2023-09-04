@@ -9,6 +9,7 @@ import morgan from "morgan";
 import vehicleRoutes from "./routes/vehicles"
 import driverRoutes from "./routes/drivers"
 import shopRoutes from "./routes/shops"
+import vehicleList from "./routes/vehicleList"
 
 
 //Configs
@@ -26,6 +27,7 @@ app.use(cors());
 app.use(vehicleRoutes);
 app.use(driverRoutes);
 app.use(shopRoutes);
+app.use(vehicleList);
 
 //Mongoose
 const PORT: number = parseInt(process.env.PORT || "9000");
