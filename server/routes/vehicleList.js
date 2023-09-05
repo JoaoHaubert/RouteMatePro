@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const vehicles_1 = __importDefault(require("../models/vehicles"));
 const router = express_1.default.Router();
-router.get("/api/vehicle/get", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/get-vehicle", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const vehicles = yield vehicles_1.default.find();
         res.json(vehicles);
