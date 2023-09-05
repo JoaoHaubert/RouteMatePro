@@ -3,7 +3,7 @@ import Vehicle from "../models/vehicles";
 
 const router = express.Router();
 
-router.get("/api/vehicle/get", async (req, res) => {
+router.get("/get-vehicle", async (req, res) => {
     try {
         const vehicles = await Vehicle.find();
         res.json(vehicles)
