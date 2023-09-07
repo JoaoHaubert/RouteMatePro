@@ -15,7 +15,7 @@ import {
   Stack,
 } from "@mui/material";
 import { Add } from "@mui/icons-material";
-import VehicleForm from "../form/vehicles/VehicleForm";
+import VehicleForm from "../vehicles/VehicleForm";
 type Props = {};
 
 export default function Register({}: Props) {

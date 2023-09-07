@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 import Dashboard from "./views/dashboard";
 import Layout from "./views/layout";
-import Register from "./views/register";
+import Register from "./views/form/register";
 import VehicleForm from "./views/form/vehicles/VehicleForm";
 import DriverForm from "./views/form/drivers/DriverForm";
 import ShopForm from "./views/form/shops/ShopForm";
