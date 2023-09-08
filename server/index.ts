@@ -6,11 +6,12 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-import vehicleRoutes from "./routes/vehicles"
-import driverRoutes from "./routes/drivers"
-import shopRoutes from "./routes/shops"
-import vehicleList from "./routes/vehicleList"
-
+import vehicleRoutes from "./routes/vehicles";
+import driverRoutes from "./routes/drivers";
+import shopRoutes from "./routes/shops";
+import vehicleList from "./routes/vehicleList";
+import driverList from "./routes/driverList";
+import shopList from "./routes/shopList";
 
 //Configs
 dotenv.config();
@@ -28,11 +29,13 @@ app.use(vehicleRoutes);
 app.use(driverRoutes);
 app.use(shopRoutes);
 app.use(vehicleList);
+app.use(driverList);
+app.use(shopList);
 
 //Mongoose
 const PORT: number = parseInt(process.env.PORT || "9000");
 const MONGO_URL: string =
-  process.env.MONGO_URL || "mongodb://localhost:27017/database"; 
+  process.env.MONGO_URL || "mongodb://localhost:27017/database";
 mongoose
   .connect(MONGO_URL)
   .then(() => {
