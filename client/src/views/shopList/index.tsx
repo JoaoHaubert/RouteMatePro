@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FormData } from "@/types";
-import { alpha } from "@mui/material/styles";
+import { FormDataShop } from "@/types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import {
@@ -16,21 +15,20 @@ import {
   TableRow,
 } from "@mui/material";
 
-
-interface Vehicle extends FormData {
+interface Shop extends FormDataShop {
   _id: string;
 }
 
-const VehicleList: React.FC = () => {
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+const ShopList: React.FC = () => {
+  const [shops, setShops] = useState<Shop[]>([]);
 
   useEffect(() => {
     // Fetch data from your API endpoint
     axios
-      .get<Vehicle[]>("http://localhost:5001/get-vehicle")
-      .then((response) => {
-        setVehicles(response.data);
-      });
+    .get<Shop[]>("http://localhost:5001/get-shop")
+    .then((response) => {
+      setShops(response.data);
+    });
   }, []);
 
   function handleUpdate() {
@@ -39,7 +37,7 @@ const VehicleList: React.FC = () => {
   function handleDelete() {
     console.log("Clicked for delete");
   }
-  return (
+  return(
     <Box
       marginTop={3}
     >
@@ -49,24 +47,21 @@ const VehicleList: React.FC = () => {
           <TableRow>
             <TableCell>Nome</TableCell>
             <TableCell>Tipo</TableCell>
-            <TableCell>Placa</TableCell>
-            <TableCell>Fabricante</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Quilometragem</TableCell>
-            <TableCell>Grupo</TableCell>
-            <TableCell>Ações</TableCell>
+            <TableCell>Telefone</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Cidade</TableCell>
+            <TableCell>Estado</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {vehicles.map((vehicle) => (
-            <TableRow key={vehicle._id}>
-              <TableCell>{vehicle.vehicleName}</TableCell>
-              <TableCell>{vehicle.vehicleType}</TableCell>
-              <TableCell>{vehicle.vehicleTag}</TableCell>
-              <TableCell>{vehicle.vehicleBrand}</TableCell>
-              <TableCell>{vehicle.vehicleStatus}</TableCell>
-              <TableCell>{vehicle.vehicleOdometer}</TableCell>
-              <TableCell>{vehicle.vehicleGroup}</TableCell>
+          {shops.map((shop) => (
+            <TableRow key={shop._id}>
+              <TableCell>{shop.storeName}</TableCell>
+              <TableCell>{shop.storeType}</TableCell>
+              <TableCell>{shop.storePhone}</TableCell>
+              <TableCell>{shop.storeEmail}</TableCell>
+              <TableCell>{shop.storeCity}</TableCell>
+              <TableCell>{shop.storeState}</TableCell>
               <TableCell>
                 <IconButton color="primary" onClick={() => handleUpdate()}>
                   <EditIcon />
@@ -80,7 +75,8 @@ const VehicleList: React.FC = () => {
         </TableBody>
       </Table>
     </Box>
-  );
-};
+  )
 
-export default VehicleList;
+}
+
+export default ShopList;

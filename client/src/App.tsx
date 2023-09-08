@@ -16,6 +16,8 @@ import VehicleForm from "./views/form/vehicles/VehicleForm";
 import DriverForm from "./views/form/drivers/DriverForm";
 import ShopForm from "./views/form/shops/ShopForm";
 import VehicleList from "./views/vehicleList";
+import DriverList from "./views/driverList";
+import ShopList from "./views/shopList";
 //import Navbar from '@/components/Navbar'
 //import Sidebar from '@/components/Sidebar'
 function App() {
@@ -41,8 +43,8 @@ function App() {
                 <Route path="/vehicles" element={ <VehicleList/> } />
                 <Route path="/active-vehicles" element={<div>Veiculos Ativos</div>}/>
                 <Route path="/maintenance" element={<div>Manutencoes</div>} />
-                <Route path="/drivers" element={<div>Lista Condutores</div>} />
-                <Route path="/shop" element={<div>Lista lojas</div>} />
+                <Route path="/drivers" element={<DriverList/>} />
+                <Route path="/shop" element={<ShopList/>} />
               </Route>
             </Routes>
           </Box>
