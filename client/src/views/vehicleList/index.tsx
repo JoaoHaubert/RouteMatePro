@@ -3,30 +3,14 @@ import axios from "axios";
 import { FormData } from "@/types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { visuallyHidden } from "@mui/utils";
+import EditIcon from "@mui/icons-material/Edit";
+import { Button, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+
 
 interface Vehicle extends FormData {
   _id: string;
 }
-
 
 const VehicleList: React.FC = () => {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -40,14 +24,56 @@ const VehicleList: React.FC = () => {
       });
   }, []);
 
+function handleUpdate() {
+  console.log("Clicked for edit")
+}
+function handleDelete() {
+  console.log("Clicked for delete")
+}
   return (
     <div>
       <h2>Vehicle List</h2>
-      <ul>
-        {vehicles.map((vehicle) => (
-          <li key={vehicle._id}>{vehicle.vehicleName}</li>
-        ))}
-      </ul>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Nome</TableCell>
+            <TableCell>Tipo</TableCell>
+            <TableCell>Placa</TableCell>
+            <TableCell>Fabricante</TableCell>
+            <TableCell>Status</TableCell>
+            <TableCell>Quilometragem</TableCell>
+            <TableCell>Grupo</TableCell>
+            <TableCell>Ações</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {vehicles.map((vehicle) => (
+            <TableRow key={vehicle._id}>
+              <TableCell>{vehicle.vehicleName}</TableCell>
+              <TableCell>{vehicle.vehicleType}</TableCell>
+              <TableCell>{vehicle.vehicleTag}</TableCell>
+              <TableCell>{vehicle.vehicleBrand}</TableCell>
+              <TableCell>{vehicle.vehicleStatus}</TableCell>
+              <TableCell>{vehicle.vehicleOdometer}</TableCell>
+              <TableCell>{vehicle.vehicleGroup}</TableCell>
+              <TableCell>
+              <IconButton
+                  color="primary"
+                  onClick={() => handleUpdate()}
+                >
+                  <EditIcon />
+                </IconButton>
+                <IconButton
+                  color="error"
+                  onClick={() => handleDelete()}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 };

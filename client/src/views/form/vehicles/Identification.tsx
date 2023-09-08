@@ -14,28 +14,28 @@ const Identification: React.FC = () => {
       setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
     };
   const vehicleType = [
-    { value: "car", label: "Carro" },
-    { value: "truck", label: "Caminhão" },
-    { value: "forklift", label: "Empilhadeira" },
-    { value: "van", label: "Furgão" },
-    { value: "motorcycle", label: "Moto" },
-    { value: "bus", label: "Ônibus" },
-    { value: "pickup", label: "Picape" },
-    { value: "others", label: "Outros" },
+    { value: "Carro", label: "Carro" },
+    { value: "Caminhão", label: "Caminhão" },
+    { value: "Empilhadeira", label: "Empilhadeira" },
+    { value: "Furgão", label: "Furgão" },
+    { value: "Moto", label: "Moto" },
+    { value: "Ônibus", label: "Ônibus" },
+    { value: "Pickup", label: "Pickup" },
+    { value: "Outros", label: "Outros" },
   ];
 
   const vehicleStatus = [
-    { value: "active", label: "Ativo" },
-    { value: "assigned", label: "Em Serviço" },
-    { value: "inactive", label: "Inativo" },
-    { value: "out of service", label: "Fora de serviço" },
-    { value: "sold", label: "Vendido" },
+    { value: "Ativo", label: "Ativo" },
+    { value: "Em Serviço", label: "Em Serviço" },
+    { value: "Inativo", label: "Inativo" },
+    { value: "Fora de Serviço", label: "Fora de serviço" },
+    { value: "Vendido", label: "Vendido" },
   ];
   const vehicleOwnership = [
-    { value: "owner", label: "Próprio" },
-    { value: "rented", label: "Alugado" },
-    { value: "client", label: "Cliente" },
-    { value: "leased", label: "Arrendado" },
+    { value: "Próprio", label: "Próprio" },
+    { value: "Alugado", label: "Alugado" },
+    { value: "Cliente", label: "Cliente" },
+    { value: "Arrendado", label: "Arrendado" },
   ];
 
   return (
