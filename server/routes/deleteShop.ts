@@ -7,10 +7,10 @@ router.delete("/delete-shop/:id", async (req, res) => {
   try {
     const id = req.body.id;
 
-    await Shop.findByIdAndDelete(id);
+    await Shop.deleteOne(id);
     res.status(200).json({ message: "Shop deleted sucessfully" });
   } catch {
-    res.status(500).json({ message: "Failed to delete shop"})
+    res.status(500).json({ message: "Failed to delete shop" });
   }
 });
 

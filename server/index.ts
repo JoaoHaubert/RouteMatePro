@@ -12,6 +12,8 @@ import shopRoutes from "./routes/shops";
 import vehicleList from "./routes/vehicleList";
 import driverList from "./routes/driverList";
 import shopList from "./routes/shopList";
+import vehicleDelete from "./routes/deleteVehicle";
+import driverDelete from "./routes/deleteDriver";
 import shopDelete from "./routes/deleteShop";
 
 //Configs
@@ -32,6 +34,8 @@ app.use(shopRoutes);
 app.use(vehicleList);
 app.use(driverList);
 app.use(shopList);
+app.use(vehicleDelete);
+app.use(driverDelete);
 app.use(shopDelete);
 
 //Mongoose

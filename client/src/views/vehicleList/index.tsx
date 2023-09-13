@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FormData } from "@/types";
-import { alpha } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import {
@@ -15,7 +14,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-
+import { ToastContainer, toast } from "react-toastify";
 
 interface Vehicle extends FormData {
   _id: string;
@@ -36,13 +35,38 @@ const VehicleList: React.FC = () => {
   function handleUpdate() {
     console.log("Clicked for edit");
   }
-  function handleDelete() {
-    console.log("Clicked for delete");
-  }
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete(
+        `http://localhost:5001/delete-vehicle/${id}`
+      );
+      toast.success("Loja removida com sucesso!", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    
+    } catch (error) {
+      toast.error("Falha ao remover a loja.", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      console.error("Error deleting:", error);
+    }
+  };
   return (
-    <Box
-      marginTop={3}
-    >
+    <Box marginTop={3}>
       <Typography variant="h4">Veículos</Typography>
       <Table>
         <TableHead>
@@ -68,10 +92,13 @@ const VehicleList: React.FC = () => {
               <TableCell>{vehicle.vehicleOdometer}</TableCell>
               <TableCell>{vehicle.vehicleGroup}</TableCell>
               <TableCell>
-                <IconButton color="primary" onClick={() => handleUpdate()}>
+                <IconButton
+                  color="primary"
+                  onClick={() => handleUpdate()}
+                >
                   <EditIcon />
                 </IconButton>
-                <IconButton color="error" onClick={() => handleDelete()}>
+                <IconButton color="error" onClick={() => handleDelete(vehicle._id)}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
@@ -79,6 +106,18 @@ const VehicleList: React.FC = () => {
           ))}
         </TableBody>
       </Table>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </Box>
   );
 };

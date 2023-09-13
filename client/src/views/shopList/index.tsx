@@ -14,6 +14,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
 
 interface Shop extends FormDataShop {
   _id: string;
@@ -24,30 +25,46 @@ const ShopList: React.FC = () => {
 
   useEffect(() => {
     // Fetch data from your API endpoint
-    axios
-    .get<Shop[]>("http://localhost:5001/get-shop")
-    .then((response) => {
+    axios.get<Shop[]>("http://localhost:5001/get-shop").then((response) => {
       setShops(response.data);
     });
   }, []);
 
-  const handleDelete = async (id: any) => {
-    axios.delete(`http://localhost:5001/delete-shop/${id}`).then((response) => {
-      if (response.status===200) {
-        console.log("Shop deleted sucessfuly")
-      } else {
-        console.log("Failed to delete shop")
-      }
-    })
-    ;
-  }
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5001/delete-shop/${id}`
+      );
+      toast.success("Loja removida com sucesso!", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      console.log("Item deleted:", response.data.message);
+    } catch (error) {
+      toast.error("Falha ao remover a loja.", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      console.error("Error deleting:", error);
+    }
+  };
   function handleUpdate() {
-    console.log("Clicked for delete")
+    console.log("Clicked for delete");
   }
-  return(
-    <Box
-      marginTop={3}
-    >
+  return (
+    <Box marginTop={3}>
       <Typography variant="h4">Veículos</Typography>
       <Table>
         <TableHead>
@@ -73,7 +90,10 @@ const ShopList: React.FC = () => {
                 <IconButton color="primary" onClick={() => handleUpdate()}>
                   <EditIcon />
                 </IconButton>
-                <IconButton color="error" onClick={() => handleDelete(shop._id)}>
+                <IconButton
+                  color="error"
+                  onClick={() => handleDelete(shop._id)}
+                >
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
@@ -81,9 +101,20 @@ const ShopList: React.FC = () => {
           ))}
         </TableBody>
       </Table>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </Box>
-  )
-
-}
+  );
+};
 
 export default ShopList;

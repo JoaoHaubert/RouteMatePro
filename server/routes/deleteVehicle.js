@@ -13,16 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const shops_1 = __importDefault(require("../models/shops"));
+const vehicles_1 = __importDefault(require("../models/vehicles"));
 const router = express_1.default.Router();
-router.delete("/delete-shop/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.delete("/delete-vehicle/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.body.id;
-        yield shops_1.default.deleteOne(id);
-        res.status(200).json({ message: "Shop deleted sucessfully" });
+        const id = req.body._id;
+        yield vehicles_1.default.deleteOne(id);
+        res.status(200).json({ message: "Vehicle deleted sucessfully" });
     }
     catch (_a) {
-        res.status(500).json({ message: "Failed to delete shop" });
+        res.status(500).json({ message: "Failed to delete vehicle" });
     }
 }));
 exports.default = router;
