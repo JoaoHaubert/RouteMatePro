@@ -14,12 +14,12 @@ const BasicDetails: React.FC = () => {
       setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
     };
   const shopTypes = [
-    { value: "parts", label: "Autopeças" },
-    { value: "sellBuy", label: "Compra e venda veículos" },
-    { value: "maintenance", label: "Mecânica e manutenção" },
-    { value: "tires", label: "Pneus e borracharia" },
-    { value: "tools", label: "Ferramentas" },
-    { value: "others", label: "Outros" },
+    { value: "Autopeças", label: "Autopeças" },
+    { value: "Compra e venda veículos", label: "Compra e venda veículos" },
+    { value: "Mecânica e manutenção", label: "Mecânica e manutenção" },
+    { value: "Pneus e borracharia", label: "Pneus e borracharia" },
+    { value: "Ferramentas", label: "Ferramentas" },
+    { value: "Outros", label: "Outros" },
   ];
 
   return (

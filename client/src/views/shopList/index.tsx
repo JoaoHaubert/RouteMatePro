@@ -31,11 +31,18 @@ const ShopList: React.FC = () => {
     });
   }, []);
 
-  function handleUpdate() {
-    console.log("Clicked for edit");
+  const handleDelete = async (id: any) => {
+    axios.delete(`http://localhost:5001/delete-shop/${id}`).then((response) => {
+      if (response.status===200) {
+        console.log("Shop deleted sucessfuly")
+      } else {
+        console.log("Failed to delete shop")
+      }
+    })
+    ;
   }
-  function handleDelete() {
-    console.log("Clicked for delete");
+  function handleUpdate() {
+    console.log("Clicked for delete")
   }
   return(
     <Box
@@ -66,7 +73,7 @@ const ShopList: React.FC = () => {
                 <IconButton color="primary" onClick={() => handleUpdate()}>
                   <EditIcon />
                 </IconButton>
-                <IconButton color="error" onClick={() => handleDelete()}>
+                <IconButton color="error" onClick={() => handleDelete(shop._id)}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
