@@ -17,6 +17,8 @@ const shops_1 = __importDefault(require("./routes/shops"));
 const vehicleList_1 = __importDefault(require("./routes/vehicleList"));
 const driverList_1 = __importDefault(require("./routes/driverList"));
 const shopList_1 = __importDefault(require("./routes/shopList"));
+const deleteVehicle_1 = __importDefault(require("./routes/deleteVehicle"));
+const deleteDriver_1 = __importDefault(require("./routes/deleteDriver"));
 const deleteShop_1 = __importDefault(require("./routes/deleteShop"));
 //Configs
 dotenv_1.default.config();
@@ -35,6 +37,8 @@ app.use(shops_1.default);
 app.use(vehicleList_1.default);
 app.use(driverList_1.default);
 app.use(shopList_1.default);
+app.use(deleteVehicle_1.default);
+app.use(deleteDriver_1.default);
 app.use(deleteShop_1.default);
 //Mongoose
 const PORT = parseInt(process.env.PORT || "9000");
