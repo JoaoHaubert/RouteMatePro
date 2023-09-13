@@ -12,6 +12,7 @@ import shopRoutes from "./routes/shops";
 import vehicleList from "./routes/vehicleList";
 import driverList from "./routes/driverList";
 import shopList from "./routes/shopList";
+import shopDelete from "./routes/deleteShop";
 
 //Configs
 dotenv.config();
@@ -31,6 +32,7 @@ app.use(shopRoutes);
 app.use(vehicleList);
 app.use(driverList);
 app.use(shopList);
+app.use(shopDelete);
 
 //Mongoose
 const PORT: number = parseInt(process.env.PORT || "9000");
