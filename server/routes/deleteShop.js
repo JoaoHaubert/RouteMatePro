@@ -17,11 +17,12 @@ const shops_1 = __importDefault(require("../models/shops"));
 const router = express_1.default.Router();
 router.delete("/delete-shop/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.body.id;
-        yield shops_1.default.deleteOne(id);
-        res.status(200).json({ message: "Shop deleted sucessfully" });
+        const id = req.params.id; // Use req.params to get the ID from the URL parameter
+        yield shops_1.default.deleteOne({ _id: id });
+        res.status(200).json({ message: "Shop deleted successfully" });
     }
-    catch (_a) {
+    catch (error) {
+        console.error("Error deleting shop:", error);
         res.status(500).json({ message: "Failed to delete shop" });
     }
 }));

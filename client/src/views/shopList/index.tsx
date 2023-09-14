@@ -14,10 +14,10 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { ToastContainer, toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 interface Shop extends FormDataShop {
-  _id: string;
+  _id: any;
 }
 
 const ShopList: React.FC = () => {
@@ -31,35 +31,39 @@ const ShopList: React.FC = () => {
   }, []);
 
   const handleDelete = async (id: string) => {
+    const confirmationMessage = "Tem certeza que deseja remover esta loja ?";
+
     try {
-      const response = await axios.delete(
-        `http://localhost:5001/delete-shop/${id}`
-      );
-      toast.success("Loja removida com sucesso!", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+      const result = await Swal.fire({
+        title: "Confirmação",
+        text: confirmationMessage,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Remover",
       });
-      console.log("Item deleted:", response.data.message);
+
+      if (result.isConfirmed) {
+        const response = await axios.delete(
+          `http://localhost:5001/delete-shop/${id}`
+        );
+
+        if (response.status === 200) {
+          Swal.fire("Removido!", "O arquivo foi removido.", "success");
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } else {
+          Swal.fire("Não removido.", "Houve algum problema.", "error");
+        }
+      }
     } catch (error) {
-      toast.error("Falha ao remover a loja.", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
       console.error("Error deleting:", error);
     }
   };
+
   function handleUpdate() {
     console.log("Clicked for delete");
   }
@@ -75,6 +79,7 @@ const ShopList: React.FC = () => {
             <TableCell>Email</TableCell>
             <TableCell>Cidade</TableCell>
             <TableCell>Estado</TableCell>
+            <TableCell>Ações</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -101,18 +106,6 @@ const ShopList: React.FC = () => {
           ))}
         </TableBody>
       </Table>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </Box>
   );
 };

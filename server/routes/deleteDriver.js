@@ -17,11 +17,12 @@ const drivers_1 = __importDefault(require("../models/drivers"));
 const router = express_1.default.Router();
 router.delete("/delete-driver/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.body.id;
-        yield drivers_1.default.deleteOne(id);
+        const id = req.params.id;
+        yield drivers_1.default.deleteOne({ _id: id });
         res.status(200).json({ message: "Driver deleted sucessfully" });
     }
-    catch (_a) {
+    catch (error) {
+        console.error("Error deleting driver:", error);
         res.status(200).json({ message: "Failed to delete driver" });
     }
 }));

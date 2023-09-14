@@ -46,7 +46,7 @@ const AddressDetail: React.FC = () => {
         onChange={handleChange("storePost")}
         onBlurCapture={consultCep}
         inputProps={{
-          maxLength: 8,
+          maxLength: 10,
         }}
       />
       <TextField

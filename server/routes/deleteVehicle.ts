@@ -5,13 +5,14 @@ const router = express.Router();
 
 router.delete("/delete-vehicle/:id", async (req, res) => {
   try {
-    const id = req.body._id;
+    const id = req.params.id;
 
-    await Vehicle.deleteOne(id);
+    await Vehicle.deleteOne({ _id: id });
     res.status(200).json({ message: "Vehicle deleted sucessfully" });
-  } catch {
+  } catch (error) {
+    console.error("Error deleting vehicle:", error);
     res.status(500).json({ message: "Failed to delete vehicle" });
   }
 });
 
-export default router
+export default router;

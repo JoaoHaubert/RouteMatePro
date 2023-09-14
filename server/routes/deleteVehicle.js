@@ -17,11 +17,12 @@ const vehicles_1 = __importDefault(require("../models/vehicles"));
 const router = express_1.default.Router();
 router.delete("/delete-vehicle/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.body._id;
-        yield vehicles_1.default.deleteOne(id);
+        const id = req.params.id;
+        yield vehicles_1.default.deleteOne({ _id: id });
         res.status(200).json({ message: "Vehicle deleted sucessfully" });
     }
-    catch (_a) {
+    catch (error) {
+        console.error("Error deleting vehicle:", error);
         res.status(500).json({ message: "Failed to delete vehicle" });
     }
 }));
