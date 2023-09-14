@@ -14,7 +14,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { ToastContainer, toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 interface Vehicle extends FormData {
   _id: string;
@@ -36,32 +36,35 @@ const VehicleList: React.FC = () => {
     console.log("Clicked for edit");
   }
   const handleDelete = async (id: string) => {
+    const confirmationMessage = "Tem certeza que deseja remover este veículo ?";
+
     try {
-      await axios.delete(
-        `http://localhost:5001/delete-vehicle/${id}`
-      );
-      toast.success("Loja removida com sucesso!", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+      const result = await Swal.fire({
+        title: "Confirmação",
+        text: confirmationMessage,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Remover",
       });
-    
+
+      if (result.isConfirmed) {
+        const response = await axios.delete(
+          `http://localhost:5001/delete-vehicle/${id}`
+        );
+
+        if (response.status === 200) {
+          Swal.fire("Removido!", "O arquivo foi removido.", "success");
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } else {
+          Swal.fire("Não removido.", "Houve algum problema.", "error");
+        }
+      }
     } catch (error) {
-      toast.error("Falha ao remover a loja.", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
       console.error("Error deleting:", error);
     }
   };
@@ -92,13 +95,13 @@ const VehicleList: React.FC = () => {
               <TableCell>{vehicle.vehicleOdometer}</TableCell>
               <TableCell>{vehicle.vehicleGroup}</TableCell>
               <TableCell>
-                <IconButton
-                  color="primary"
-                  onClick={() => handleUpdate()}
-                >
+                <IconButton color="primary" onClick={() => handleUpdate()}>
                   <EditIcon />
                 </IconButton>
-                <IconButton color="error" onClick={() => handleDelete(vehicle._id)}>
+                <IconButton
+                  color="error"
+                  onClick={() => handleDelete(vehicle._id)}
+                >
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
@@ -106,18 +109,6 @@ const VehicleList: React.FC = () => {
           ))}
         </TableBody>
       </Table>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </Box>
   );
 };

@@ -14,6 +14,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import Swal from "sweetalert2"
 
 interface Driver extends FormDataDriver {
   _id: string;
@@ -34,9 +35,39 @@ const DriverList: React.FC = () => {
   function handleUpdate() {
     console.log("Clicked for edit");
   }
-  function handleDelete() {
-    console.log("Clicked for delete");
-  }
+  const handleDelete = async (id: string) => {
+    const confirmationMessage = "Tem certeza que deseja remover este condutor(a) ?";
+
+    try {
+      const result = await Swal.fire({
+        title: "Confirmação",
+        text: confirmationMessage,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Remover",
+      });
+
+      if (result.isConfirmed) {
+        const response = await axios.delete(
+          `http://localhost:5001/delete-driver/${id}`
+        );
+
+        if (response.status === 200) {
+          Swal.fire("Removido!", "O arquivo foi removido.", "success");
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } else {
+          Swal.fire("Não removido.", "Houve algum problema.", "error");
+        }
+      }
+    } catch (error) {
+      console.error("Error deleting:", error);
+    }
+  };
 
   return (
     <Box marginTop={3}>
@@ -63,7 +94,7 @@ const DriverList: React.FC = () => {
                 <IconButton color="primary" onClick={() => handleUpdate()}>
                   <EditIcon />
                 </IconButton>
-                <IconButton color="error" onClick={() => handleDelete()}>
+                <IconButton color="error" onClick={() => handleDelete(driver._id)}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
