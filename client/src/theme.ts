@@ -93,8 +93,9 @@ export const themeSettings = {
     },
     h6: {
       fontFamily: ["Inter", "sans-serif"].join(","),
-      fontSize: 10,
-      color: tokens.grey[700],
+      fontSize: 14,
+      fontWeight: 800,
+      color: tokens.grey[900],
     },
   },
 };

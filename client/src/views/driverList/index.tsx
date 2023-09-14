@@ -3,10 +3,11 @@ import axios from "axios";
 import { FormDataDriver } from "@/types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import Header from "@/components/Header";
+import FlexBetween from "@/components/FlexBetween";
 import {
   Box,
   Typography,
-  Button,
   IconButton,
   Table,
   TableBody,
@@ -14,7 +15,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 
 interface Driver extends FormDataDriver {
   _id: string;
@@ -25,9 +26,7 @@ const DriverList: React.FC = () => {
 
   useEffect(() => {
     // Fetch data from your API endpoint
-    axios
-    .get<Driver[]>("http://localhost:5001/get-driver")
-    .then((response) => {
+    axios.get<Driver[]>("http://localhost:5001/get-driver").then((response) => {
       setDrivers(response.data);
     });
   }, []);
@@ -36,7 +35,8 @@ const DriverList: React.FC = () => {
     console.log("Clicked for edit");
   }
   const handleDelete = async (id: string) => {
-    const confirmationMessage = "Tem certeza que deseja remover este condutor(a) ?";
+    const confirmationMessage =
+      "Tem certeza que deseja remover este condutor(a) ?";
 
     try {
       const result = await Swal.fire({
@@ -71,15 +71,16 @@ const DriverList: React.FC = () => {
 
   return (
     <Box marginTop={3}>
-      <Typography variant="h4">Condutores</Typography>
+      <Header title="Condutores" subtitle="Lista de condutores"/>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Nome</TableCell>
-            <TableCell>Telefone</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Habilitações</TableCell>
-            <TableCell>Cidade</TableCell>
+            <TableCell><Typography variant="h6">Nome</Typography></TableCell>
+            <TableCell><Typography variant="h6">Telefone</Typography></TableCell>
+            <TableCell><Typography variant="h6">Email</Typography></TableCell>
+            <TableCell><Typography variant="h6">Habilitações</Typography></TableCell>
+            <TableCell><Typography variant="h6">Cidade</Typography></TableCell>
+            <TableCell><Typography variant="h6">Ações</Typography></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -94,7 +95,10 @@ const DriverList: React.FC = () => {
                 <IconButton color="primary" onClick={() => handleUpdate()}>
                   <EditIcon />
                 </IconButton>
-                <IconButton color="error" onClick={() => handleDelete(driver._id)}>
+                <IconButton
+                  color="error"
+                  onClick={() => handleDelete(driver._id)}
+                >
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
