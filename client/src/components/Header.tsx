@@ -4,8 +4,8 @@ import { Typography, Box, useTheme } from '@mui/material'
 
 
 interface HeaderProps {
-    title?: any
-    subtitle?: any
+    title?: string
+    subtitle?: string
 }
 
 const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {

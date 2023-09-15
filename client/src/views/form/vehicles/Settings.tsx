@@ -13,16 +13,24 @@ const Settings: React.FC = () => {
       setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
     };
 
+      function formatMileage(mileage: string) {
+    if (!mileage) return "";
+    return mileage.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  }
+
   return (
     <FlexBetween p="15px" flexDirection="column">
       <TextField
         required
         id="outlined-required"
-        type="number"
+        type="text"
         label="Odômetro atual"
         helperText="Quilometragem do veículo"
-        value={formData.vehicleOdometer}
-        onChange={handleChange("vehicleOdometer")}
+        value={formatMileage(formData.vehicleOdometer)}
+        onChange={(event: any) => {
+          const inputMileage = event.target.value.replace(/\D/g, "").slice(0, 11);
+          handleChange("vehicleOdometer")({ target: { value: inputMileage } }); // Set the input value using handleChange
+        }}
         InputProps={{
           endAdornment: <InputAdornment position="end">km</InputAdornment>,
         }}

@@ -64,22 +64,48 @@ const ShopList: React.FC = () => {
     }
   };
 
+  function formatPhone(telefone: string | undefined) {
+    if (!telefone) return "";
+    // Assuming telefone is a string in the format "XXXXXXXXXXX"
+    return `(${telefone.slice(0, 2)}) ${telefone.slice(2, 7)}-${telefone.slice(
+      7
+    )}`;
+  }
+
   function handleUpdate() {
     console.log("Clicked for delete");
   }
   return (
-    <Box marginTop={3}>
-      <Typography variant="h4">Veículos</Typography>
+    <Box marginTop={1}>
+      <Box m="0.3rem 0rem" p="0.4rem" flexDirection="column">
+        <Typography variant="h2" m="0.2rem">
+          Lojas
+        </Typography>
+      </Box>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Nome</TableCell>
-            <TableCell>Tipo</TableCell>
-            <TableCell>Telefone</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Cidade</TableCell>
-            <TableCell>Estado</TableCell>
-            <TableCell>Ações</TableCell>
+            <TableCell>
+              <Typography variant="h6">Nome</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Tipo</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Telefone</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Email</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Cidade</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Estado</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Ações</Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -87,7 +113,7 @@ const ShopList: React.FC = () => {
             <TableRow key={shop._id}>
               <TableCell>{shop.storeName}</TableCell>
               <TableCell>{shop.storeType}</TableCell>
-              <TableCell>{shop.storePhone}</TableCell>
+              <TableCell>{formatPhone(shop.storePhone)}</TableCell>
               <TableCell>{shop.storeEmail}</TableCell>
               <TableCell>{shop.storeCity}</TableCell>
               <TableCell>{shop.storeState}</TableCell>
