@@ -3,8 +3,6 @@ import axios from "axios";
 import { FormDataDriver } from "@/types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import Header from "@/components/Header";
-import FlexBetween from "@/components/FlexBetween";
 import {
   Box,
   Typography,
@@ -69,25 +67,49 @@ const DriverList: React.FC = () => {
     }
   };
 
+  function formatPhone(telefone: string | undefined) {
+    if (!telefone) return "";
+    // Assuming telefone is a string in the format "XXXXXXXXXXX"
+    return `(${telefone.slice(0, 2)}) ${telefone.slice(2, 7)}-${telefone.slice(
+      7
+    )}`;
+  }
+
   return (
-    <Box marginTop={3}>
-      <Header title="Condutores" subtitle="Lista de condutores"/>
+    <Box marginTop={1}>
+      <Box m="0.3rem 0rem" p="0.4rem" flexDirection="column">
+        <Typography variant="h2" m="0.2rem">
+          Condutores
+        </Typography>
+      </Box>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell><Typography variant="h6">Nome</Typography></TableCell>
-            <TableCell><Typography variant="h6">Telefone</Typography></TableCell>
-            <TableCell><Typography variant="h6">Email</Typography></TableCell>
-            <TableCell><Typography variant="h6">Habilitações</Typography></TableCell>
-            <TableCell><Typography variant="h6">Cidade</Typography></TableCell>
-            <TableCell><Typography variant="h6">Ações</Typography></TableCell>
+            <TableCell>
+              <Typography variant="h6">Nome</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Telefone</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Email</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Habilitações</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Cidade</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Ações</Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {drivers.map((driver) => (
             <TableRow key={driver._id}>
               <TableCell>{driver.fullName}</TableCell>
-              <TableCell>{driver.phone}</TableCell>
+              <TableCell>{formatPhone(driver.phone)}</TableCell>
               <TableCell>{driver.email}</TableCell>
               <TableCell>{driver.license}</TableCell>
               <TableCell>{driver.city}</TableCell>

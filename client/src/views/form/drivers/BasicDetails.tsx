@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from "react";
 import { TextField, InputAdornment } from "@mui/material";
 //components
@@ -14,6 +15,14 @@ const BasicDetails: React.FC = () => {
       setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
     };
 
+  function formatPhone(telefone: string | undefined) {
+    if (!telefone) return "";
+    // Assuming telefone is a string in the format "XXXXXXXXXXX"
+    return `(${telefone.slice(0, 2)}) ${telefone.slice(2, 7)}-${telefone.slice(
+      7
+    )}`;
+  }
+
   return (
     <FlexBetween p="15px" flexDirection="column">
       <TextField
@@ -26,12 +35,16 @@ const BasicDetails: React.FC = () => {
       />
       <TextField
         required
-        type="number"
+        type="text"
         label="Telefone"
-        value={formData.phone}
-        onChange={handleChange("phone")}
+        value={formatPhone(formData.phone)}
+        onChange={(event: any) => {
+          const inputPhone = event.target.value.replace(/\D/g, "").slice(0, 11);
+          handleChange("phone")({ target: { value: inputPhone } }); // Set the input value using handleChange
+        }}
         InputProps={{
           startAdornment: <InputAdornment position="start">+55</InputAdornment>,
+          maxLength: 15,
         }}
       />
       <TextField

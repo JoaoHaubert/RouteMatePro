@@ -68,20 +68,46 @@ const VehicleList: React.FC = () => {
       console.error("Error deleting:", error);
     }
   };
+
+  function formatMileage(mileage: string) {
+    if (!mileage) return "";
+    return mileage.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  }
+
   return (
-    <Box marginTop={3}>
-      <Typography variant="h4">Veículos</Typography>
+    <Box marginTop={1}>
+      <Box m="0.3rem 0rem" p="0.4rem" flexDirection="column">
+        <Typography variant="h2" m="0.2rem">
+          Veículos
+        </Typography>
+      </Box>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Nome</TableCell>
-            <TableCell>Tipo</TableCell>
-            <TableCell>Placa</TableCell>
-            <TableCell>Fabricante</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Quilometragem</TableCell>
-            <TableCell>Grupo</TableCell>
-            <TableCell>Ações</TableCell>
+            <TableCell>
+              <Typography variant="h6">Nome</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Tipo</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Placa</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Fabricante</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Status</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Quilometragem</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Grupo</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="h6">Ações</Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -92,7 +118,7 @@ const VehicleList: React.FC = () => {
               <TableCell>{vehicle.vehicleTag}</TableCell>
               <TableCell>{vehicle.vehicleBrand}</TableCell>
               <TableCell>{vehicle.vehicleStatus}</TableCell>
-              <TableCell>{vehicle.vehicleOdometer}</TableCell>
+              <TableCell>{formatMileage(vehicle.vehicleOdometer)} Km</TableCell>
               <TableCell>{vehicle.vehicleGroup}</TableCell>
               <TableCell>
                 <IconButton color="primary" onClick={() => handleUpdate()}>
