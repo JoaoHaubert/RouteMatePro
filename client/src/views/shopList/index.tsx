@@ -15,7 +15,7 @@ import {
   TableRow,
 } from "@mui/material";
 import Swal from "sweetalert2";
-import EditShop from './EditShop'
+import EditShop from "./EditShop";
 
 interface Shop extends FormDataShop {
   _id: string;
@@ -24,8 +24,7 @@ interface Shop extends FormDataShop {
 const ShopList: React.FC = () => {
   const [shops, setShops] = useState<Shop[]>([]);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [editData, setEditData] = useState<Shop | null>(null);
-
+  const [editData, setEditData] = useState();
 
   useEffect(() => {
     // Fetch data from your API endpoint
@@ -76,13 +75,23 @@ const ShopList: React.FC = () => {
     )}`;
   }
 
+  // Function to open the dialog for editing
+  const openEditDialog = (data: any) => {
+    setEditData(data);
+    setIsEditDialogOpen(true);
+  };
 
+  const handleEditClose = () => {
+    setIsEditDialogOpen(false);
+    // Optionally, you can reload the data here
+  };
 
   const handleUpdate = async (id: string) => {
-    const confirmationMessage = "Tem certeza que você deseja editar o arquivo ?"
+    const confirmationMessage =
+      "Tem certeza que você deseja editar o arquivo ?";
 
     try {
-      const result = await Swal.fire ({
+      const result = await Swal.fire({
         title: "Confirmação",
         text: confirmationMessage,
         icon: "question",
@@ -93,34 +102,25 @@ const ShopList: React.FC = () => {
         confirmButtonText: "Editar",
       });
       if (result.isConfirmed) {
+        openEditDialog;
         const response = await axios.put(
           `http://localhost:5001/update-shop/${id}`
         );
 
         if (response.status === 200) {
-          Swal.fire("Editado!", "O arquivo foi modificado.", "success")
+          Swal.fire("Editado!", "O arquivo foi modificado.", "success");
           setTimeout(() => {
             window.location.reload();
-          }, 2000)
+          }, 2000);
         } else {
-          Swal.fire("Não editado!", "Houve algum problema.", "error")
+          Swal.fire("Não editado!", "Houve algum problema.", "error");
         }
       }
     } catch (error) {
-      console.error("Error updating:", error)
+      console.error("Error updating:", error);
     }
-  }
+  };
 
-    // Function to open the dialog for editing
-    const openEditDialog = (data: any) => {
-      setEditData(data);
-      setIsEditDialogOpen(true);
-    };
-  
-    const handleEditClose = () => {
-      setIsEditDialogOpen(false);
-      // Optionally, you can reload the data here
-    };
   return (
     <Box marginTop={1}>
       <Box m="0.3rem 0rem" p="0.4rem" flexDirection="column">
@@ -164,7 +164,10 @@ const ShopList: React.FC = () => {
               <TableCell>{shop.storeCity}</TableCell>
               <TableCell>{shop.storeState}</TableCell>
               <TableCell>
-                <IconButton color="primary" onClick={() => handleUpdate(shop._id)}>
+                <IconButton
+                  color="primary"
+                  onClick={() => handleUpdate(shop._id)}
+                >
                   <EditIcon />
                 </IconButton>
                 <IconButton
@@ -178,12 +181,12 @@ const ShopList: React.FC = () => {
           ))}
         </TableBody>
       </Table>
-     <EditShop
-     open={isEditDialogOpen}
-     onClose={handleEditClose}
-     data={editData}
-     onSave={}
-     />
+      <EditShop
+        open={isEditDialogOpen}
+        onClose={handleEditClose}
+        data={editData}
+        onSave={() => {}}
+      />
     </Box>
   );
 };
