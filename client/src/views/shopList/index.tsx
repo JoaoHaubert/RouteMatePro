@@ -24,7 +24,7 @@ interface Shop extends FormDataShop {
 const ShopList: React.FC = () => {
   const [shops, setShops] = useState<Shop[]>([]);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [editData, setEditData] = useState();
+  const [editData, setEditData] = useState<FormDataShop | null>(null);
 
   useEffect(() => {
     // Fetch data from your API endpoint
@@ -181,12 +181,14 @@ const ShopList: React.FC = () => {
           ))}
         </TableBody>
       </Table>
-      <EditShop
-        open={isEditDialogOpen}
-        onClose={handleEditClose}
-        data={editData}
-        onSave={() => {}}
-      />
+      {isEditDialogOpen && editData !== null && (
+  <EditShop
+    open={isEditDialogOpen}
+    onClose={() => setIsEditDialogOpen(false)}
+    onSave={() => {}}
+    data={editData}
+  />
+)}
     </Box>
   );
 };
