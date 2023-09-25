@@ -13,17 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const drivers_1 = __importDefault(require("../models/drivers"));
+const shops_1 = __importDefault(require("../models/shops"));
 const router = express_1.default.Router();
-router.delete("/delete-driver/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.put('/update-shop/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        yield drivers_1.default.deleteOne({ _id: id });
-        res.status(200).json({ message: "Driver deleted sucessfully" });
+        const updatedData = req.body;
+        yield shops_1.default.updateOne({ _id: id }, updatedData);
+        res.status(200).json({ message: 'Vehicle updated successfully' });
     }
     catch (error) {
-        console.error("Error deleting driver:", error);
-        res.status(500).json({ message: "Failed to delete driver" });
+        console.error('Error updating vehicle data:', error);
+        res.status(500).json({ message: 'Failed to update vehicle' });
     }
 }));
 exports.default = router;

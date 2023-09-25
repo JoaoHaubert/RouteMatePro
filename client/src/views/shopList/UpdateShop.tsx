@@ -6,9 +6,11 @@ import {
   DialogActions,
   Button,
   TextField,
+  Box,
 } from "@mui/material";
 import { FormDataShop } from "@/types";
 import axios from "axios";
+import FlexBetween from "@/components/FlexBetween";
 
 interface UpdateShopProps {
   open: boolean;
@@ -55,46 +57,50 @@ const UpdateShop: React.FC<UpdateShopProps> = ({
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Altere os dados da loja</DialogTitle>
       <DialogContent>
-        <TextField
-          required
-          id="outlined-required"
-          label="CEP"
-          value={formData.storePost}
-          onChange={handleChange("storePost")}
-          onBlurCapture={consultCep}
-          inputProps={{
-            maxLength: 10,
-          }}
-        />
-        <TextField
-          id="outlined-required"
-          label="Endereço"
-          value={formData.storeAddress}
-          onChange={handleChange("storeAddress")}
-        />
-        <TextField
-          required
-          id="outlined-required"
-          label="Número"
-          value={formData.storeNumber}
-          onChange={handleChange("storeNumber")}
-          onBlurCapture={consultCep}
-          inputProps={{
-            maxLength: 8,
-          }}
-        />
-        <TextField
-          id="outlined-required"
-          label="Cidade"
-          value={formData.storeCity}
-          onChange={handleChange("storeCity")}
-        />
-        <TextField
-          id="outlined-required"
-          label="Estado"
-          value={formData.storeState}
-          onChange={handleChange("storeState")}
-        />
+        <Box padding={5} margin={1}>
+          <FlexBetween p="15px"flexDirection="column">
+            <TextField
+              required
+              id="outlined-required"
+              label="CEP"
+              value={formData.storePost}
+              onChange={handleChange("storePost")}
+              onBlurCapture={consultCep}
+              inputProps={{
+                maxLength: 10,
+              }}
+            />
+            <TextField
+              id="outlined-required"
+              label="Endereço"
+              value={formData.storeAddress}
+              onChange={handleChange("storeAddress")}
+            />
+            <TextField
+              required
+              id="outlined-required"
+              label="Número"
+              value={formData.storeNumber}
+              onChange={handleChange("storeNumber")}
+              onBlurCapture={consultCep}
+              inputProps={{
+                maxLength: 8,
+              }}
+            />
+            <TextField
+              id="outlined-required"
+              label="Cidade"
+              value={formData.storeCity}
+              onChange={handleChange("storeCity")}
+            />
+            <TextField
+              id="outlined-required"
+              label="Estado"
+              value={formData.storeState}
+              onChange={handleChange("storeState")}
+            />
+          </FlexBetween>
+        </Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancelar</Button>

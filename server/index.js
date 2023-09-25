@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//@ts-nocheck
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
@@ -20,6 +19,7 @@ const shopList_1 = __importDefault(require("./routes/shopList"));
 const deleteVehicle_1 = __importDefault(require("./routes/deleteVehicle"));
 const deleteDriver_1 = __importDefault(require("./routes/deleteDriver"));
 const deleteShop_1 = __importDefault(require("./routes/deleteShop"));
+const updateShop_1 = __importDefault(require("./routes/updateShop"));
 //Configs
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -40,6 +40,7 @@ app.use(shopList_1.default);
 app.use(deleteVehicle_1.default);
 app.use(deleteDriver_1.default);
 app.use(deleteShop_1.default);
+app.use(updateShop_1.default);
 //Mongoose
 const PORT = parseInt(process.env.PORT || "9000");
 const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017/database";

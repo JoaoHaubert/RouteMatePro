@@ -28,7 +28,6 @@ export interface FormDataDriver {
 }
 
 export interface FormDataShop {
-    data: any;
     storeName: string;
     storePhone: string;
     storeEmail: string;

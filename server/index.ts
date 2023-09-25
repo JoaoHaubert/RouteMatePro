@@ -1,4 +1,3 @@
-//@ts-nocheck
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -15,6 +14,7 @@ import shopList from "./routes/shopList";
 import vehicleDelete from "./routes/deleteVehicle";
 import driverDelete from "./routes/deleteDriver";
 import shopDelete from "./routes/deleteShop";
+import shopUpdate from "./routes/updateShop"
 
 //Configs
 dotenv.config();
@@ -37,6 +37,7 @@ app.use(shopList);
 app.use(vehicleDelete);
 app.use(driverDelete);
 app.use(shopDelete);
+app.use(shopUpdate);
 
 //Mongoose
 const PORT: number = parseInt(process.env.PORT || "9000");

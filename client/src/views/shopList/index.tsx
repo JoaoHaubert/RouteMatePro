@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 import { FormDataShop } from "@/types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -15,7 +16,7 @@ import {
   TableRow,
 } from "@mui/material";
 import Swal from "sweetalert2";
-import EditShop from "./EditShop";
+import EditShop from "./UpdateShop";
 
 interface Shop extends FormDataShop {
   _id: string;
@@ -52,12 +53,11 @@ const ShopList: React.FC = () => {
         const response = await axios.delete(
           `http://localhost:5001/delete-shop/${id}`
         );
-
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
         if (response.status === 200) {
           Swal.fire("Removido!", "O arquivo foi removido.", "success");
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
         } else {
           Swal.fire("Não removido.", "Houve algum problema.", "error");
         }
@@ -102,16 +102,13 @@ const ShopList: React.FC = () => {
         confirmButtonText: "Editar",
       });
       if (result.isConfirmed) {
-        openEditDialog;
+        openEditDialog(shops);
         const response = await axios.put(
           `http://localhost:5001/update-shop/${id}`
         );
 
         if (response.status === 200) {
           Swal.fire("Editado!", "O arquivo foi modificado.", "success");
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
         } else {
           Swal.fire("Não editado!", "Houve algum problema.", "error");
         }
@@ -184,7 +181,7 @@ const ShopList: React.FC = () => {
       {isEditDialogOpen && editData !== null && (
   <EditShop
     open={isEditDialogOpen}
-    onClose={() => setIsEditDialogOpen(false)}
+    onClose={handleEditClose}
     onSave={() => {}}
     data={editData}
   />

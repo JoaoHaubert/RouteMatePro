@@ -16,4 +16,5 @@ router.put('/update-shop/:id', async (req, res) => {
       res.status(500).json({ message: 'Failed to update vehicle' });
     }
   });
-  
+
+export default router;
