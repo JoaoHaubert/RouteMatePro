@@ -7,30 +7,48 @@ import {
   Button,
   TextField,
   Box,
+  MenuItem,
+  InputAdornment,
 } from "@mui/material";
 import { FormDataShop } from "@/types";
+import { useFormShopContext } from "@/components/FormContextShops";
 import axios from "axios";
 import FlexBetween from "@/components/FlexBetween";
 
-interface UpdateShopProps {
+interface UpdateShopProps extends FormDataShop {
   open: boolean;
   onClose: () => void;
-  onSave: (data: FormDataShop) => void;
-  data: FormDataShop;
+  data: any
 }
-const UpdateShop: React.FC<UpdateShopProps> = ({
-  open,
-  onClose,
-  onSave,
-  data,
-}) => {
-  const [formData, setFormData] = useState(data);
+const UpdateShop: React.FC<UpdateShopProps> = ({ open, onClose, data }) => {
+  const { submitForms } = useFormShopContext();
+  const [formData, setFormData] = useState<UpdateShopProps>({
+    storeName: "",
+    storePhone: "",
+    storeEmail: "",
+    storeType: "",
+    storePost: "",
+    storeAddress: "",
+    storeNumber: "",
+    storeCity: "",
+    storeState: "",
+    ...data
+  });
 
   const handleChange =
-    (field: keyof FormDataShop) =>
+    (field: keyof UpdateShopProps) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
     };
+
+    const shopTypes = [
+      { value: "Autopeças", label: "Autopeças" },
+      { value: "Compra e venda veículos", label: "Compra e venda veículos" },
+      { value: "Mecânica e manutenção", label: "Mecânica e manutenção" },
+      { value: "Pneus e borracharia", label: "Pneus e borracharia" },
+      { value: "Ferramentas", label: "Ferramentas" },
+      { value: "Outros", label: "Outros" },
+    ];
 
   const consultCep = async () => {
     const cep = formData.storePost; // Assuming postCode is the CEP field
@@ -56,9 +74,54 @@ const UpdateShop: React.FC<UpdateShopProps> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Altere os dados da loja</DialogTitle>
-      <DialogContent>
-        <Box padding={5} margin={1}>
-          <FlexBetween p="15px"flexDirection="column">
+      <Box
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <FlexBetween p="15px" flexDirection="column">
+          <DialogContent>
+          <TextField
+        required
+        id="outlined-required"
+        label="Nome da loja"
+        value={formData.storeName}
+        onChange={handleChange("storeName")}
+      />
+      <TextField
+        required
+        type="number"
+        label="Telefone"
+        value={formData.storePhone}
+        onChange={handleChange("storePhone")}
+        InputProps={{
+          startAdornment: <InputAdornment position="start">+55</InputAdornment>,
+        }}
+      />
+      <TextField
+        required
+        id="outlined-required"
+        label="Email"
+        value={formData.storeEmail}
+        onChange={handleChange("storeEmail")}
+      />
+      <TextField
+        required
+        select
+        label="Tipo da loja"
+        id="outlined-select-store-type"
+        value={formData.storeType}
+        onChange={handleChange("storeType")}
+      >
+        {shopTypes.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
             <TextField
               required
               id="outlined-required"
@@ -82,7 +145,6 @@ const UpdateShop: React.FC<UpdateShopProps> = ({
               label="Número"
               value={formData.storeNumber}
               onChange={handleChange("storeNumber")}
-              onBlurCapture={consultCep}
               inputProps={{
                 maxLength: 8,
               }}
@@ -99,20 +161,37 @@ const UpdateShop: React.FC<UpdateShopProps> = ({
               value={formData.storeState}
               onChange={handleChange("storeState")}
             />
-          </FlexBetween>
-        </Box>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancelar</Button>
-        <Button
-          onClick={() => {
-            onSave(formData);
-            onClose();
-          }}
-        >
-          Salvar
-        </Button>
-      </DialogActions>
+          </DialogContent>
+        </FlexBetween>
+      </Box>
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        padding={1}
+      >
+        <DialogActions>
+          <Button
+            onClick={onClose}
+            size="small"
+            color="error"
+            sx={{
+              marginLeft: "2rem",
+            }}
+          >
+            Cancelar
+          </Button>
+
+          <Button
+            onClick={() => {
+              submitForms
+              onClose();
+            }}
+          >
+            Salvar
+          </Button>
+        </DialogActions>
+      </Box>
     </Dialog>
   );
 };
