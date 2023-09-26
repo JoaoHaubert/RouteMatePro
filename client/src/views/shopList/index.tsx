@@ -16,7 +16,8 @@ import {
   TableRow,
 } from "@mui/material";
 import Swal from "sweetalert2";
-import EditShop from "./UpdateShop";
+import UpdateShop from "./UpdateShop";
+import { FormShopProvider } from "@/components/FormContextShops";
 
 interface Shop extends FormDataShop {
   _id: string;
@@ -119,6 +120,7 @@ const ShopList: React.FC = () => {
   };
 
   return (
+      <FormShopProvider>
     <Box marginTop={1}>
       <Box m="0.3rem 0rem" p="0.4rem" flexDirection="column">
         <Typography variant="h2" m="0.2rem">
@@ -179,14 +181,14 @@ const ShopList: React.FC = () => {
         </TableBody>
       </Table>
       {isEditDialogOpen && editData !== null && (
-  <EditShop
+  <UpdateShop
     open={isEditDialogOpen}
     onClose={handleEditClose}
-    onSave={() => {}}
     data={editData}
   />
 )}
     </Box>
+    </FormShopProvider>
   );
 };
 

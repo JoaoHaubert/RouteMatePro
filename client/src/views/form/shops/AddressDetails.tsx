@@ -61,7 +61,6 @@ const AddressDetail: React.FC = () => {
         label="Número"
         value={formData.storeNumber}
         onChange={handleChange("storeNumber")}
-        onBlurCapture={consultCep}
         inputProps={{
           maxLength: 8,
         }}
