@@ -1,13 +1,12 @@
+//@ts-nocheck
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import { FormDataShop } from "@/types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import {
   Box,
   Typography,
-  Button,
   IconButton,
   Table,
   TableBody,
@@ -17,8 +16,6 @@ import {
 } from "@mui/material";
 import Swal from "sweetalert2";
 import UpdateShop from "./UpdateShop";
-import { FormShopProvider } from "@/components/FormContextShops";
-
 interface Shop extends FormDataShop {
   _id: string;
 }
@@ -109,9 +106,9 @@ const ShopList: React.FC = () => {
         );
 
         if (response.status === 200) {
-          Swal.fire("Editado!", "O arquivo foi modificado.", "success");
+          console.log("Deu boa!")
         } else {
-          Swal.fire("Não editado!", "Houve algum problema.", "error");
+          console.log("Deu ruim!")
         }
       }
     } catch (error) {
@@ -120,7 +117,6 @@ const ShopList: React.FC = () => {
   };
 
   return (
-      <FormShopProvider>
     <Box marginTop={1}>
       <Box m="0.3rem 0rem" p="0.4rem" flexDirection="column">
         <Typography variant="h2" m="0.2rem">
@@ -188,7 +184,6 @@ const ShopList: React.FC = () => {
   />
 )}
     </Box>
-    </FormShopProvider>
   );
 };
 

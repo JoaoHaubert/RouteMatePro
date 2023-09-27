@@ -11,9 +11,24 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { FormDataShop } from "@/types";
-import { useFormShopContext } from "@/components/FormContextShops";
 import axios from "axios";
+import { z, ZodType} from "zod"
+//Components
 import FlexBetween from "@/components/FlexBetween";
+//Swal
+import Swal from "sweetalert2"
+
+const formSchema: ZodType<FormDataShop> = z.object({
+  storeName: z.string().nonempty("Campo necessário para o cadastro"),
+  storePhone: z.string().nonempty("Campo necessário para o cadastro"),
+  storeEmail: z.string().email().nonempty("Campo necessário para o cadastro"),
+  storeAddress: z.string(),
+  storeNumber: z.string().nonempty("Campo necessário para o cadastro"),
+  storeCity: z.string(),
+  storePost: z.string().nonempty("Campo necessário para o cadastro"),
+  storeState: z.string(),
+  storeType: z.string().nonempty("Campo necessário para o cadastro"),
+});
 
 interface UpdateShopProps extends FormDataShop {
   open: boolean;
@@ -21,7 +36,6 @@ interface UpdateShopProps extends FormDataShop {
   data: any
 }
 const UpdateShop: React.FC<UpdateShopProps> = ({ open, onClose, data }) => {
-  const { submitForms } = useFormShopContext();
   const [formData, setFormData] = useState<UpdateShopProps>({
     storeName: "",
     storePhone: "",
@@ -40,6 +54,23 @@ const UpdateShop: React.FC<UpdateShopProps> = ({ open, onClose, data }) => {
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
     };
+
+  const submitUpdate = async (id: string) => {
+      try {
+        const response = await axios.put(
+          `http://localhost:5001/update-shop/${id}`,
+          formData
+        );
+
+        if (response.status === 200) {
+          Swal.fire("Editado!", "O arquivo foi editado com sucesso.", "success")
+        } else {
+          Swal.fire("Ops!","Ocorreu um erro.","error")
+        }
+      } catch (error){
+        console.error();
+      }
+  }
 
     const shopTypes = [
       { value: "Autopeças", label: "Autopeças" },
@@ -184,7 +215,7 @@ const UpdateShop: React.FC<UpdateShopProps> = ({ open, onClose, data }) => {
 
           <Button
             onClick={() => {
-              submitForms
+              submitUpdate
               onClose();
             }}
           >
