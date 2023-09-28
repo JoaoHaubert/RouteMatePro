@@ -1,4 +1,3 @@
-//@ts-nocheck
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FormDataShop } from "@/types";
@@ -15,15 +14,12 @@ import {
   TableRow,
 } from "@mui/material";
 import Swal from "sweetalert2";
-import UpdateShop from "./UpdateShop";
 interface Shop extends FormDataShop {
   _id: string;
 }
 
 const ShopList: React.FC = () => {
   const [shops, setShops] = useState<Shop[]>([]);
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [editData, setEditData] = useState<FormDataShop | null>(null);
 
   useEffect(() => {
     // Fetch data from your API endpoint
@@ -65,6 +61,10 @@ const ShopList: React.FC = () => {
     }
   };
 
+  const handleUpdate = () => {
+    console.log("click update")
+  }
+
   function formatPhone(telefone: string | undefined) {
     if (!telefone) return "";
     // Assuming telefone is a string in the format "XXXXXXXXXXX"
@@ -73,48 +73,6 @@ const ShopList: React.FC = () => {
     )}`;
   }
 
-  // Function to open the dialog for editing
-  const openEditDialog = (data: any) => {
-    setEditData(data);
-    setIsEditDialogOpen(true);
-  };
-
-  const handleEditClose = () => {
-    setIsEditDialogOpen(false);
-    // Optionally, you can reload the data here
-  };
-
-  const handleUpdate = async (id: string) => {
-    const confirmationMessage =
-      "Tem certeza que você deseja editar o arquivo ?";
-
-    try {
-      const result = await Swal.fire({
-        title: "Confirmação",
-        text: confirmationMessage,
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        cancelButtonText: "Cancelar",
-        confirmButtonText: "Editar",
-      });
-      if (result.isConfirmed) {
-        openEditDialog(shops);
-        const response = await axios.put(
-          `http://localhost:5001/update-shop/${id}`
-        );
-
-        if (response.status === 200) {
-          console.log("Deu boa!")
-        } else {
-          console.log("Deu ruim!")
-        }
-      }
-    } catch (error) {
-      console.error("Error updating:", error);
-    }
-  };
 
   return (
     <Box marginTop={1}>
@@ -161,7 +119,7 @@ const ShopList: React.FC = () => {
               <TableCell>
                 <IconButton
                   color="primary"
-                  onClick={() => handleUpdate(shop._id)}
+                  onClick={() => handleUpdate()}
                 >
                   <EditIcon />
                 </IconButton>
@@ -176,13 +134,6 @@ const ShopList: React.FC = () => {
           ))}
         </TableBody>
       </Table>
-      {isEditDialogOpen && editData !== null && (
-  <UpdateShop
-    open={isEditDialogOpen}
-    onClose={handleEditClose}
-    data={editData}
-  />
-)}
     </Box>
   );
 };
