@@ -12,6 +12,12 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  Button,
 } from "@mui/material";
 import Swal from "sweetalert2";
 interface Shop extends FormDataShop {
@@ -19,12 +25,38 @@ interface Shop extends FormDataShop {
 }
 
 const ShopList: React.FC = () => {
-  const [shops, setShops] = useState<Shop[]>([]);
+  const [shop, setShop] = useState<Shop[]>([]);
+  const [editShop, setEditShop] = useState<Shop | null>(null);
+  const [formData, setFormData] = useState<Shop>({
+    _id: "",
+    storeName: "",
+    storePhone: "",
+    storeEmail: "",
+    storeType: "",
+    storePost: "",
+    storeAddress: "",
+    storeNumber: "",
+    storeCity: "",
+    storeState: "",
+  });
+
+  const openEditForm = (shop: Shop) => {
+    setEditShop(shop);
+    setFormData(shop);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   useEffect(() => {
     // Fetch data from your API endpoint
     axios.get<Shop[]>("http://localhost:5001/get-shop").then((response) => {
-      setShops(response.data);
+      setShop(response.data);
     });
   }, []);
 
@@ -61,9 +93,26 @@ const ShopList: React.FC = () => {
     }
   };
 
-  const handleUpdate = () => {
-    console.log("click update")
-  }
+  const handleUpdate = async (id: string) => {
+    try {
+      const response = await axios.put(`http://localhost:5001/update-shop/${id}`, formData);
+      if (response.status === 200) {
+        Swal.fire("Atualizado!", "A loja foi atualizada.", "success");
+        // Update the shops state to reflect the changes
+        setShop((prevShops) =>
+          prevShops.map((shop) =>
+            shop._id === id ? { ...shop, ...formData } : shop
+          )
+        );
+        setEditShop(null); // Close the edit form
+      } else {
+        Swal.fire("Não atualizado.", "Houve algum problema.", "error");
+      }
+    } catch (error) {
+      console.error("Error updating:", error);
+    }
+  };
+  
 
   function formatPhone(telefone: string | undefined) {
     if (!telefone) return "";
@@ -72,7 +121,6 @@ const ShopList: React.FC = () => {
       7
     )}`;
   }
-
 
   return (
     <Box marginTop={1}>
@@ -108,7 +156,7 @@ const ShopList: React.FC = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {shops.map((shop) => (
+          {shop.map((shop) => (
             <TableRow key={shop._id}>
               <TableCell>{shop.storeName}</TableCell>
               <TableCell>{shop.storeType}</TableCell>
@@ -117,10 +165,7 @@ const ShopList: React.FC = () => {
               <TableCell>{shop.storeCity}</TableCell>
               <TableCell>{shop.storeState}</TableCell>
               <TableCell>
-                <IconButton
-                  color="primary"
-                  onClick={() => handleUpdate()}
-                >
+                <IconButton color="primary" onClick={() => openEditForm(shop)}>
                   <EditIcon />
                 </IconButton>
                 <IconButton
@@ -134,6 +179,32 @@ const ShopList: React.FC = () => {
           ))}
         </TableBody>
       </Table>
+      {/*DIALOG CONTENT WITH THE INPUTS FOR UPDATE */}
+      {editShop && (
+          <Dialog open={Boolean(editShop)} onClose={() => setEditShop(null)}>
+          <DialogTitle>Edit Shop</DialogTitle>
+          <DialogContent>
+            <form>
+              <TextField
+                label="Name"
+                name="storeName"
+                value={formData.storeName}
+                onChange={handleInputChange}
+              />
+              {/* Add more fields for other shop properties */}
+            </form>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              color="primary"
+              onClick={() => handleUpdate(editShop._id)}
+            >
+              Update
+            </Button>
+            <Button onClick={() => setEditShop(null)}>Cancel</Button>
+          </DialogActions>
+        </Dialog>
+      )}
     </Box>
   );
 };
