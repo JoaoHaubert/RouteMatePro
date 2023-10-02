@@ -12,6 +12,14 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  Button,
+  InputAdornment,
+  MenuItem,
 } from "@mui/material";
 import Swal from "sweetalert2";
 
@@ -21,6 +29,35 @@ interface Driver extends FormDataDriver {
 
 const DriverList: React.FC = () => {
   const [drivers, setDrivers] = useState<Driver[]>([]);
+  const [editDriver, setEditDriver] = useState<Driver | null>(null);
+  const [formData, setFormData] = useState<Driver>({
+    _id: "",
+    fullName: "",
+    phone: "",
+    license: "",
+    email: "",
+    address: "",
+    city: "",
+    birthDate: "",
+    postCode: "",
+    state: "",
+    id: "",
+    number: "",
+    complement: "",
+  });
+
+  const openEditForm = (driver: Driver) => {
+    setEditDriver(driver);
+    setFormData(driver);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   useEffect(() => {
     // Fetch data from your API endpoint
@@ -29,9 +66,6 @@ const DriverList: React.FC = () => {
     });
   }, []);
 
-  function handleUpdate() {
-    console.log("Clicked for edit");
-  }
   const handleDelete = async (id: string) => {
     const confirmationMessage =
       "Tem certeza que deseja remover este condutor(a) ?";
@@ -64,6 +98,29 @@ const DriverList: React.FC = () => {
       }
     } catch (error) {
       console.error("Error deleting:", error);
+    }
+  };
+
+  const handleUpdate = async (id: string) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:5001/update-driver/${id}`,
+        formData
+      );
+      if (response.status === 200) {
+        Swal.fire("Atualizado!", "O motorista foi atualizado.", "success");
+        // Update the shops state to reflect the changes
+        setDrivers((prevDrivers) =>
+          prevDrivers.map((driver) =>
+            driver._id === id ? { ...driver, ...formData } : driver
+          )
+        );
+        setEditDriver(null); // Close the edit form
+      } else {
+        Swal.fire("Não atualizado.", "Houve algum problema.", "error");
+      }
+    } catch (error) {
+      console.error("Error updating:", error);
     }
   };
 
@@ -114,7 +171,10 @@ const DriverList: React.FC = () => {
               <TableCell>{driver.license}</TableCell>
               <TableCell>{driver.city}</TableCell>
               <TableCell>
-                <IconButton color="primary" onClick={() => handleUpdate()}>
+                <IconButton
+                  color="primary"
+                  onClick={() => openEditForm(driver)}
+                >
                   <EditIcon />
                 </IconButton>
                 <IconButton
@@ -128,6 +188,76 @@ const DriverList: React.FC = () => {
           ))}
         </TableBody>
       </Table>
+      {/*DIALOG CONTENT WITH THE INPUTS FOR UPDATE */}
+      {editDriver && (
+        <Dialog open={Boolean(editDriver)} onClose={() => setEditDriver(null)}>
+          <DialogTitle>Editar Dados do Motorista</DialogTitle>
+          <DialogContent>
+            <Box
+              component="form"
+              bgcolor="#fff"
+              m="1rem 1.5rem"
+              sx={{
+                "& .MuiTextField-root": { m: 2, width: "25ch" },
+              }}
+            >
+              <TextField
+                type="text"
+                name="fullName"
+                id="outlined-fullName"
+                label="Nome completo"
+                value={formData.fullName}
+                onChange={handleInputChange}
+              />
+              <TextField
+                type="text"
+                name="phone"
+                label="Telefone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                InputProps={{
+                  startAdornment: <InputAdornment position="start">+55</InputAdornment>,
+                }}
+                inputProps={{
+                  maxLength: 15,
+                }}
+              />
+              <TextField
+                id="outlined-email"
+                name="email"
+                label="Email"
+                type="email"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+              <TextField
+                id="outlined-license"
+                label="Habilitação"
+                type="text"
+                helperText="Exemplo: AB, B ou ABCDE."
+                value={formData.license}
+                onChange={handleInputChange}
+              />
+            </Box>
+          </DialogContent>
+          <DialogActions>
+          <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => handleUpdate(editDriver._id)}
+            >
+              Atualizar
+            </Button>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={() => setEditDriver(null)}
+            >
+              Cancelar
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
     </Box>
   );
 };

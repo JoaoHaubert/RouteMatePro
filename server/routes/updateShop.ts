@@ -10,10 +10,10 @@ router.put('/update-shop/:id', async (req, res) => {
   
       await Shop.updateOne({_id: id}, updatedData);
   
-      res.status(200).json({ message: 'Vehicle updated successfully' });
+      res.status(200).json({ message: 'Shop updated successfully' });
     } catch (error) {
-      console.error('Error updating vehicle data:', error);
-      res.status(500).json({ message: 'Failed to update vehicle' });
+      console.error('Error updating shop data:', error);
+      res.status(500).json({ message: 'Failed to update shop' });
     }
   });
 

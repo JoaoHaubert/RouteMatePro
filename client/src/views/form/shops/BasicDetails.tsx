@@ -33,7 +33,6 @@ const BasicDetails: React.FC = () => {
       />
       <TextField
         required
-        type="number"
         label="Telefone"
         value={formData.storePhone}
         onChange={handleChange("storePhone")}

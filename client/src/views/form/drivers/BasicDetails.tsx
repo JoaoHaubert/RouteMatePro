@@ -1,4 +1,3 @@
-//@ts-nocheck
 import React from "react";
 import { TextField, InputAdornment } from "@mui/material";
 //components
@@ -38,12 +37,11 @@ const BasicDetails: React.FC = () => {
         type="text"
         label="Telefone"
         value={formatPhone(formData.phone)}
-        onChange={(event: any) => {
-          const inputPhone = event.target.value.replace(/\D/g, "").slice(0, 11);
-          handleChange("phone")({ target: { value: inputPhone } }); // Set the input value using handleChange
-        }}
+        onChange={handleChange("phone")}
         InputProps={{
           startAdornment: <InputAdornment position="start">+55</InputAdornment>,
+        }}
+        inputProps={{
           maxLength: 15,
         }}
       />
