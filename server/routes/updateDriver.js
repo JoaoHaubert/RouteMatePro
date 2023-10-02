@@ -13,18 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const shops_1 = __importDefault(require("../models/shops"));
+const drivers_1 = __importDefault(require("../models/drivers"));
 const router = express_1.default.Router();
-router.put('/update-shop/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.put('/update-driver/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
         const updatedData = req.body;
-        yield shops_1.default.updateOne({ _id: id }, updatedData);
-        res.status(200).json({ message: 'Shop updated successfully' });
+        yield drivers_1.default.updateOne({ _id: id }, updatedData);
+        res.status(200).json({ message: 'Driver updated successfully' });
     }
     catch (error) {
-        console.error('Error updating shop data:', error);
-        res.status(500).json({ message: 'Failed to update shop' });
+        console.error('Error updating driver data:', error);
+        res.status(500).json({ message: 'Failed to update driver' });
     }
 }));
 exports.default = router;

@@ -18,6 +18,8 @@ import {
   DialogActions,
   TextField,
   Button,
+  InputAdornment,
+  MenuItem,
 } from "@mui/material";
 import Swal from "sweetalert2";
 interface Shop extends FormDataShop {
@@ -39,6 +41,15 @@ const ShopList: React.FC = () => {
     storeCity: "",
     storeState: "",
   });
+
+  const shopTypes = [
+    { value: "Autopeças", label: "Autopeças" },
+    { value: "Compra e venda veículos", label: "Compra e venda veículos" },
+    { value: "Mecânica e manutenção", label: "Mecânica e manutenção" },
+    { value: "Pneus e borracharia", label: "Pneus e borracharia" },
+    { value: "Ferramentas", label: "Ferramentas" },
+    { value: "Outros", label: "Outros" },
+  ];
 
   const openEditForm = (shop: Shop) => {
     setEditShop(shop);
@@ -95,7 +106,10 @@ const ShopList: React.FC = () => {
 
   const handleUpdate = async (id: string) => {
     try {
-      const response = await axios.put(`http://localhost:5001/update-shop/${id}`, formData);
+      const response = await axios.put(
+        `http://localhost:5001/update-shop/${id}`,
+        formData
+      );
       if (response.status === 200) {
         Swal.fire("Atualizado!", "A loja foi atualizada.", "success");
         // Update the shops state to reflect the changes
@@ -112,7 +126,27 @@ const ShopList: React.FC = () => {
       console.error("Error updating:", error);
     }
   };
-  
+
+  const consultCep = async () => {
+    const cep = formData.storePost; // Assuming postCode is the CEP field
+    try {
+      const response = await axios.get(`http://viacep.com.br/ws/${cep}/json`);
+
+      if (response.status === 200) {
+        const data = response.data;
+        setFormData((prevData) => ({
+          ...prevData,
+          storeAddress: data.logradouro,
+          storeCity: data.localidade,
+          storeState: data.uf,
+        }));
+      } else {
+        console.log("Não foi possível consultar CEP");
+      }
+    } catch (error: any) {
+      console.error("Erro na consulta do CEP", error.message);
+    }
+  };
 
   function formatPhone(telefone: string | undefined) {
     if (!telefone) return "";
@@ -181,27 +215,118 @@ const ShopList: React.FC = () => {
       </Table>
       {/*DIALOG CONTENT WITH THE INPUTS FOR UPDATE */}
       {editShop && (
-          <Dialog open={Boolean(editShop)} onClose={() => setEditShop(null)}>
-          <DialogTitle>Edit Shop</DialogTitle>
+        <Dialog open={Boolean(editShop)} onClose={() => setEditShop(null)}>
+          <DialogTitle>Editar Dados da Loja</DialogTitle>
           <DialogContent>
-            <form>
+            <Box
+              component="form"
+              bgcolor="#fff"
+              m="1rem 1.5rem"
+              sx={{
+                "& .MuiTextField-root": { m: 2, width: "25ch" },
+              }}
+            >
               <TextField
                 label="Name"
                 name="storeName"
                 value={formData.storeName}
                 onChange={handleInputChange}
               />
+              <TextField
+                label="Telefone"
+                name="storePhone"
+                value={formData.storePhone}
+                onChange={handleInputChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">+55</InputAdornment>
+                  ),
+                }}
+                inputProps={{
+                  maxLength: 15,
+                }}
+              />
+              <TextField
+                id="outlined-email"
+                name="storeEmail"
+                label="Email"
+                value={formData.storeEmail}
+                onChange={handleInputChange}
+              />
+              <TextField
+                select
+                name="storeType"
+                label="Tipo da loja"
+                id="outlined-select-store-type"
+                value={formData.storeType}
+                onChange={handleInputChange}
+              >
+                {shopTypes.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                id="outlined-postCode"
+                name="storePost"
+                label="CEP"
+                onChange={handleInputChange}
+                onBlurCapture={consultCep}
+                value={formData.storePost}
+                inputProps={{
+                  maxLength: 10,
+                }}
+              />
+              <TextField
+                id="outlined-Address"
+                name="storeAddress"
+                label="Endereço"
+                value={formData.storeAddress}
+                onChange={handleInputChange}
+              />
+              <TextField
+                id="outlined-number"
+                name="storeNumber"
+                label="Número"
+                value={formData.storeNumber}
+                onChange={handleInputChange}
+                inputProps={{
+                  maxLength: 8,
+                }}
+              />
+              <TextField
+                id="outlined-city"
+                name="storeCity"
+                label="Cidade"
+                value={formData.storeCity}
+                onChange={handleInputChange}
+              />
+              <TextField
+                id="outlined-state"
+                name="storeState"
+                label="Estado"
+                value={formData.storeState}
+                onChange={handleInputChange}
+              />
               {/* Add more fields for other shop properties */}
-            </form>
+            </Box>
           </DialogContent>
           <DialogActions>
             <Button
+              variant="outlined"
               color="primary"
               onClick={() => handleUpdate(editShop._id)}
             >
-              Update
+              Atualizar
             </Button>
-            <Button onClick={() => setEditShop(null)}>Cancel</Button>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={() => setEditShop(null)}
+            >
+              Cancelar
+            </Button>
           </DialogActions>
         </Dialog>
       )}
