@@ -21,6 +21,7 @@ const deleteDriver_1 = __importDefault(require("./routes/deleteDriver"));
 const deleteShop_1 = __importDefault(require("./routes/deleteShop"));
 const updateDriver_1 = __importDefault(require("./routes/updateDriver"));
 const updateShop_1 = __importDefault(require("./routes/updateShop"));
+const updateVehicle_1 = __importDefault(require("./routes/updateVehicle"));
 //Configs
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -41,6 +42,7 @@ app.use(shopList_1.default);
 app.use(deleteVehicle_1.default);
 app.use(deleteDriver_1.default);
 app.use(deleteShop_1.default);
+app.use(updateVehicle_1.default);
 app.use(updateDriver_1.default);
 app.use(updateShop_1.default);
 //Mongoose
