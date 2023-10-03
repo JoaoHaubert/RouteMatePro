@@ -132,6 +132,27 @@ const DriverList: React.FC = () => {
     )}`;
   }
 
+  const consultCep = async () => {
+    const cep = formData.postCode; // Assuming postCode is the CEP field
+    try {
+      const response = await axios.get(`http://viacep.com.br/ws/${cep}/json`);
+
+      if (response.status === 200) {
+        const data = response.data;
+        setFormData((prevData) => ({
+          ...prevData,
+          address: data.logradouro,
+          city: data.localidade,
+          state: data.uf,
+        }));
+      } else {
+        console.log("Não foi possível consultar CEP");
+      }
+    } catch (error: any) {
+      console.error("Erro na consulta do CEP", error.message);
+    }
+  };
+
   return (
     <Box marginTop={1}>
       <Box m="0.3rem 0rem" p="0.4rem" flexDirection="column">
@@ -216,7 +237,9 @@ const DriverList: React.FC = () => {
                 value={formData.phone}
                 onChange={handleInputChange}
                 InputProps={{
-                  startAdornment: <InputAdornment position="start">+55</InputAdornment>,
+                  startAdornment: (
+                    <InputAdornment position="start">+55</InputAdornment>
+                  ),
                 }}
                 inputProps={{
                   maxLength: 15,
@@ -232,16 +255,64 @@ const DriverList: React.FC = () => {
               />
               <TextField
                 id="outlined-license"
+                name="license"
                 label="Habilitação"
                 type="text"
                 helperText="Exemplo: AB, B ou ABCDE."
                 value={formData.license}
                 onChange={handleInputChange}
               />
+              <TextField
+                id="outlined-post"
+                name="postCode"
+                label="CEP"
+                onChange={handleInputChange}
+                onBlurCapture={consultCep}
+                value={formData.postCode}
+                inputProps={{
+                  maxLength: 10,
+                }}
+              />
+              <TextField
+                id="outlined-address"
+                name="address"
+                label="Endereço"
+                value={formData.address}
+                onChange={handleInputChange}
+              />
+              <TextField
+                type="number"
+                name="number"
+                id="outlined-number"
+                label="Número"
+                value={formData.number}
+                onChange={handleInputChange}
+              />
+              <TextField
+                id="outlined-city"
+                name="city"
+                label="Cidade"
+                value={formData.city}
+                onChange={handleInputChange}
+              />
+              <TextField
+                id="outlined-state"
+                name="state"
+                label="Estado"
+                value={formData.state}
+                onChange={handleInputChange}
+              />
+              <TextField
+                id="outlined-complement"
+                name="complement"
+                label="Complemento"
+                value={formData.complement}
+                onChange={handleInputChange}
+              />
             </Box>
           </DialogContent>
           <DialogActions>
-          <Button
+            <Button
               variant="outlined"
               color="primary"
               onClick={() => handleUpdate(editDriver._id)}
