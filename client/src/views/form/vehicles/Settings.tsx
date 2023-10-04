@@ -35,6 +35,21 @@ const Settings: React.FC = () => {
           endAdornment: <InputAdornment position="end">km</InputAdornment>,
         }}
       />
+      <TextField
+        required
+        id="outlined-required"
+        type="text"
+        label="Odômetro atual"
+        helperText="Quilometragem do veículo"
+        value={formatMileage(formData.vehicleOdometer)}
+        onChange={(event: any) => {
+          const inputMileage = event.target.value.replace(/\D/g, "").slice(0, 11);
+          handleChange("vehicleOdometer")({ target: { value: inputMileage } }); // Set the input value using handleChange
+        }}
+        InputProps={{
+          endAdornment: <InputAdornment position="end">km</InputAdornment>,
+        }}
+      />
     </FlexBetween>
   );
 };

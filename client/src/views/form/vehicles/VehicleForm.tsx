@@ -146,7 +146,7 @@ export default function VehicleForm({}: Props) {
             borderRadius={4}
             m="2rem 2.5rem"
             sx={{
-              "& .MuiTextField-root": { m: 2, width: "90ch" },
+              "& .MuiTextField-root": { m: 1, width: "90ch" },
             }}
             noValidate
             autoComplete="off"
