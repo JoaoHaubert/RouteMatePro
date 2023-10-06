@@ -22,7 +22,7 @@ const Settings: React.FC = () => {
     <FlexBetween p="15px" flexDirection="column">
       <TextField
         required
-        id="outlined-required"
+        id="outlined-required-odometer"
         type="text"
         label="Odômetro atual"
         helperText="Quilometragem do veículo"
@@ -39,47 +39,48 @@ const Settings: React.FC = () => {
       />
       <Typography variant="h2">Custos Fixos</Typography>
       <TextField
-        id="outlined-"
+        id="outlined-vehicleOperationCost"
         type="text"
+        helperText="Custo do condutor. Se necessário somar custo do ajudante."
         label="Custo de operação do veículo"
-        value={formatMileage(formData.vehicleOdometer)}
-        onChange={handleChange()}
+        value={formData.vehicleOperationCost}
+        onChange={handleChange("vehicleOperationCost")}
         InputProps={{
-          endAdornment: <InputAdornment position="end">Anual</InputAdornment>,
-          startAdornment:<InputAdornment position="start">R$</InputAdornment>
+          endAdornment: <InputAdornment position="end">Mensal</InputAdornment>,
+          startAdornment: <InputAdornment position="start">R$</InputAdornment>,
         }}
       />
       <TextField
-        id="outlined-"
+        id="outlined-ipva"
         type="text"
         label="IPVA"
-        value={formatMileage(formData.vehicleOdometer)}
-        onChange={handleChange()}
+        value={formData.vehicleIpva}
+        onChange={handleChange("vehicleIpva")}
         InputProps={{
           endAdornment: <InputAdornment position="end">Anual</InputAdornment>,
-          startAdornment:<InputAdornment position="start">R$</InputAdornment>
+          startAdornment: <InputAdornment position="start">R$</InputAdornment>,
         }}
       />
       <TextField
-        id="outlined-"
+        id="outlined-insurance"
         type="text"
         label="Seguro"
-        value={formatMileage(formData.vehicleOdometer)}
-        onChange={handleChange()}
+        value={formData.vehicleInsurance}
+        onChange={handleChange("vehicleInsurance")}
         InputProps={{
           endAdornment: <InputAdornment position="end">Anual</InputAdornment>,
-          startAdornment:<InputAdornment position="start">R$</InputAdornment>
+          startAdornment: <InputAdornment position="start">R$</InputAdornment>,
         }}
       />
       <TextField
-        id="outlined-"
+        id="outlined-maintenance"
         type="text"
         label="Manutenções Preventivas"
-        value={formatMileage(formData.vehicleOdometer)}
-        onChange={handleChange()}
+        value={formData.vehicleMaintenance}
+        onChange={handleChange("vehicleMaintenance")}
         InputProps={{
           endAdornment: <InputAdornment position="end">Anual</InputAdornment>,
-          startAdornment:<InputAdornment position="start">R$</InputAdornment>
+          startAdornment: <InputAdornment position="start">R$</InputAdornment>,
         }}
       />
     </FlexBetween>
