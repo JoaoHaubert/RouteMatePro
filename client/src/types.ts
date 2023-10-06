@@ -9,7 +9,10 @@ export interface FormData {
     vehicleConsume: string;
     vehicleLoadCap: string;
     vehicleOdometer: string;
-   
+    vehicleOperationCost: number;
+    vehicleIpva: number;
+    vehicleInsurance: number;
+    vehicleMaintenance: number;
 };
 
 export interface FormDataDriver {
