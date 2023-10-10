@@ -36,6 +36,18 @@ const VehicleSchema = new mongoose.Schema(
     vehicleOdometer: {
       type: String,
     },
+    vehicleOperationCost: {
+      type: Number,
+    },
+    vehicleIpva: {
+      type: Number,
+    },
+    vehicleInsurance: {
+      type: Number,
+    },
+    vehicleMaintenance: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );
