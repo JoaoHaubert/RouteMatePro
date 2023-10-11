@@ -37,7 +37,6 @@ const Settings: React.FC = () => {
           endAdornment: <InputAdornment position="end">km</InputAdornment>,
         }}
       />
-      <Typography variant="h2">Custos Fixos</Typography>
       <TextField
         id="outlined-vehicleOperationCost"
         type="text"
