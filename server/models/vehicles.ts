@@ -37,16 +37,16 @@ const VehicleSchema = new mongoose.Schema(
       type: String,
     },
     vehicleOperationCost: {
-      type: Number,
+      type: String,
     },
     vehicleIpva: {
-      type: Number,
+      type: String,
     },
     vehicleInsurance: {
-      type: Number,
+      type: String,
     },
     vehicleMaintenance: {
-      type: Number,
+      type: String,
     },
   },
   { timestamps: true }

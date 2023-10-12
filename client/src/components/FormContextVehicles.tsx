@@ -24,10 +24,10 @@ const formSchema: ZodType<FormData> = z.object({
   vehicleGroup: z.string(),
   vehicleOwnership: z.string(),
   vehicleBrand: z.string(),
-  vehicleOperationCost: z.number(),
-  vehicleIpva: z.number(),
-  vehicleInsurance: z.number(),
-  vehicleMaintenance: z.number(),
+  vehicleOperationCost: z.string(),
+  vehicleIpva: z.string(),
+  vehicleInsurance: z.string(),
+  vehicleMaintenance: z.string(),
 });
 
 interface FormContextValue {
@@ -59,10 +59,10 @@ export const FormProvider: React.FC = ({ children }: any) => {
     vehicleConsume: "",
     vehicleLoadCap: "",
     vehicleOdometer: "",
-    vehicleOperationCost: 0,
-    vehicleIpva: 0,
-    vehicleInsurance: 0,
-    vehicleMaintenance: 0,
+    vehicleOperationCost: "",
+    vehicleIpva: "",
+    vehicleInsurance: "",
+    vehicleMaintenance: "",
   });
 
   // Validate form data using Zod schema

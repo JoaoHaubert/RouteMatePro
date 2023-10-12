@@ -39,6 +39,18 @@ const VehicleSchema = new mongoose_1.default.Schema({
     vehicleOdometer: {
         type: String,
     },
+    vehicleOperationCost: {
+        type: String,
+    },
+    vehicleIpva: {
+        type: String,
+    },
+    vehicleInsurance: {
+        type: String,
+    },
+    vehicleMaintenance: {
+        type: String,
+    },
 }, { timestamps: true });
 const Vehicle = mongoose_1.default.model("Vehicle", VehicleSchema);
 exports.default = Vehicle;
