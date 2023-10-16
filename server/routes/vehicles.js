@@ -17,7 +17,7 @@ const vehicles_1 = __importDefault(require("../models/vehicles"));
 const router = express_1.default.Router();
 router.route("/api/vehicle").post((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { vehicleName, vehicleTag, vehicleType, vehicleStatus, vehicleOwnership, vehicleGroup, vehicleBrand, vehicleConsume, vehicleLoadCap, vehicleOdometer, } = req.body;
+        const { vehicleName, vehicleTag, vehicleType, vehicleStatus, vehicleOwnership, vehicleGroup, vehicleBrand, vehicleConsume, vehicleLoadCap, vehicleOdometer, vehicleOperationCost, vehicleIpva, vehicleInsurance, vehicleMaintenance, } = req.body;
         const newVehicle = new vehicles_1.default({
             vehicleName,
             vehicleTag,
@@ -29,6 +29,10 @@ router.route("/api/vehicle").post((req, res) => __awaiter(void 0, void 0, void 0
             vehicleConsume,
             vehicleLoadCap,
             vehicleOdometer,
+            vehicleOperationCost,
+            vehicleIpva,
+            vehicleInsurance,
+            vehicleMaintenance,
         });
         yield newVehicle.save();
         res.status(201).json({ message: "Vehicle added successfully" });

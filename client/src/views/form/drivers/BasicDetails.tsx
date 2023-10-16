@@ -14,13 +14,13 @@ const BasicDetails: React.FC = () => {
       setFormData((prevData) => ({ ...prevData, [field]: event.target.value }));
     };
 
-  function formatPhone(telefone: string | undefined) {
-    if (!telefone) return "";
-    // Assuming telefone is a string in the format "XXXXXXXXXXX"
-    return `(${telefone.slice(0, 2)}) ${telefone.slice(2, 7)}-${telefone.slice(
-      7
-    )}`;
-  }
+  // function formatPhone(telefone: string | undefined) {
+  //   if (!telefone) return "";
+  //   // Assuming telefone is a string in the format "XXXXXXXXXXX"
+  //   return `(${telefone.slice(0, 2)}) ${telefone.slice(2, 7)}-${telefone.slice(
+  //     7
+  //   )}`;
+  // }
 
   return (
     <FlexBetween p="15px" flexDirection="column">
@@ -36,7 +36,7 @@ const BasicDetails: React.FC = () => {
         required
         type="text"
         label="Telefone"
-        value={formatPhone(formData.phone)}
+        value={(formData.phone)}
         onChange={handleChange("phone")}
         InputProps={{
           startAdornment: <InputAdornment position="start">+55</InputAdornment>,
