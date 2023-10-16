@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useFormContext } from "@/components/FormContextVehicles";
 import { TextField, MenuItem } from "@mui/material";
@@ -37,6 +36,35 @@ const Identification: React.FC = () => {
     { value: "Cliente", label: "Cliente" },
     { value: "Arrendado", label: "Arrendado" },
   ];
+  const vehicleBrand = [
+    { value: "Audi", label: "Audi" },
+    { value: "BMW", label: "BMW" },
+    { value: "BYD", label: "BYD" },
+    { value: "Cherry", label: "Cherry" },
+    { value: "Chevrolet", label: "Chevrolet" },
+    { value: "DAF", label: "DAF" },
+    { value: "Fiat", label: "Fiat" },
+    { value: "Ford", label: "Ford" },
+    { value: "GWM", label: "GWM" },
+    { value: "Hino", label: "Hino" },
+    { value: "Honda", label: "Honda" },
+    { value: "Hyundai", label: "Hyundai" },
+    { value: "International", label: "International" },
+    { value: "Iveco", label: "Iveco" },
+    { value: "Jeep", label: "Jeep" },
+    { value: "Kia", label: "Kia" },
+    { value: "MAN", label: "MAN" },
+    { value: "Mercedes-Benz", label: "Mercedes-Benz" },
+    { value: "Mitsubishi", label: "Mitsubishi" },
+    { value: "Nissan", label: "Nissan" },
+    { value: "Peugeot", label: "Peugeot" },
+    { value: "Renault", label: "Renault" },
+    { value: "Scania", label: "Scania" },
+    { value: "Toyota", label: "Toyota" },
+    { value: "Volkswagen", label: "Volkswagen" },
+    { value: "Volvo", label: "Volvo" },
+    { value: "Outras", label: "Outras" },
+  ];
 
   return (
     <FlexBetween p="15px" flexDirection="column">
@@ -68,11 +96,17 @@ const Identification: React.FC = () => {
         ))}
       </TextField>
       <TextField
+        select
         label="Fabricante do Veículo"
         value={formData.vehicleBrand}
         onChange={handleChange("vehicleBrand")}
-        helperText="Exemplo: Ford ou Volkswagen."
-      />
+      >
+        {vehicleBrand.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
       <TextField
         select
         label="Status do Veículo"

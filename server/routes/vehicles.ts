@@ -15,6 +15,10 @@ router.route("/api/vehicle").post(async (req: any, res: any) => {
       vehicleConsume,
       vehicleLoadCap,
       vehicleOdometer,
+      vehicleOperationCost,
+      vehicleIpva,
+      vehicleInsurance,
+      vehicleMaintenance,
     } = req.body;
 
     const newVehicle = new Vehicle({
@@ -28,6 +32,10 @@ router.route("/api/vehicle").post(async (req: any, res: any) => {
       vehicleConsume,
       vehicleLoadCap,
       vehicleOdometer,
+      vehicleOperationCost,
+      vehicleIpva,
+      vehicleInsurance,
+      vehicleMaintenance,
     });
 
     await newVehicle.save();
