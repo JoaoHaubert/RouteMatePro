@@ -41,6 +41,10 @@ const VehicleList: React.FC = () => {
     vehicleConsume: "",
     vehicleLoadCap: "",
     vehicleOdometer: "",
+    vehicleOperationCost: "",
+    vehicleIpva: "",
+    vehicleInsurance: "",
+    vehicleMaintenance: "",
   });
 
   const vehicleType = [
