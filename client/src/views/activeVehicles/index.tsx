@@ -60,16 +60,10 @@ const ActiveVehicles: React.FC = () => {
               <Typography variant="h6">Placa</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6">Fabricante</Typography>
+              <Typography variant="h6">Data Início</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6">Status</Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="h6">Quilometragem</Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="h6">Grupo</Typography>
+              <Typography variant="h6">Data Fim</Typography>
             </TableCell>
             <TableCell>
               <Typography variant="h6">Ações</Typography>
@@ -82,10 +76,6 @@ const ActiveVehicles: React.FC = () => {
               <TableCell>{vehicle.vehicleName}</TableCell>
               <TableCell>{vehicle.vehicleType}</TableCell>
               <TableCell>{vehicle.vehicleTag}</TableCell>
-              <TableCell>{vehicle.vehicleBrand}</TableCell>
-              <TableCell>{vehicle.vehicleStatus}</TableCell>
-              <TableCell>{vehicle.vehicleOdometer} km</TableCell>
-              <TableCell>{vehicle.vehicleGroup}</TableCell>
               <TableCell>
                 <IconButton
                   color="primary"
