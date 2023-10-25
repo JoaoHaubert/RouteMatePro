@@ -4,7 +4,7 @@ The **objective** of **Route Mate Pro**, as transportation software, is to optim
 ## Stack
 - Mongodb
 - Express.js
-- React.tsx
+- React
 - Material ui (MUI)
 - Redux
 - Node.js
