@@ -209,7 +209,7 @@ const DriverList: React.FC = () => {
           ))}
         </TableBody>
       </Table>
-      {/*DIALOG CONTENT WITH THE INPUTS FOR UPDATE */}
+      {/* DIALOG CONTENT WITH THE INPUTS FOR UPDATE */}
       {editDriver && (
         <Dialog open={Boolean(editDriver)} onClose={() => setEditDriver(null)}>
           <DialogTitle>Editar Dados do Motorista</DialogTitle>

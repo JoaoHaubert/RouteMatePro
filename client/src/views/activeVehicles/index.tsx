@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FormData } from "@/types";
+//ICONS
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Box,
   Typography,
@@ -84,8 +87,12 @@ const ActiveVehicles: React.FC = () => {
               <TableCell>{vehicle.vehicleType}</TableCell>
               <TableCell>{vehicle.vehicleTag}</TableCell>
               <TableCell>
-                <IconButton color="primary" onClick={() => "a"}></IconButton>
-                <IconButton color="error" onClick={() => "a"}></IconButton>
+                <IconButton color="primary" onClick={() => "a"}>
+                  <CheckOutlinedIcon/>
+                </IconButton>
+                <IconButton color="error" onClick={() => "a"}>
+                  <DeleteIcon/>
+                </IconButton>
               </TableCell>
             </TableRow>
           ))}
